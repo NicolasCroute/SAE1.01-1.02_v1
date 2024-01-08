@@ -25,6 +25,20 @@ namespace SAE1._01_1._02
             InitializeComponent();
             WindowState = WindowState.Maximized;
         }
+        private void GameEngine(object sender, EventArgs e)
+        { 
+
+
+        }
+
+        private void DeplacementJoueur() 
+        { 
+        
+
+        }
+
+
+
 
 
     }
