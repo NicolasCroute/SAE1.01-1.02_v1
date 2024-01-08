@@ -38,7 +38,7 @@ namespace SAE1._01_1._02
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
                         dispatcherTimer.Start();
             //joueur1=joueurSkin
-            joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace"));
+            joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
             joueur1.Fill = joueurSkin;
 
 
