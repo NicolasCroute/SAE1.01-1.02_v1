@@ -29,6 +29,7 @@ namespace SAE1._01_1._02
         private int vitesseJoueur = 10;
         int compteur = 0, sprite = 1;
 
+
         public MainWindow()
         {
             InitializeComponent();
@@ -37,7 +38,9 @@ namespace SAE1._01_1._02
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
                         dispatcherTimer.Start();
             //joueur1=joueurSkin
-            
+            joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace"));
+            joueur1.Fill = joueurSkin;
+
 
 
 
