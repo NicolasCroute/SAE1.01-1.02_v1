@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE1._01_1._02"
         mc:Ignorable="d"
-        Title="Zombie Survivor" Height="650" Width="1300">
+        Title="Zombie Survivor" Height="650" Width="1300" KeyDown="CanvasKeyIsDown" KeyUp="CanvasKeyIsUp">
 
-    <Canvas Width="800" Height="430" >
-        <Rectangle Name="sol1" Height="600" Fill="ForestGreen" Canvas.Left="-201" Stroke="Black" Canvas.Top="-85" Width="1200" VerticalAlignment="Top" Grid.IsSharedSizeScope="True"/>
-        <Rectangle Name="joueur1" Height="40" Canvas.Left="380" Fill="LightBlue" Stroke="Black" Canvas.Top="195" Width="40"/>
-        <Rectangle Name="ennemi1" Height="40" Canvas.Left="379" Fill="Red" Stroke="Black" Canvas.Top="10" Width="40"/>
+    <Canvas Width="1280" Height="616" >
+        <Rectangle Name="sol1" Height="596" Fill="ForestGreen" Stroke="Black" Canvas.Top="10" Width="1210" VerticalAlignment="Top" Grid.IsSharedSizeScope="True" HorizontalAlignment="Left" Canvas.Left="35"/>
+        <Rectangle Name="joueur1" Height="40" Canvas.Left="620" Fill="LightBlue" Stroke="Black" Canvas.Top="288" Width="40"/>
+        <Rectangle Name="ennemi1" Height="40" Canvas.Left="620" Fill="Red" Stroke="Black" Canvas.Top="106" Width="40"/>
 
     </Canvas>
 

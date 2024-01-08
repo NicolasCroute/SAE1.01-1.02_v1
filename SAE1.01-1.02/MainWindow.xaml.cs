@@ -23,8 +23,8 @@ namespace SAE1._01_1._02
     {
         private bool haut, gauche,droite,bas = false;
         private ImageBrush joueurSkin = new ImageBrush();
-        private ImageBrush sol1 = new ImageBrush();
-        private ImageBrush ennemi1 = new ImageBrush();
+      //  private ImageBrush sol1 = new ImageBrush();
+      //  private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int vitesseJoueur = 10;
         int compteur = 0, sprite = 1;
@@ -35,6 +35,7 @@ namespace SAE1._01_1._02
             WindowState = WindowState.Maximized;
             dispatcherTimer.Tick += Jeu;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
+                        dispatcherTimer.Start();
             //joueur1=joueurSkin
             
         }
@@ -42,7 +43,7 @@ namespace SAE1._01_1._02
         {
             Rect joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1),
             joueur1.Width, joueur1.Height);
-
+            DeplacementJoueur();
         }
 
 
@@ -97,6 +98,14 @@ namespace SAE1._01_1._02
             if (droite && Canvas.GetLeft(joueur1) > 0)
             {
                 Canvas.SetLeft(joueur1, Canvas.GetLeft(joueur1) + vitesseJoueur);
+            }
+            if(haut && Canvas.GetTop(joueur1)>0)
+            {
+                Canvas.SetTop(joueur1, Canvas.GetTop(joueur1) - vitesseJoueur); 
+            }
+            if (bas && Canvas.GetTop(joueur1) > 0)
+            {
+                Canvas.SetTop(joueur1, Canvas.GetTop(joueur1) + vitesseJoueur);
             }
 
         }
