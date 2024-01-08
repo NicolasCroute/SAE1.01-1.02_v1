@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE1._01_1._02"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-   
-        <Canvas Width="800" Height="430" >
-            <Rectangle Name="sol1" Height="412" Fill="ForestGreen" Canvas.Left="10" Stroke="Black" Canvas.Top="10" Width="776" VerticalAlignment="Top" Grid.IsSharedSizeScope="True"/>
-            <Rectangle Name="joueur" Height="40" Canvas.Left="379" Fill="LightBlue" Stroke="Black" Canvas.Top="186" Width="40"/>
-            <Rectangle Name="ennemi1" Height="40" Canvas.Left="202" Fill="Red" Stroke="Black" Canvas.Top="163" Width="40"/>
+        Title="MainWindow" Height="600" Width="1200">
 
-        </Canvas>
-   
+    <Canvas Width="800" Height="430" >
+        <Rectangle Name="sol1" Height="600" Fill="ForestGreen" Canvas.Left="-201" Stroke="Black" Canvas.Top="-85" Width="1200" VerticalAlignment="Top" Grid.IsSharedSizeScope="True"/>
+        <Rectangle Name="joueur" Height="40" Canvas.Left="959" Fill="LightBlue" Stroke="Black" Canvas.Top="-85" Width="40"/>
+        <Rectangle Name="ennemi1" Height="40" Canvas.Left="-201" Fill="Red" Stroke="Black" Canvas.Top="-85" Width="40"/>
+
+    </Canvas>
+
 </Window>
