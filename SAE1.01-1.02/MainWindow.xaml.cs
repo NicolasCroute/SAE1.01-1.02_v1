@@ -26,6 +26,7 @@ namespace SAE1._01_1._02
         private ImageBrush sol1 = new ImageBrush();
         private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
+        private int vitesseJoueur = 10;
         int compteur = 0, sprite = 1;
 
         public MainWindow()
@@ -93,7 +94,13 @@ namespace SAE1._01_1._02
         private void DeplacementJoueur()
         {
             if (gauche && Canvas.GetLeft(joueur1)>0)
-            { }
+            {
+                Canvas.SetLeft(joueur1, Canvas.GetLeft(joueur1) - vitesseJoueur);
+            }
+            if (droite && Canvas.GetLeft(joueur1) > 0)
+            {
+                Canvas.SetLeft(joueur1, Canvas.GetLeft(joueur1) + vitesseJoueur);
+            }
 
         }
     }
