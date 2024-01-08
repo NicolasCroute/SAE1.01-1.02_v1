@@ -38,6 +38,9 @@ namespace SAE1._01_1._02
                         dispatcherTimer.Start();
             //joueur1=joueurSkin
             
+
+
+
         }
         private void Jeu(object sender, EventArgs e)
         {
