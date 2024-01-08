@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SAE1._01_1._02"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1300">
+        Title="Zombie Survivor" Height="650" Width="1300">
 
     <Canvas Width="800" Height="430" >
         <Rectangle Name="sol1" Height="600" Fill="ForestGreen" Canvas.Left="-201" Stroke="Black" Canvas.Top="-85" Width="1200" VerticalAlignment="Top" Grid.IsSharedSizeScope="True"/>
