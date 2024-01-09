@@ -57,6 +57,9 @@ namespace SAE1._01_1._02
             joueur1.Fill = joueurSkin;
             buissonSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson.png"));
             buisson.Fill = buissonSkin;
+            buisson1.Fill = buissonSkin;
+            buisson2.Fill = buissonSkin;
+            buisson3.Fill = buissonSkin;
 
 
 
@@ -75,6 +78,7 @@ namespace SAE1._01_1._02
                 ChangementApparence();
                 tempsEcouleDepuisChangement = 0;
             }
+
             foreach (Rectangle x in Canvas.Children.OfType<Rectangle>())
             {
                 TestTireJoueur(x);
