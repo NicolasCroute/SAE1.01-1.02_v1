@@ -28,7 +28,7 @@ namespace SAE1._01_1._02
         private ImageBrush buissonSkin = new ImageBrush();
         //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private int vitesseJoueur = 10;
+        private int vitesseJoueur = 5;
         int compteur = 0, sprite = 1;
         private string[] tableauApparenceDroite = { "images/hero_droites/HeroDroite_1.png", "images/hero_droites/HeroDroite_2.png", "images/hero_droites/HeroDroite_3.png", "images/hero_droites/HeroDroite_4.png", "images/hero_droites/HeroDroite_5.png", "images/hero_droites/HeroDroite_6.png", "images/hero_droites/HeroDroite_7.png", "images/hero_droites/HeroDroite_8.png", "images/hero_droites/HeroDroite_9.png" };
         private string[] tableauApparenceGauche = { "images/hero_gauche/HeroGauche_1.png", "images/hero_gauche/HeroGauche_2.png", "images/hero_gauche/HeroGauche_3.png", "images/hero_gauche/HeroGauche_4.png", "images/hero_gauche/HeroGauche_5.png", "images/hero_gauche/HeroGauche_6.png", "images/hero_gauche/HeroGauche_7.png", "images/hero_gauche/HeroGauche_8.png", "images/hero_gauche/HeroGauche_9.png" };
@@ -38,7 +38,7 @@ namespace SAE1._01_1._02
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 34;
         private int changement = 0;
-        private int vitesseennemie1 = 5;
+        private int vitesseennemie1 = 3;
         private int maxEnnemiemillisecond;
         private int delaiapparitionennemie = 500;
 
@@ -241,6 +241,10 @@ namespace SAE1._01_1._02
                 };
                 delaiapparitionennemie -= 25;
                 compteur = 0;
+                Canvas.SetTop(newEnnemie, 30);
+                Canvas.SetLeft(newEnnemie, left);
+                Canvas.Children.Add (newEnnemie);
+                        
             }
 
         }

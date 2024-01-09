@@ -26,7 +26,7 @@
             VerticalAlignment="Top"
             Fill="ForestGreen"
             Grid.IsSharedSizeScope="True"
-            Stroke="Black" />
+             />
         <Rectangle
             Name="joueur1"
             Canvas.Left="608"
@@ -36,7 +36,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Fill="LightBlue"
-            Stroke="Black" />
+             />
         <Rectangle
             x:Name="buisson"
             Canvas.Left="-346"
