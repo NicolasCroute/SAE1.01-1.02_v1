@@ -41,8 +41,10 @@ namespace SAE1._01_1._02
         private int vitesseennemie1 = 3;
         private int maxEnnemiemillisecond;
         private int delaiapparitionennemie = 500;
+        private string directionEnnemie;
 
-      
+
+
 
         private int vitesseTireJoueur = 15;
         private List<Rectangle> itemsToRemove = new List<Rectangle>();
@@ -414,6 +416,16 @@ namespace SAE1._01_1._02
 
             }
 
+
         }
+        //private Rect Ennemiemouvementetcollision(Rectangle x, Rect player)
+        //{
+        //    directionEnnemie =
+        //    if (x is Rectangle && (string)x.Tag == "ennemie")
+        //    {
+        //        Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseennemie1);
+        //    }
+        //}
+
     }
  }
