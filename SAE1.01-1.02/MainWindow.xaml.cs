@@ -23,8 +23,8 @@ namespace SAE1._01_1._02
     {
         private bool haut, gauche, droite, bas = false;
         private ImageBrush joueurSkin = new ImageBrush();
-      //private ImageBrush sol1 = new ImageBrush();
-      //private ImageBrush ennemi1 = new ImageBrush();
+        private ImageBrush sol1Skin = new ImageBrush();
+        //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int vitesseJoueur = 10;
         int compteur = 0, sprite = 1;
@@ -32,14 +32,11 @@ namespace SAE1._01_1._02
         private string[] tableauApparenceGauche = { "images/hero_gauche/HeroGauche_1.png", "images/hero_gauche/HeroGauche_2.png", "images/hero_gauche/HeroGauche_3.png", "images/hero_gauche/HeroGauche_4.png", "images/hero_gauche/HeroGauche_5.png", "images/hero_gauche/HeroGauche_6.png", "images/hero_gauche/HeroGauche_7.png", "images/hero_gauche/HeroGauche_8.png", "images/hero_gauche/HeroGauche_9.png" };
         private string[] tableauApparenceHaut = { "images/hero_haut/HeroHaut_1.png", "images/hero_haut/HeroHaut_2.png", "images/hero_haut/HeroHaut_3.png", "images/hero_haut/HeroHaut_4.png", "images/hero_haut/HeroHaut_5.png", "images/hero_haut/HeroHaut_6.png", "images/hero_haut/HeroHaut_7.png", "images/hero_haut/HeroHaut_8.png", "images/hero_haut/HeroHaut_9.png" };
         private string[] tableauApparenceBas = { "images/hero_bas/HeroBas_1.png", "images/hero_bas/HeroBas_2.png", "images/hero_bas/HeroBas_3.png", "images/hero_bas/HeroBas_4.png", "images/hero_bas/HeroBas_5.png", "images/hero_bas/HeroBas_6.png", "images/hero_bas/HeroBas_7.png", "images/hero_bas/HeroBas_8.png", "images/hero_bas/HeroBas_9.png" };
-
-        //---------------modif-----------------
-        // en millisecondes :
         private int tempsEntreMisesAJour = 16;
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 34;
         private int changement = 0;
-        //-------------------------------------
+
 
         private int vitesseTireJoueur = 15;
         private List<Rectangle> itemsToRemove = new List<Rectangle>();
@@ -52,6 +49,8 @@ namespace SAE1._01_1._02
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
                         dispatcherTimer.Start();
             //joueur1=joueurSkin
+            sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.jpg"));
+            sol1.Fill = sol1Skin;
             joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
             joueur1.Fill = joueurSkin;
 
