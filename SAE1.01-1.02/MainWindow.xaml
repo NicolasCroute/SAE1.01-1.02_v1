@@ -38,14 +38,6 @@
             Fill="LightBlue"
             Stroke="Black" />
         <Rectangle
-            Name="ennemi1"
-            Canvas.Left="620"
-            Canvas.Top="106"
-            Width="40"
-            Height="40"
-            Fill="Red"
-            Stroke="Black" />
-        <Rectangle
             x:Name="buisson"
             Canvas.Left="-346"
             Canvas.Top="245"

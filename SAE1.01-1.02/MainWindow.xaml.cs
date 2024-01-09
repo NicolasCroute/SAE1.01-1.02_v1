@@ -39,8 +39,8 @@ namespace SAE1._01_1._02
         private int intervalleChangementApparence = 34;
         private int changement = 0;
         private int vitesseennemie1 = 5;
-        private int totaleEnnemie;
-        private int delaiapparitionennemie = 200;
+        private int maxEnnemiemillisecond;
+        private int delaiapparitionennemie = 500;
 
 
 
@@ -232,7 +232,27 @@ namespace SAE1._01_1._02
         }
 
 
+        private void ennemie1(int limit)
 
+        {
+
+            int left = 0;
+            maxEnnemiemillisecond = limit;
+            if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > maxEnnemiemillisecond)
+            {
+               // ImageBrush enemySkin = new ImageBrush();
+                Rectangle newEnnemie = new Rectangle
+                {
+                    Tag = "ennemie",
+                    Height = 45,
+                    Width = 45,
+                    //Fill = enemySkin,
+                };
+                delaiapparitionennemie -= 25;
+                compteur = 0;
+            }
+
+        }
 
 
 
