@@ -42,7 +42,7 @@ namespace SAE1._01_1._02
         private int maxEnnemiemillisecond;
         private int delaiapparitionennemie = 500;
 
-
+      
 
         private int vitesseTireJoueur = 15;
         private List<Rectangle> itemsToRemove = new List<Rectangle>();
@@ -64,7 +64,7 @@ namespace SAE1._01_1._02
             buisson1.Fill = buissonSkin;
             buisson2.Fill = buissonSkin;
             buisson3.Fill = buissonSkin;
-
+            ennemie1(100);
 
 
 
@@ -240,23 +240,24 @@ namespace SAE1._01_1._02
             maxEnnemiemillisecond = limit;
             if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > maxEnnemiemillisecond)
             {
-               // ImageBrush enemySkin = new ImageBrush();
+                ImageBrush ennemieSkin = new ImageBrush();
                 Rectangle newEnnemie = new Rectangle
                 {
                     Tag = "ennemie",
-                    Height = 45,
-                    Width = 45,
-                    //Fill = enemySkin,
+                    Height = 75,
+                    Width = 75,
+                    Fill = ennemieSkin,
                 };
                 delaiapparitionennemie -= 25;
                 compteur = 0;
                 Canvas.SetTop(newEnnemie, 30);
                 Canvas.SetLeft(newEnnemie, left);
                 Canvas.Children.Add (newEnnemie);
-                        
+                ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/zombiecourse/frame-15.gif"));    
             }
 
         }
+        
 
 
 
