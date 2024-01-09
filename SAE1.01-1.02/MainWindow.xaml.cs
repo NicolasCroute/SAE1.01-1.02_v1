@@ -38,6 +38,10 @@ namespace SAE1._01_1._02
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 34;
         private int changement = 0;
+        private int vitesseennemie1 = 5;
+        private int totaleEnnemie;
+        private int delaiapparitionennemie = 200;
+
 
 
         private int vitesseTireJoueur = 15;
@@ -83,6 +87,19 @@ namespace SAE1._01_1._02
             {
                 TestTireJoueur(x);
             }
+
+            compteur++;
+            if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > 100)
+            {
+
+                delaiapparitionennemie -= 25;
+                compteur = 0;
+            }
+            //else 
+            //{ 
+            //    gg 
+            //} 
+
 
         }
 

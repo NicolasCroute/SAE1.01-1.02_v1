@@ -48,11 +48,11 @@
         <Rectangle
             x:Name="buisson"
             Canvas.Left="-346"
-            Canvas.Top="233"
+            Canvas.Top="245"
             Width="710"
             Height="132"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
             RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
@@ -65,12 +65,12 @@
         </Rectangle>
         <Rectangle
             x:Name="buisson1"
-            Canvas.Left="34"
+            Canvas.Left="16"
             Canvas.Top="-76"
             Width="1262"
             Height="142"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
             RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
