@@ -29,7 +29,9 @@ namespace SAE1._01_1._02
         private int vitesseJoueur = 10;
         int compteur = 0, sprite = 1;
         private string[] tableauApparenceDroite = { "images/hero_droites/HeroDroite_1.png", "images/hero_droites/HeroDroite_2.png", "images/hero_droites/HeroDroite_3.png", "images/hero_droites/HeroDroite_4.png", "images/hero_droites/HeroDroite_5.png", "images/hero_droites/HeroDroite_6.png", "images/hero_droites/HeroDroite_7.png", "images/hero_droites/HeroDroite_8.png", "images/hero_droites/HeroDroite_9.png" };
-
+        private string[] tableauApparenceGauche = { "images/hero_gauche/HeroGauche_1.png", "images/hero_gauche/HeroGauche_2.png", "images/hero_gauche/HeroGauche_3.png", "images/hero_gauche/HeroGauche_4.png", "images/hero_gauche/HeroGauche_5.png", "images/hero_gauche/HeroGauche_6.png", "images/hero_gauche/HeroGauche_7.png", "images/hero_gauche/HeroGauche_8.png", "images/hero_gauche/HeroGauche_9.png" };
+        private string[] tableauApparenceHaut = { "images/hero_haut/HeroHaut_1.png", "images/hero_haut/HeroHaut_2.png", "images/hero_haut/HeroHaut_3.png", "images/hero_haut/HeroHaut_4.png", "images/hero_haut/HeroHaut_5.png", "images/hero_haut/HeroHaut_6.png", "images/hero_haut/HeroHaut_7.png", "images/hero_haut/HeroHaut_8.png", "images/hero_haut/HeroHaut_9.png" };
+        private string[] tableauApparenceBas = { "images/hero_bas/HeroBas_1.png", "images/hero_bas/HeroBas_2.png", "images/hero_bas/HeroBas_3.png", "images/hero_bas/HeroBas_4.png", "images/hero_bas/HeroBas_5.png", "images/hero_bas/HeroBas_6.png", "images/hero_bas/HeroBas_7.png", "images/hero_bas/HeroBas_8.png", "images/hero_bas/HeroBas_9.png" };
 
         //---------------modif-----------------
         // en millisecondes :
@@ -140,7 +142,7 @@ namespace SAE1._01_1._02
 
             if (droite == true)
             {
-                changement = changement + 1;
+                changement++;
 
                 if (changement >= tableauApparenceDroite.Length)
                 {
@@ -152,14 +154,41 @@ namespace SAE1._01_1._02
             }
             else if (gauche == true)
             {
+                changement++;
+
+                if (changement >= tableauApparenceDroite.Length)
+                {
+                    changement = 0;
+                }
+                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceGauche[changement];
+                joueurSkin.ImageSource = new BitmapImage(new Uri(image));
+                joueur1.Fill = joueurSkin;
 
             }
             else if (haut == true)
             {
+                changement++;
+
+                if (changement >= tableauApparenceDroite.Length)
+                {
+                    changement = 0;
+                }
+                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceHaut[changement];
+                joueurSkin.ImageSource = new BitmapImage(new Uri(image));
+                joueur1.Fill = joueurSkin;
 
             }
             else if (bas == true)
             {
+                changement++;
+
+                if (changement >= tableauApparenceDroite.Length)
+                {
+                    changement = 0;
+                }
+                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceBas[changement];
+                joueurSkin.ImageSource = new BitmapImage(new Uri(image));
+                joueur1.Fill = joueurSkin;
 
             }
             else
