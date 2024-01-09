@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Zombie Survivor"
     Width="1500"
-    Height="800"
+    Height="1000"
     KeyDown="CanvasKeyIsDown"
     KeyUp="CanvasKeyIsUp"
     mc:Ignorable="d" ResizeMode="NoResize">
@@ -19,10 +19,10 @@
         <Rectangle
             Name="sol1"
             Canvas.Left="35"
-            Canvas.Top="10"
+            Canvas.Top="-20"
             Width="1210"
-            Height="596"
-            HorizontalAlignment="Left"
+            Height="666"
+            HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Fill="ForestGreen"
             Grid.IsSharedSizeScope="True"
@@ -38,73 +38,73 @@
             Fill="LightBlue"
              />
         <Rectangle
-            x:Name="buisson"
-            Canvas.Left="-346"
-            Canvas.Top="245"
-            Width="710"
-            Height="132"
+            x:Name="buissonGauche"
+            Canvas.Left="-37"
+            Canvas.Top="-40"
+            Width="141"
+            Height="618"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            RenderTransformOrigin="0.5,0.5">
+            RenderTransformOrigin="0.5,0.5" Stroke="Black">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
                     <SkewTransform />
-                    <RotateTransform Angle="-90.168" />
+                    <RotateTransform Angle="0.354" />
                     <TranslateTransform />
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
         <Rectangle
-            x:Name="buisson1"
-            Canvas.Left="16"
-            Canvas.Top="-76"
+            x:Name="buissonHaut"
+            Canvas.Left="18"
+            Canvas.Top="-143"
             Width="1262"
-            Height="142"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            RenderTransformOrigin="0.5,0.5">
+            Height="148"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            RenderTransformOrigin="0.5,0.5" Stroke="Black">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
                     <SkewTransform />
-                    <RotateTransform Angle="-179.504" />
+                    <RotateTransform Angle="-359.832" />
                     <TranslateTransform />
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
         <Rectangle
-            x:Name="buisson3"
-            Canvas.Left="939"
-            Canvas.Top="253"
-            Width="686"
-            Height="114"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            RenderTransformOrigin="0.5,0.5">
+            x:Name="buissonDroite"
+            Canvas.Left="1200"
+            Canvas.Top="-60"
+            Width="153"
+            Height="634"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            RenderTransformOrigin="0.5,0.5" Stroke="Black">
             <Rectangle.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform />
+                    <ScaleTransform ScaleY="-1" />
                     <SkewTransform />
-                    <RotateTransform Angle="-90.168" />
+                    <RotateTransform Angle="179.456" />
                     <TranslateTransform />
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
         <Rectangle
-            x:Name="buisson2"
-            Canvas.Left="-5"
-            Canvas.Top="563"
+            x:Name="buissonBas"
+            Canvas.Left="-1"
+            Canvas.Top="449"
             Width="1323"
-            Height="129"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            RenderTransformOrigin="0.5,0.5">
+            Height="149"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            RenderTransformOrigin="0.5,0.5" Stroke="Black">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
                     <SkewTransform />
-                    <RotateTransform Angle="-179.833" />
+                    <RotateTransform Angle="-0.123" />
                     <TranslateTransform />
                 </TransformGroup>
             </Rectangle.RenderTransform>
