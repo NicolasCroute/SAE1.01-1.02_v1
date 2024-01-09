@@ -21,14 +21,23 @@ namespace SAE1._01_1._02
     /// </summary>
     public partial class MainWindow : Window
     {
-        private bool haut, gauche,droite,bas = false;
+        private bool haut, gauche, droite, bas = false;
         private ImageBrush joueurSkin = new ImageBrush();
       //  private ImageBrush sol1 = new ImageBrush();
       //  private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int vitesseJoueur = 10;
         int compteur = 0, sprite = 1;
+        private string[] tableauApparenceDroite = { "images/hero_droites/HeroDroite_1.png", "images/hero_droites/HeroDroite_2.png", "images/hero_droites/HeroDroite_3.png", "images/hero_droites/HeroDroite_4.png", "images/hero_droites/HeroDroite_5.png", "images/hero_droites/HeroDroite_6.png", "images/hero_droites/HeroDroite_7.png", "images/hero_droites/HeroDroite_8.png", "images/hero_droites/HeroDroite_9.png" };
 
+
+        //---------------modif-----------------
+        // en millisecondes :
+        private int tempsEntreMisesAJour = 16;
+        private int tempsEcouleDepuisChangement = 0;
+        private int intervalleChangementApparence = 34;
+        private int changement = 0;
+        //-------------------------------------
 
         public MainWindow()
         {
@@ -50,6 +59,15 @@ namespace SAE1._01_1._02
             Rect joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1),
             joueur1.Width, joueur1.Height);
             DeplacementJoueur();
+
+            //----------------------modif--------------------
+            tempsEcouleDepuisChangement = tempsEcouleDepuisChangement + tempsEntreMisesAJour;
+            if (tempsEcouleDepuisChangement >= intervalleChangementApparence)
+            {
+                ChangementApparence();
+                tempsEcouleDepuisChangement = 0;
+            }
+
         }
 
 
@@ -113,6 +131,44 @@ namespace SAE1._01_1._02
             {
                 Canvas.SetTop(joueur1, Canvas.GetTop(joueur1) + vitesseJoueur);
             }
+
+        }
+
+        private void ChangementApparence()
+        {
+
+
+            if (droite == true)
+            {
+                changement = changement + 1;
+
+                if (changement >= tableauApparenceDroite.Length)
+                {
+                    changement = 0;
+                }
+                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceDroite[changement];
+                joueurSkin.ImageSource = new BitmapImage(new Uri(image));
+                joueur1.Fill = joueurSkin;
+            }
+            else if (gauche == true)
+            {
+
+            }
+            else if (haut == true)
+            {
+
+            }
+            else if (bas == true)
+            {
+
+            }
+            else
+            {
+                joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
+                joueur1.Fill = joueurSkin;
+            }
+
+            
 
         }
     }
