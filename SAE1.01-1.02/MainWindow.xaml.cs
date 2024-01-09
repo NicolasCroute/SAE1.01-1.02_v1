@@ -39,8 +39,8 @@ namespace SAE1._01_1._02
         private int intervalleChangementApparence = 34;
         private int changement = 0;
         private int vitesseennemie1 = 5;
-        private int totaleEnnemie;
-        private int delaiapparitionennemie = 200;
+        private int maxEnnemiemillisecond;
+        private int delaiapparitionennemie = 500;
 
 
 
@@ -55,7 +55,7 @@ namespace SAE1._01_1._02
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
                         dispatcherTimer.Start();
             //joueur1=joueurSkin
-            sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol_facile.jpg"));
+            sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.jpg"));
             sol1.Fill = sol1Skin;
             joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
             joueur1.Fill = joueurSkin;
@@ -89,17 +89,7 @@ namespace SAE1._01_1._02
             }
 
             compteur++;
-            if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > 100)
-            {
-
-                delaiapparitionennemie -= 25;
-                compteur = 0;
-            }
-            //else 
-            //{ 
-            //    gg 
-            //} 
-
+            
 
         }
 
@@ -233,7 +223,27 @@ namespace SAE1._01_1._02
         }
 
 
+        private void ennemie1(int limit)
 
+        {
+
+            int left = 0;
+            maxEnnemiemillisecond = limit;
+            if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > maxEnnemiemillisecond)
+            {
+               // ImageBrush enemySkin = new ImageBrush();
+                Rectangle newEnnemie = new Rectangle
+                {
+                    Tag = "ennemie",
+                    Height = 45,
+                    Width = 45,
+                    //Fill = enemySkin,
+                };
+                delaiapparitionennemie -= 25;
+                compteur = 0;
+            }
+
+        }
 
 
 
