@@ -89,7 +89,16 @@ namespace SAE1._01_1._02
             }
 
             compteur++;
-            
+            if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > 100)
+            {
+
+                delaiapparitionennemie -= 25;
+                compteur = 0;
+            }
+            //else 
+            //{ 
+            //    gg 
+            //} 
 
         }
 
