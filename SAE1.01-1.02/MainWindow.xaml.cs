@@ -23,8 +23,8 @@ namespace SAE1._01_1._02
     {
         private bool haut, gauche, droite, bas = false;
         private ImageBrush joueurSkin = new ImageBrush();
-      //  private ImageBrush sol1 = new ImageBrush();
-      //  private ImageBrush ennemi1 = new ImageBrush();
+      //private ImageBrush sol1 = new ImageBrush();
+      //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int vitesseJoueur = 10;
         int compteur = 0, sprite = 1;
@@ -40,6 +40,9 @@ namespace SAE1._01_1._02
         private int intervalleChangementApparence = 34;
         private int changement = 0;
         //-------------------------------------
+
+        private int vitesseTireJoueur = 15;
+        private List<Rectangle> itemsToRemove = new List<Rectangle>();
 
         public MainWindow()
         {
@@ -68,6 +71,10 @@ namespace SAE1._01_1._02
             {
                 ChangementApparence();
                 tempsEcouleDepuisChangement = 0;
+            }
+            foreach (Rectangle x in Canvas.Children.OfType<Rectangle>())
+            {
+                TestTireJoueur(x);
             }
 
         }
@@ -114,7 +121,100 @@ namespace SAE1._01_1._02
             {
                 bas = false;
             }
+
+            //tire joueur 
+            if (e.Key == Key.Z)
+            {
+
+                itemsToRemove.Clear();
+                // création un nouveau tir 
+                Rectangle nouveauTire = new Rectangle
+                {
+                    Tag = "tireJoueurHaut", //permet de tagger les rectangles 
+                    Height = 20,
+                    Width = 5,
+                    Fill = Brushes.Black
+                };
+
+                // on place le tir à l’endroit du joueur 
+                Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height / 2);
+                Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
+                // on place le tir dans le canvas 
+                Canvas.Children.Add(nouveauTire);
+            }
+
+            if (e.Key == Key.Q)
+            {
+
+                itemsToRemove.Clear();
+                // création un nouveau tir 
+
+                Rectangle nouveauTire = new Rectangle
+                {
+                    Tag = "tireJoueurGauche", //permet de tagger les rectangles 
+                    Height = 5,
+                    Width = 20,
+                    Fill = Brushes.Black
+                };
+
+                // on place le tir à l’endroit du joueur 
+                Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height / 2);
+                Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
+                // on place le tir dans le canvas 
+                Canvas.Children.Add(nouveauTire);
+            }
+
+            if (e.Key == Key.S)
+
+            {
+
+                itemsToRemove.Clear();
+                // création un nouveau tir 
+                Rectangle nouveauTire = new Rectangle
+                {
+                    Tag = "tireJoueurBas", //permet de tagger les rectangles 
+                    Height = 20,
+                    Width = 5,
+                    Fill = Brushes.Black
+                };
+
+                // on place le tir à l’endroit du joueur 
+                Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height);
+                Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
+                // on place le tir dans le canvas 
+                Canvas.Children.Add(nouveauTire);
+
+            }
+
+            if (e.Key == Key.D)
+            {
+
+                itemsToRemove.Clear();
+                // création un nouveau tir 
+                Rectangle nouveauTire = new Rectangle
+                {
+                    Tag = "tireJoueurDroite",
+                    //permet de tagger les rectangles 
+                    Height = 5,
+                    Width = 20,
+                    Fill = Brushes.Black
+                };
+                // on place le tir à l’endroit du joueur 
+                Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height / 2);
+                Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
+                // on place le tir dans le canvas 
+                Canvas.Children.Add(nouveauTire);
+
+            }
         }
+
+
+
+
+
+
+
+
         private void DeplacementJoueur()
         {
             if (gauche && Canvas.GetLeft(joueur1)>0)
@@ -198,6 +298,73 @@ namespace SAE1._01_1._02
             }
 
             
+
+        }
+        private void TestTireJoueur(Rectangle x)
+
+        {
+            if (x is Rectangle && (string)x.Tag == "tireJoueurHaut")
+            {
+                // si c’est un tir joueur on le déplace vers le haut 
+                Canvas.SetTop(x, Canvas.GetTop(x) - vitesseTireJoueur);
+                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
+                Rect TireHaut = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                // on vérifie que le tir a quitté le le haut du canvas (pas de collision avec un ennemie) 
+                if (Canvas.GetTop(x) < 10)
+                {
+                    // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
+                    itemsToRemove.Add(x);
+                }
+
+            }
+
+            if (x is Rectangle && (string)x.Tag == "tireJoueurGauche")
+            {
+
+                // si c’est un tir joueur on le déplace vers le haut 
+                Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseTireJoueur);
+                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
+                Rect TireDroite = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+                // on vérifie que le tir a quitté le le haut du canvas (pas de collision avec un ennemie) 
+                if (Canvas.GetTop(x) < 10)
+                {
+                    // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
+                    itemsToRemove.Add(x);
+                }
+
+            }
+
+            if (x is Rectangle && (string)x.Tag == "tireJoueurDroite")
+            {
+                // si c’est un tir joueur on le déplace vers le haut 
+                Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseTireJoueur);
+                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
+                Rect TireDroite = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+                // on vérifie que le tir a quitté le le haut du canvas (pas de collision avec un ennemie) 
+                if (Canvas.GetTop(x) < 10)
+
+                {
+                    // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
+                    itemsToRemove.Add(x);
+                }
+
+            }
+
+            if (x is Rectangle && (string)x.Tag == "tireJoueurBas")
+            {
+
+                // si c’est un tir joueur on le déplace vers le haut 
+                Canvas.SetTop(x, Canvas.GetTop(x) + vitesseTireJoueur);
+                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
+                Rect TireHaut = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                // on vérifie que le tir a quitté le le haut du canvas (pas de collision avec un ennemie) 
+                if (Canvas.GetTop(x) < 10)
+                {
+                    // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
+                    itemsToRemove.Add(x);
+                }
+
+            }
 
         }
     }
