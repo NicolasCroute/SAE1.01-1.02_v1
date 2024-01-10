@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 
 namespace SAE1._01_1._02
 {
-
     /// <summary>
     /// Logique d'interaction pour Menu.xaml
     /// </summary>
