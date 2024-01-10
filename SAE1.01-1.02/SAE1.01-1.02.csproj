@@ -233,34 +233,34 @@
     <None Update="images\squelette_marche_droite\squelette_marche_Droite_9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\zombiecourse\frame-15.gif">
+    <None Update="images\zombiecourse\frame-1.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\zombiecourse\frame-16.gif">
+    <None Update="images\zombiecourse\frame-2.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\zombiecourse\frame-17.gif">
+    <None Update="images\zombiecourse\frame-3.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\zombiecourse\frame-18.gif">
+    <None Update="images\zombiecourse\frame-4.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\zombiecourse\frame-19.gif">
+    <None Update="images\zombiecourse\frame-5.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\zombiecourse\frame-20.gif">
+    <None Update="images\zombiecourse\frame-6.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\zombiecourse\frame-21.gif">
+    <None Update="images\zombiecourse\frame-7.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\zombiecourse\frame-22.gif">
+    <None Update="images\zombiecourse\frame-8.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\zombiecourse\frame-23.gif">
+    <None Update="images\zombiecourse\frame-9.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\zombiecourse\frame-24.gif">
+    <None Update="images\zombiecourse\frame-99.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="little-pixel.ttf">

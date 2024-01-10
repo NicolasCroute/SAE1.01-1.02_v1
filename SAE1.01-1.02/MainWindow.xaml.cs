@@ -43,7 +43,7 @@ namespace SAE1._01_1._02
         private string[] tableauApparenceHaut = { "images/hero_haut/HeroHaut_1.png", "images/hero_haut/HeroHaut_2.png", "images/hero_haut/HeroHaut_3.png", "images/hero_haut/HeroHaut_4.png", "images/hero_haut/HeroHaut_5.png", "images/hero_haut/HeroHaut_6.png", "images/hero_haut/HeroHaut_7.png", "images/hero_haut/HeroHaut_8.png", "images/hero_haut/HeroHaut_9.png" };
         private string[] tableauApparenceBas = { "images/hero_bas/HeroBas_1.png", "images/hero_bas/HeroBas_2.png", "images/hero_bas/HeroBas_3.png", "images/hero_bas/HeroBas_4.png", "images/hero_bas/HeroBas_5.png", "images/hero_bas/HeroBas_6.png", "images/hero_bas/HeroBas_7.png", "images/hero_bas/HeroBas_8.png", "images/hero_bas/HeroBas_9.png" };
         private string[] tableauApparenceSqueletteDroite = { "images/squelette_marche_droite/squelette_marche_Droite_1.png", "images/squelette_marche_droite/squelette_marche_Droite_2.png", "images/squelette_marche_droite/squelette_marche_Droite_3.png", "images/squelette_marche_droite/squelette_marche_Droite_4.png", "images/squelette_marche_droite/squelette_marche_Droite_5.png", "images/squelette_marche_droite/squelette_marche_Droite_6.png", "images/squelette_marche_droite/squelette_marche_Droite_7.png", "images/squelette_marche_droite/squelette_marche_Droite_8.png", "images/squelette_marche_droite/squelette_marche_Droite_9.png", "images/squelette_marche_droite/squelette_marche_Droite_10.png" };
-        private string[] tableauApparenceZombieDroite = { "image/zombiecourse/frame-15.gif", "image/zombiecourse/frame-16.gif", "image/zombiecourse/frame-16.gif", "image/zombiecourse/frame-17.gif", "image/zombiecourse/frame-18.gif", "image/zombiecourse/frame-19.gif", "image/zombiecourse/frame-20.gif", "image/zombiecourse/frame-21.gif", "image/zombiecourse/frame-22.gif", "image/zombiecourse/frame-23.gif", "image/zombiecourse/frame-24.gif" };
+        private string[] tableauApparenceZombieDroite = { "image/zombiecourse/frame-1.gif", "image/zombiecourse/frame-2.gif", "image/zombiecourse/frame-3.gif", "image/zombiecourse/frame-4.gif", "image/zombiecourse/frame-5.gif", "image/zombiecourse/frame-6.gif", "image/zombiecourse/frame-7.gif", "image/zombiecourse/frame-8.gif", "image/zombiecourse/frame-9.gif", "image/zombiecourse/frame-99.gif" };
         private int tempsEntreMisesAJour = 16;
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 34;
@@ -52,6 +52,7 @@ namespace SAE1._01_1._02
         private int maxEnnemiemillisecond;
         private int delaiapparitionennemie = 500;
         private string directionEnnemie;
+        private Random déplacementAléatoire= new Random();
 
         //------------------------Modif--------------------
         private bool deplacementDroiteSquelette, deplacementGaucheSquelette, deplacementZombieDroite, deplacementZombieGauche = false;
@@ -83,9 +84,10 @@ namespace SAE1._01_1._02
 
             buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
             buissonDroite.Fill = buissonDroiteSkin;
+
             Ennemie(100);
 
-
+         
 
         }
         private void Jeu(object sender, EventArgs e)
@@ -136,8 +138,6 @@ namespace SAE1._01_1._02
             //} 
 
         }
-
-
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
@@ -356,6 +356,39 @@ namespace SAE1._01_1._02
         private void TestTireJoueur(Rectangle x)
 
         {
+            if (x is Rectangle && (string)x.Tag == "tireJoueurGauche")
+            {
+
+                // si c’est un tir joueur on le déplace vers le haut 
+                Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseTireJoueur);
+                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
+                Rect TireGauche = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+                // on vérifie que le tir a quitté le le haut du canvas (pas de collision avec un ennemie) 
+                if (Canvas.GetLeft(x) < 80)
+                {
+                    // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
+                    supprimer.Add(x);
+                }
+                foreach (var y in Canvas.Children.OfType<Rectangle>())
+                {
+                    // si le rectangle est un ennemi
+                    if (y is Rectangle && (string)y.Tag == "ennemie" || (string)y.Tag == "ennemiesql")
+                    {
+                        // création d’un rectangle correspondant à l’ennemi
+                        Rect ennemie = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
+                        // on vérifie la collision
+                        // appel à la méthode IntersectsWith pour détecter la collision
+                        if (TireGauche.IntersectsWith(ennemie))
+                        {
+                            // on ajoute l’ennemi de la liste à supprimer eton décrémente le nombre d’ennemis
+                            supprimer.Add(x);
+                            supprimer.Add(y);
+
+                        }
+                    }
+                }
+
+            }
             if (x is Rectangle && (string)x.Tag == "tireJoueurHaut")
             {
                 // si c’est un tir joueur on le déplace vers le haut 
@@ -368,24 +401,28 @@ namespace SAE1._01_1._02
                     // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
                     supprimer.Add(x);
                 }
-
-            }
-
-            if (x is Rectangle && (string)x.Tag == "tireJoueurGauche")
-            {
-
-                // si c’est un tir joueur on le déplace vers le haut 
-                Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseTireJoueur);
-                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                Rect TireDroite = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
-                // on vérifie que le tir a quitté le le haut du canvas (pas de collision avec un ennemie) 
-                if (Canvas.GetLeft(x) < 80)
+                foreach (var y in Canvas.Children.OfType<Rectangle>())
                 {
-                    // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
-                    supprimer.Add(x);
+                    // si le rectangle est un ennemi
+                    if (y is Rectangle && (string)y.Tag == "ennemie" || (string)y.Tag == "ennemiesql")
+                    {
+                        // création d’un rectangle correspondant à l’ennemi
+                        Rect ennemie = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
+                        // on vérifie la collision
+                        // appel à la méthode IntersectsWith pour détecter la collision
+                        if (TireHaut.IntersectsWith(ennemie))
+                        {
+                            // on ajoute l’ennemi de la liste à supprimer eton décrémente le nombre d’ennemis
+                            supprimer.Add(x);
+                            supprimer.Add(y);
+
+                        }
+                    }
                 }
 
             }
+
+            
 
             if (x is Rectangle && (string)x.Tag == "tireJoueurDroite")
             {
@@ -400,7 +437,26 @@ namespace SAE1._01_1._02
                     // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
                     supprimer.Add(x);
                 }
+                foreach (var y in Canvas.Children.OfType<Rectangle>())
+                {
+                    // si le rectangle est un ennemi
+                    if (y is Rectangle && (string)y.Tag == "ennemie" || (string)y.Tag == "ennemiesql")
+                    {
+                        // création d’un rectangle correspondant à l’ennemi
+                        Rect ennemie = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
+                        // on vérifie la collision
+                        // appel à la méthode IntersectsWith pour détecter la collision
+                        if (TireDroite.IntersectsWith(ennemie))
+                        {
+                            // on ajoute l’ennemi de la liste à supprimer eton décrémente le nombre d’ennemis
+                            supprimer.Add(x);
+                            supprimer.Add(y);
 
+                        }
+                        
+                    }
+
+                }
             }
 
             if (x is Rectangle && (string)x.Tag == "tireJoueurBas")
@@ -409,12 +465,30 @@ namespace SAE1._01_1._02
                 // si c’est un tir joueur on le déplace vers le haut 
                 Canvas.SetTop(x, Canvas.GetTop(x) + vitesseTireJoueur);
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                Rect TireHaut = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+                Rect TireBas = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                 // on vérifie que le tir a quitté le le haut du canvas (pas de collision avec un ennemie) 
                 if (Canvas.GetTop(x) > 500)
                 {
                     // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
                     supprimer.Add(x);
+                }
+                foreach (var y in Canvas.Children.OfType<Rectangle>())
+                {
+                    // si le rectangle est un ennemi
+                    if (y is Rectangle && (string)y.Tag == "ennemie" || (string)y.Tag == "ennemiesql")
+                    {
+                        // création d’un rectangle correspondant à l’ennemi
+                        Rect ennemie = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
+                        // on vérifie la collision
+                        // appel à la méthode IntersectsWith pour détecter la collision
+                        if (TireBas.IntersectsWith(ennemie))
+                        {
+                            // on ajoute l’ennemi de la liste à supprimer eton décrémente le nombre d’ennemis
+                            supprimer.Add(x);
+                            supprimer.Add(y);
+
+                        }
+                    }
                 }
 
             }
@@ -443,7 +517,15 @@ namespace SAE1._01_1._02
                 Canvas.SetTop(newEnnemie, 30);
                 Canvas.SetLeft(newEnnemie, left);
                 Canvas.Children.Add(newEnnemie);
-                ennemieZombieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/zombiecourse/frame-15.gif"));
+                changement++;
+                if (changement >= tableauApparenceZombieDroite.Length)
+                {
+                    changement = 0;
+                }
+
+                string imagezombie = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceZombieDroite[changement];
+                ennemieZombieSkin.ImageSource = new BitmapImage(new Uri(imagezombie));
+               
 
             }
 
@@ -456,8 +538,8 @@ namespace SAE1._01_1._02
                 changement = 0;
             }
 
-            string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceZombieDroite[changement];
-            ennemieZombieSkin.ImageSource = new BitmapImage(new Uri(image));
+            string imagezombie = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceZombieDroite[changement];
+            ennemieZombieSkin.ImageSource = new BitmapImage(new Uri(imagezombie));
             deplacementZombieDroite = true;
         }
 
@@ -480,17 +562,6 @@ namespace SAE1._01_1._02
             if (x is Rectangle && (string)x.Tag == "ennemie" || (string)x.Tag == "ennemiesql")
             {
                 
-                if (Canvas.GetLeft(x) > 975)
-                {
-                    for (double murgauche = -75; Canvas.GetLeft(x)> murgauche ;)
-                    { 
-                   Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseennemie1);
-                    }
-                   }
-                else
-                {
-                    Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseennemie1);
-                }
                 Rect ennemie = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                 if (joueur.IntersectsWith(ennemie))
                 {
