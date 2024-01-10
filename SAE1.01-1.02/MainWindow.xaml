@@ -10,7 +10,8 @@
     Height="1000"
     KeyDown="CanvasKeyIsDown"
     KeyUp="CanvasKeyIsUp"
-    mc:Ignorable="d" ResizeMode="NoResize">
+    ResizeMode="NoResize"
+    mc:Ignorable="d">
 
     <Canvas
         x:Name="Canvas"
@@ -18,15 +19,14 @@
         Height="616">
         <Rectangle
             Name="sol1"
-            Canvas.Left="35"
+            Canvas.Left="-28"
             Canvas.Top="-20"
-            Width="1210"
-            Height="666"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
+            Width="1343"
+            Height="796"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
             Fill="ForestGreen"
-            Grid.IsSharedSizeScope="True"
-             />
+            Grid.IsSharedSizeScope="True" />
         <Rectangle
             Name="joueur1"
             Canvas.Left="608"
@@ -35,17 +35,16 @@
             Height="92"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Fill="LightBlue"
-             />
+            Fill="LightBlue" />
         <Rectangle
             x:Name="buissonGauche"
-            Canvas.Left="-37"
+            Canvas.Left="-73"
             Canvas.Top="-40"
-            Width="141"
+            Width="177"
             Height="618"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            RenderTransformOrigin="0.5,0.5" Stroke="Black">
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -58,12 +57,12 @@
         <Rectangle
             x:Name="buissonHaut"
             Canvas.Left="18"
-            Canvas.Top="-143"
+            Canvas.Top="-173"
             Width="1262"
-            Height="148"
+            Height="201"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            RenderTransformOrigin="0.5,0.5" Stroke="Black">
+            RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -75,13 +74,13 @@
         </Rectangle>
         <Rectangle
             x:Name="buissonDroite"
-            Canvas.Left="1200"
+            Canvas.Left="1174"
             Canvas.Top="-60"
-            Width="153"
+            Width="199"
             Height="634"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            RenderTransformOrigin="0.5,0.5" Stroke="Black">
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1" />
@@ -94,12 +93,12 @@
         <Rectangle
             x:Name="buissonBas"
             Canvas.Left="-1"
-            Canvas.Top="449"
+            Canvas.Top="447"
             Width="1323"
-            Height="149"
+            Height="193"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            RenderTransformOrigin="0.5,0.5" Stroke="Black">
+            RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -109,7 +108,12 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Height="103" Canvas.Left="90" Stroke="Black" Canvas.Top="158" Width="71"/>
+        <Rectangle
+            Canvas.Left="90"
+            Canvas.Top="158"
+            Width="71"
+            Height="103"
+            Stroke="Black" />
 
     </Canvas>
 

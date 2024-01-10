@@ -17,6 +17,18 @@
     <None Update="images\buisson.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\buisson\buisson_bas.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\buisson\buisson_droite.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\buisson\buisson_gauche.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\buisson\buisson_haut.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\hero droites\HeroDroite_1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -188,7 +200,7 @@
     <None Update="images\sol\sol_difficile.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\sol\sol_facile.jpg">
+    <None Update="images\sol\sol_facile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="images\squelette_marche_droite\squelette_marche_Droite_1.png">

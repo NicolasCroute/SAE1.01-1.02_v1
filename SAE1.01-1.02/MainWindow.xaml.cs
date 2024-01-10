@@ -26,8 +26,11 @@ namespace SAE1._01_1._02
         
         private ImageBrush joueurSkin = new ImageBrush();
         private ImageBrush sol1Skin = new ImageBrush();
-        private ImageBrush buissonSkin = new ImageBrush();
-        ImageBrush ennemieSkin = new ImageBrush();
+        private ImageBrush buissonHautSkin = new ImageBrush();
+        private ImageBrush buissonBasSkin = new ImageBrush();
+        private ImageBrush buissonGaucheSkin = new ImageBrush();
+        private ImageBrush buissonDroiteSkin = new ImageBrush();
+        private ImageBrush ennemieSkin = new ImageBrush();
         //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int vitesseJoueur = 5;
@@ -60,15 +63,21 @@ namespace SAE1._01_1._02
             dispatcherTimer.Tick += Jeu;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             dispatcherTimer.Start();
-            sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.jpg"));
+            sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.png"));
             sol1.Fill = sol1Skin;
             joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
             joueur1.Fill = joueurSkin;
-            buissonSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson.png"));
-            buisson.Fill = buissonSkin;
-            buisson1.Fill = buissonSkin;
-            buisson2.Fill = buissonSkin;
-            buisson3.Fill = buissonSkin;
+            buissonBasSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_bas.png"));
+            buissonBas.Fill = buissonBasSkin;
+
+            buissonHautSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_haut.png"));
+            buissonHaut.Fill = buissonHautSkin;
+
+            buissonGaucheSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_gauche.png"));
+            buissonGauche.Fill = buissonGaucheSkin;
+
+            buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
+            buissonDroite.Fill = buissonDroiteSkin;
             ennemie1(100);
 
 
