@@ -16,13 +16,13 @@
     <Canvas
         x:Name="Canvas"
         Width="1280"
-        Height="616">
+        Height="610">
         <Rectangle
             Name="sol1"
-            Canvas.Left="-28"
+            Canvas.Left="-30"
             Canvas.Top="-20"
-            Width="1343"
-            Height="796"
+            Width="1350"
+            Height="800"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
             Fill="ForestGreen"

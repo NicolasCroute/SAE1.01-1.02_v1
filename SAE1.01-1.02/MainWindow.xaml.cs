@@ -392,7 +392,7 @@ namespace SAE1._01_1._02
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireDroite = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
                 // on vérifie que le tir a quitté le le haut du canvas (pas de collision avec un ennemie) 
-                if (Canvas.GetTop(x) < 0)
+                if (Canvas.GetLeft(x) > 1200)
 
                 {
                     // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
@@ -409,7 +409,7 @@ namespace SAE1._01_1._02
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireHaut = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                 // on vérifie que le tir a quitté le le haut du canvas (pas de collision avec un ennemie) 
-                if (Canvas.GetTop(x) < 10)
+                if (Canvas.GetTop(x) > 500)
                 {
                     // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
                     supprimer.Add(x);
