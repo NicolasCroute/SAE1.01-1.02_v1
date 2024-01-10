@@ -9,6 +9,11 @@
     Width="1500"
     Height="1000"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <FontFamily x:Key="PixelTandyFont">/SAE1.01-1.02;component/Pixel Tandy.otf#Pixel Tandy</FontFamily>
+    </Window.Resources>
+
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
@@ -17,14 +22,52 @@
                 <GradientStop Offset="0.562" Color="#FF0E1550" />
             </LinearGradientBrush>
         </Grid.Background>
+
         <Label
-            Margin="0,167,0,0"
+            x:Name="titre"
+            Margin="0,76,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            Background="{x:Null}"
             Content="ZOMBIE SURVIVOR"
-            FontFamily="#little-pixel.ttf"
-            FontSize="90"
+            FontFamily="{StaticResource PixelTandyFont}"
+            FontSize="120"
+            FontWeight="Bold"
             Foreground="White" />
+        <Button
+            x:Name="but_Jouer"
+            Width="250"
+            Height="100"
+            Margin="0,293,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Background="#FF5CB75D"
+            Content="Jouer"
+            FontFamily="{StaticResource PixelTandyFont}"
+            FontSize="72"
+            FontWeight="Bold"
+            Foreground="White" />
+        <Button
+            x:Name="but_Mode"
+            Width="250"
+            Height="100"
+            Margin="0,408,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Background="#FF5CB75D"
+            Click="but_Mode_Click"
+            Content="Mode"
+            FontFamily="{StaticResource PixelTandyFont}"
+            FontSize="72"
+            FontWeight="Bold"
+            Foreground="White" />
+        <Rectangle
+            x:Name="mode"
+            Width="656"
+            Height="364"
+            Margin="0,568,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top" />
 
     </Grid>
 </Window>
