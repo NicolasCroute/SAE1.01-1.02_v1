@@ -57,7 +57,7 @@ namespace SAE1._01_1._02
 
 
         private int vitesseTireJoueur = 15;
-        private List<Rectangle> itemsToRemove = new List<Rectangle>();
+        private List<Rectangle> supprimer = new List<Rectangle>();
 
         public MainWindow()
         {
@@ -107,6 +107,11 @@ namespace SAE1._01_1._02
                     ApparenceEnnemieSqu();
                 }
 
+            }
+            foreach (Rectangle y in supprimer)
+            {
+                // on les enlève du canvas
+                Canvas.Children.Remove(y);
             }
 
 
@@ -177,7 +182,7 @@ namespace SAE1._01_1._02
             if (e.Key == Key.Z)
             {
 
-                itemsToRemove.Clear();
+                supprimer.Clear();
                 // création un nouveau tir 
                 Rectangle nouveauTire = new Rectangle
                 {
@@ -197,7 +202,7 @@ namespace SAE1._01_1._02
             if (e.Key == Key.Q)
             {
 
-                itemsToRemove.Clear();
+                supprimer.Clear();
                 // création un nouveau tir 
 
                 Rectangle nouveauTire = new Rectangle
@@ -219,7 +224,7 @@ namespace SAE1._01_1._02
 
             {
 
-                itemsToRemove.Clear();
+                supprimer.Clear();
                 // création un nouveau tir 
                 Rectangle nouveauTire = new Rectangle
                 {
@@ -240,7 +245,7 @@ namespace SAE1._01_1._02
             if (e.Key == Key.D)
             {
 
-                itemsToRemove.Clear();
+                supprimer.Clear();
                 // création un nouveau tir 
                 Rectangle nouveauTire = new Rectangle
                 {
@@ -359,7 +364,7 @@ namespace SAE1._01_1._02
                 if (Canvas.GetTop(x) < 0)
                 {
                     // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
-                    itemsToRemove.Add(x);
+                    supprimer.Add(x);
                 }
 
             }
@@ -372,10 +377,10 @@ namespace SAE1._01_1._02
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireDroite = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
                 // on vérifie que le tir a quitté le le haut du canvas (pas de collision avec un ennemie) 
-                if (Canvas.GetTop(x) < 10)
+                if (Canvas.GetLeft(x) < 80)
                 {
                     // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
-                    itemsToRemove.Add(x);
+                    supprimer.Add(x);
                 }
 
             }
@@ -391,7 +396,7 @@ namespace SAE1._01_1._02
 
                 {
                     // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
-                    itemsToRemove.Add(x);
+                    supprimer.Add(x);
                 }
 
             }
@@ -407,7 +412,7 @@ namespace SAE1._01_1._02
                 if (Canvas.GetTop(x) < 10)
                 {
                     // si c’est le cas on l’ajoute à la liste des éléments à supprimer 
-                    itemsToRemove.Add(x);
+                    supprimer.Add(x);
                 }
 
             }
@@ -418,7 +423,7 @@ namespace SAE1._01_1._02
         private void Ennemie(int limit)
         {
 
-            int left = 0;
+            int left = 30;
             maxEnnemiemillisecond = limit;
             if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > maxEnnemiemillisecond)
             {
@@ -427,8 +432,8 @@ namespace SAE1._01_1._02
                 Rectangle newEnnemie = new Rectangle
                 {
                     Tag = "ennemie",
-                    Height = 120,
-                    Width = 120,
+                    Height = 100,
+                    Width = 100,
                     Fill = ennemieZombieSkin,
                 };
                 delaiapparitionennemie -= 25;
@@ -472,14 +477,18 @@ namespace SAE1._01_1._02
         {
             if (x is Rectangle && (string)x.Tag == "ennemie" || (string)x.Tag == "ennemiesql")
             {
-                Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseennemie1);
+                
                 if (Canvas.GetLeft(x) > 975)
                 {
-                    for (double murgauche = -73; Canvas.GetLeft(x)> murgauche ;)
+                    for (double murgauche = -75; Canvas.GetLeft(x)> murgauche ;)
                     { 
                    Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseennemie1);
                     }
                    }
+                else
+                {
+                    Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseennemie1);
+                }
                 Rect ennemie = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                 if (joueur.IntersectsWith(ennemie))
                 {
