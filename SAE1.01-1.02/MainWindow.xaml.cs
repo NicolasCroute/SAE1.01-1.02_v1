@@ -23,9 +23,14 @@ namespace SAE1._01_1._02
     public partial class MainWindow : Window
     {
         private bool haut, gauche, droite, bas = false;
+        
         private ImageBrush joueurSkin = new ImageBrush();
         private ImageBrush sol1Skin = new ImageBrush();
-        private ImageBrush buissonSkin = new ImageBrush();
+        private ImageBrush buissonHautSkin = new ImageBrush();
+        private ImageBrush buissonBasSkin = new ImageBrush();
+        private ImageBrush buissonGaucheSkin = new ImageBrush();
+        private ImageBrush buissonDroiteSkin = new ImageBrush();
+        private ImageBrush ennemieSkin = new ImageBrush();
         //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int vitesseJoueur = 5;
@@ -34,6 +39,7 @@ namespace SAE1._01_1._02
         private string[] tableauApparenceGauche = { "images/hero_gauche/HeroGauche_1.png", "images/hero_gauche/HeroGauche_2.png", "images/hero_gauche/HeroGauche_3.png", "images/hero_gauche/HeroGauche_4.png", "images/hero_gauche/HeroGauche_5.png", "images/hero_gauche/HeroGauche_6.png", "images/hero_gauche/HeroGauche_7.png", "images/hero_gauche/HeroGauche_8.png", "images/hero_gauche/HeroGauche_9.png" };
         private string[] tableauApparenceHaut = { "images/hero_haut/HeroHaut_1.png", "images/hero_haut/HeroHaut_2.png", "images/hero_haut/HeroHaut_3.png", "images/hero_haut/HeroHaut_4.png", "images/hero_haut/HeroHaut_5.png", "images/hero_haut/HeroHaut_6.png", "images/hero_haut/HeroHaut_7.png", "images/hero_haut/HeroHaut_8.png", "images/hero_haut/HeroHaut_9.png" };
         private string[] tableauApparenceBas = { "images/hero_bas/HeroBas_1.png", "images/hero_bas/HeroBas_2.png", "images/hero_bas/HeroBas_3.png", "images/hero_bas/HeroBas_4.png", "images/hero_bas/HeroBas_5.png", "images/hero_bas/HeroBas_6.png", "images/hero_bas/HeroBas_7.png", "images/hero_bas/HeroBas_8.png", "images/hero_bas/HeroBas_9.png" };
+        private string[] tableauApparenceSqueletteDroite = { "images/squelette_marche_droite/squelette_marche_Droite_1.png", "images/squelette_marche_droite/squelette_marche_Droite_2.png", "images/squelette_marche_droite/squelette_marche_Droite_3.png", "images/squelette_marche_droite/squelette_marche_Droite_4.png", "images/squelette_marche_droite/squelette_marche_Droite_5.png", "images/squelette_marche_droite/squelette_marche_Droite_6.png", "images/squelette_marche_droite/squelette_marche_Droite_7.png", "images/squelette_marche_droite/squelette_marche_Droite_8.png", "images/squelette_marche_droite/squelette_marche_Droite_9.png", "images/squelette_marche_droite/squelette_marche_Droite_10.png" };
         private int tempsEntreMisesAJour = 16;
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 34;
@@ -43,7 +49,8 @@ namespace SAE1._01_1._02
         private int delaiapparitionennemie = 500;
         private string directionEnnemie;
 
-
+        //------------------------Modif--------------------
+        private bool deplacementDroiteSquelette, deplacementGaucheSquelette = false;
 
 
         private int vitesseTireJoueur = 15;
@@ -55,17 +62,22 @@ namespace SAE1._01_1._02
             WindowState = WindowState.Maximized;
             dispatcherTimer.Tick += Jeu;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
-                        dispatcherTimer.Start();
-            //joueur1=joueurSkin
-            sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.jpg"));
+            dispatcherTimer.Start();
+            sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.png"));
             sol1.Fill = sol1Skin;
             joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
             joueur1.Fill = joueurSkin;
-            buissonSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson.png"));
-            buisson.Fill = buissonSkin;
-            buisson1.Fill = buissonSkin;
-            buisson2.Fill = buissonSkin;
-            buisson3.Fill = buissonSkin;
+            buissonBasSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_bas.png"));
+            buissonBas.Fill = buissonBasSkin;
+
+            buissonHautSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_haut.png"));
+            buissonHaut.Fill = buissonHautSkin;
+
+            buissonGaucheSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_gauche.png"));
+            buissonGauche.Fill = buissonGaucheSkin;
+
+            buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
+            buissonDroite.Fill = buissonDroiteSkin;
             ennemie1(100);
 
 
@@ -77,13 +89,28 @@ namespace SAE1._01_1._02
             joueur1.Width, joueur1.Height);
             DeplacementJoueur();
 
-            //----------------------modif--------------------
+            
             tempsEcouleDepuisChangement = tempsEcouleDepuisChangement + tempsEntreMisesAJour;
             if (tempsEcouleDepuisChangement >= intervalleChangementApparence)
             {
                 ChangementApparence();
                 tempsEcouleDepuisChangement = 0;
+
+
+
+
+
+                //----------------modif-------------------
+                if (deplacementDroiteSquelette == true)
+                {
+                    ApparenceEnnemie1();
+                }
+
+
+
+
             }
+
 
             foreach (Rectangle x in Canvas.Children.OfType<Rectangle>())
             {
@@ -108,7 +135,7 @@ namespace SAE1._01_1._02
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
-            // on gère les booléens gauche et droite en fonction de l’appui de la touche
+            
             if (e.Key == Key.Left)
             {
                 gauche = true;
@@ -129,7 +156,7 @@ namespace SAE1._01_1._02
 
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
-            // on gère les booléens gauche et droite en fonction du relâchement de la touche
+            
             if (e.Key == Key.Left)
             {
                 gauche = false;
@@ -234,8 +261,71 @@ namespace SAE1._01_1._02
         }
 
 
+        private void ennemie1(int limit)
+        {
+
+            int left = 0;
+            maxEnnemiemillisecond = limit;
+            if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > maxEnnemiemillisecond)
+            {
+                
+                Rectangle newEnnemie = new Rectangle
+                {
+                    Tag = "ennemie",
+                    Height = 120,
+                    Width = 120,
+                    Fill = ennemieSkin,
+                };
+                delaiapparitionennemie -= 25;
+                compteur = 0;
+                Canvas.SetTop(newEnnemie, 30);
+                Canvas.SetLeft(newEnnemie, left);
+                Canvas.Children.Add (newEnnemie);
+                ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/zombiecourse/frame-15.gif"));
+
+
+
+
+
+
+
+                //-----ajouter peut etre plusieur rectangle pour chaque enemis ???
+
+                //----------------imaginon---------------
+                deplacementDroiteSquelette = true;
+                //----------------alors-----------------
+                
+
+                
+
+
+
+
+
+
+                
+            }
+
+        }
+
+        private void ApparenceEnnemie1()
+        {
+            changement++;
+
+            if (changement >= tableauApparenceSqueletteDroite.Length)
+            {
+                changement = 0;
+            }
+            string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changement];
+            ennemieSkin.ImageSource = new BitmapImage(new Uri(image));
+            
+        }
         
-        
+
+
+
+
+
 
 
 
