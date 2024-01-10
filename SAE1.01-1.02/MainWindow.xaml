@@ -35,7 +35,8 @@
             Height="92"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Fill="LightBlue" />
+            Fill="LightBlue" 
+            Stroke="DarkBlue"/>
         <Rectangle
             x:Name="buissonGauche"
             Canvas.Left="-73"
@@ -57,9 +58,9 @@
         <Rectangle
             x:Name="buissonHaut"
             Canvas.Left="18"
-            Canvas.Top="-173"
-            Width="1262"
-            Height="201"
+            Canvas.Top="-175"
+            Width="1260"
+            Height="200"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             RenderTransformOrigin="0.5,0.5">
@@ -74,9 +75,9 @@
         </Rectangle>
         <Rectangle
             x:Name="buissonDroite"
-            Canvas.Left="1174"
+            Canvas.Left="1175"
             Canvas.Top="-60"
-            Width="199"
+            Width="200"
             Height="634"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
