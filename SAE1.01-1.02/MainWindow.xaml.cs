@@ -22,6 +22,8 @@ namespace SAE1._01_1._02
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+
         private bool haut, gauche, droite, bas = false;
         
         private ImageBrush joueurSkin = new ImageBrush();
