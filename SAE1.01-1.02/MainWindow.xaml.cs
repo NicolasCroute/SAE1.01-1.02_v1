@@ -234,31 +234,7 @@ namespace SAE1._01_1._02
         }
 
 
-        private void ennemie1(int limit)
-
-        {
-
-            int left = 0;
-            maxEnnemiemillisecond = limit;
-            if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > maxEnnemiemillisecond)
-            {
-                ImageBrush ennemieSkin = new ImageBrush();
-                Rectangle newEnnemie = new Rectangle
-                {
-                    Tag = "ennemie",
-                    Height = 75,
-                    Width = 75,
-                    Fill = ennemieSkin,
-                };
-                delaiapparitionennemie -= 25;
-                compteur = 0;
-                Canvas.SetTop(newEnnemie, 30);
-                Canvas.SetLeft(newEnnemie, left);
-                Canvas.Children.Add (newEnnemie);
-                ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/zombiecourse/frame-15.gif"));    
-            }
-
-        }
+        
         
 
 
@@ -418,13 +394,46 @@ namespace SAE1._01_1._02
 
 
         }
-        //private Rect Ennemiemouvementetcollision(Rectangle x, Rect player)
+        private void ennemie1(int limit)
+
+        {
+
+            int left = 0;
+            maxEnnemiemillisecond = limit;
+            if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > maxEnnemiemillisecond)
+            {
+                ImageBrush ennemieSkin = new ImageBrush();
+                Rectangle newEnnemie = new Rectangle
+                {
+                    Tag = "ennemie",
+                    Height = 75,
+                    Width = 75,
+                    Fill = ennemieSkin,
+                };
+                delaiapparitionennemie -= 25;
+                compteur = 0;
+                Canvas.SetTop(newEnnemie, 30);
+                Canvas.SetLeft(newEnnemie, left);
+                Canvas.Children.Add (newEnnemie);
+                ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/zombiecourse/frame-15.gif"));    
+            }
+
+        }
+        //private Rect Ennemiemouvement(Rectangle x, Rect player)
         //{
-        //    directionEnnemie =
-        //    if (x is Rectangle && (string)x.Tag == "ennemie")
-        //    {
-        //        Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseennemie1);
-        //    }
+        //    DispatcherTimer timer = new DispatcherTimer();
+        //    timer.Tick += (sender, e) => Ennemiemouvementaleatoire();
+        //    timer.Interval = TimeSpan.FromSeconds(1); // Changer l'intervalle selon vos besoins
+        //    timer.Start();
+        //}
+        //private void Ennemiemouvementaleatoire() 
+        //{
+        //    double maxWidth = ActualWidth - newEnnemie.Width;
+        //    double maxHeight = ActualHeight - monRectangle.Height;
+        //    double newX = random.NextDouble() * maxWidth;
+        //    double newY = random.NextDouble() * maxHeight;
+        //    Canvas.SetLeft(monRectangle, newX);
+        //    Canvas.SetTop(monRectangle, newY);
         //}
 
     }
