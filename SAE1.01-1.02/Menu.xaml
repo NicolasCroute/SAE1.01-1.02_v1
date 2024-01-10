@@ -8,13 +8,15 @@
     Title="Menu"
     Width="1500"
     Height="1000"
-    mc:Ignorable="d" ResizeMode="NoResize">
+    mc:Ignorable="d" ResizeMode="NoResize"
+    >
 
     <Window.Resources>
         <FontFamily x:Key="PixelTandyFont">/SAE1.01-1.02;component/Pixel Tandy.otf#Pixel Tandy</FontFamily>
     </Window.Resources>
 
-    <Grid>
+    <Grid >
+        
 
 
         <Label
