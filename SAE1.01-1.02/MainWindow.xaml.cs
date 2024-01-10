@@ -66,9 +66,22 @@ namespace SAE1._01_1._02
         {
             InitializeComponent();
             WindowState = WindowState.Maximized;
+
+            //------------------A comprendre--------------
+            Menu accesMenu = new Menu();
+            accesMenu.ShowDialog();
+            //----------------------?????-------------------
+            //accesMenu.Owner = this;
+            if (accesMenu.DialogResult == false)
+            {
+                Application.Current.Shutdown();
+            }
+            
+
             dispatcherTimer.Tick += Jeu;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             dispatcherTimer.Start();
+
             sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.png"));
             sol1.Fill = sol1Skin;
             joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
@@ -524,7 +537,7 @@ namespace SAE1._01_1._02
                 }
 
                 string imagezombie = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceZombieDroite[changement];
-                ennemieZombieSkin.ImageSource = new BitmapImage(new Uri(imagezombie));
+                //ennemieZombieSkin.ImageSource = new BitmapImage(new Uri(imagezombie));
                
 
             }

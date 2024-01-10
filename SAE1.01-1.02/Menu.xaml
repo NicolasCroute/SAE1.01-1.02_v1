@@ -8,20 +8,14 @@
     Title="Menu"
     Width="1500"
     Height="1000"
-    mc:Ignorable="d">
+    mc:Ignorable="d" ResizeMode="NoResize">
 
     <Window.Resources>
         <FontFamily x:Key="PixelTandyFont">/SAE1.01-1.02;component/Pixel Tandy.otf#Pixel Tandy</FontFamily>
     </Window.Resources>
 
     <Grid>
-        <Grid.Background>
-            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
-                <GradientStop Color="#FF060A31" />
-                <GradientStop Offset="1" Color="#FF263186" />
-                <GradientStop Offset="0.562" Color="#FF0E1550" />
-            </LinearGradientBrush>
-        </Grid.Background>
+
 
         <Label
             x:Name="titre"
@@ -33,7 +27,8 @@
             FontFamily="{StaticResource PixelTandyFont}"
             FontSize="120"
             FontWeight="Bold"
-            Foreground="White" />
+            Foreground="White" 
+            Panel.ZIndex="3"/>
         <Button
             x:Name="but_Jouer"
             Width="250"
@@ -46,7 +41,8 @@
             FontFamily="{StaticResource PixelTandyFont}"
             FontSize="72"
             FontWeight="Bold"
-            Foreground="White" />
+            Foreground="White" Click="but_Jouer_Click" 
+            Panel.ZIndex="2"/>
         <Button
             x:Name="but_Mode"
             Width="250"
@@ -60,14 +56,17 @@
             FontFamily="{StaticResource PixelTandyFont}"
             FontSize="72"
             FontWeight="Bold"
-            Foreground="White" />
+            Foreground="White" 
+            Panel.ZIndex="2"/>
         <Rectangle
             x:Name="mode"
             Width="656"
             Height="364"
             Margin="0,568,0,0"
             HorizontalAlignment="Center"
-            VerticalAlignment="Top" />
+            VerticalAlignment="Top" 
+            Panel.ZIndex="2"/>
+        <Rectangle x:Name="fontMode" Height="1000" Margin="0,0,0,0" Width="1500" Panel.ZIndex="1"/>
 
     </Grid>
 </Window>

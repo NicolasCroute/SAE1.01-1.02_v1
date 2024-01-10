@@ -29,6 +29,12 @@
     <None Update="images\buisson\buisson_haut.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\font\fontBleu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\font\fontRouge.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\hero droites\HeroDroite_1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
