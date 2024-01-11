@@ -51,7 +51,7 @@ namespace SAE1._01_1._02
         private int changement = 0;
         private int vitesseennemie = 3;
         private int maxEnnemiemillisecond;
-        private int delaiapparitionennemie = 500;       
+        private int delaiapparitionennemie = 500;
         private Random déplacementAléatoire = new Random();
         private int vitesseTireJoueur = 15;
         private List<Rectangle> supprimer = new List<Rectangle>();
@@ -112,7 +112,7 @@ namespace SAE1._01_1._02
             foreach (Rectangle x in Canvas.Children.OfType<Rectangle>())
             {
                 TestTireJoueur(x);
-                
+
             }
 
             compteur++;
@@ -145,7 +145,7 @@ namespace SAE1._01_1._02
             if (e.Key == Key.Up)
             {
                 haut = true;
-               direction = "H";
+                direction = "H";
             }
             if (e.Key == Key.Down)
             {
@@ -164,12 +164,12 @@ namespace SAE1._01_1._02
             if (e.Key == Key.Right)
             {
                 droite = false;
-              
+
             }
             if (e.Key == Key.Up)
             {
                 haut = false;
-              
+
             }
             if (e.Key == Key.Down)
             {
@@ -186,7 +186,7 @@ namespace SAE1._01_1._02
                     Fill = Brushes.Black
                 };
                 Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height / 2);
-                Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1)+joueur1.Width / 2);
+                Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
                 Canvas.Children.Add(nouveauTire);
             }
             if (e.Key == Key.Space && direction == "H" || e.Key == Key.Space && direction == "B")
@@ -203,18 +203,18 @@ namespace SAE1._01_1._02
                 Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
                 Canvas.Children.Add(nouveauTire);
             }
-            
+
         }
         private void TestTireJoueur(Rectangle x)
         {
 
-            if (x is Rectangle && (string)x.Tag == "tireJoueur" && direction =="G")
+            if (x is Rectangle && (string)x.Tag == "tireJoueur" && direction == "G")
             {
                 Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseTireJoueur);
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireGauche = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
                 x.Tag = "TireG";
-                if(Canvas.GetLeft(x) < 80)
+                if (Canvas.GetLeft(x) < 80)
                 {
                     supprimer.Add(x);
                 }
@@ -241,9 +241,9 @@ namespace SAE1._01_1._02
                 {
                     supprimer.Add(x);
                 }
-             }
+            }
 
-            if((string)x.Tag == "TireH")
+            if ((string)x.Tag == "TireH")
             {
                 Canvas.SetTop(x, Canvas.GetTop(x) - vitesseTireJoueur);
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
@@ -252,18 +252,18 @@ namespace SAE1._01_1._02
 
 
 
-             if (x is Rectangle && (string)x.Tag == "tireJoueur" && direction == "B")
-             {
-                 Canvas.SetTop(x, Canvas.GetTop(x) + vitesseTireJoueur);
+            if (x is Rectangle && (string)x.Tag == "tireJoueur" && direction == "B")
+            {
+                Canvas.SetTop(x, Canvas.GetTop(x) + vitesseTireJoueur);
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                 Rect TireBas = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
-                    x.Tag = "TireB";
+                Rect TireBas = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+                x.Tag = "TireB";
                 if (Canvas.GetTop(x) > 500)
-                 {
-                     supprimer.Add(x);
-                 }
+                {
+                    supprimer.Add(x);
+                }
 
-             }
+            }
             if ((string)x.Tag == "TireB")
             {
                 Canvas.SetTop(x, Canvas.GetTop(x) + vitesseTireJoueur);
@@ -274,17 +274,17 @@ namespace SAE1._01_1._02
 
 
             if (x is Rectangle && (string)x.Tag == "tireJoueur" && direction == "D")
-             {
-                 Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseTireJoueur);
-                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                 Rect TireDroite = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+            {
+                Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseTireJoueur);
+                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
+                Rect TireDroite = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
                 x.Tag = "TireD";
                 if (Canvas.GetLeft(x) > 1200)
-                 {
-                     supprimer.Add(x);
-                 }
+                {
+                    supprimer.Add(x);
+                }
 
-             }
+            }
             if ((string)x.Tag == "TireD")
             {
                 Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseTireJoueur);
@@ -292,7 +292,7 @@ namespace SAE1._01_1._02
                 Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
             }
         }
-        
+
 
 
 
@@ -382,31 +382,7 @@ namespace SAE1._01_1._02
 
 
         }
-        
-            //if (x is Rectangle && (string)x.Tag == "tireJoueurGauche")
-            //{
-
-               // si c’est un tir joueur on le déplace vers le haut 
-             
-                }
-            //    foreach (var y in Canvas.Children.OfType<Rectangle>())
-            //    {
-            //        // si le rectangle est un ennemi
-            //        if (y is Rectangle && (string)y.Tag == "ennemie" || (string)y.Tag == "ennemiesql")
-            //        {
-            //            // création d’un rectangle correspondant à l’ennemi
-            //            Rect ennemie = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
-            //            // on vérifie la collision
-            //            // appel à la méthode IntersectsWith pour détecter la collision
-            //            if (TireGauche.IntersectsWith(ennemie))
-            //            {
-            //                // on ajoute l’ennemi de la liste à supprimer eton décrémente le nombre d’ennemis
-            //                supprimer.Add(x);
-            //                supprimer.Add(y);
-
-            //            }
-            //        }
-        
+    }
 
     }
 
