@@ -44,8 +44,7 @@ namespace SAE1._01_1._02
         private string[] tableauApparenceHaut = { "images/hero_haut/HeroHaut_1.png", "images/hero_haut/HeroHaut_2.png", "images/hero_haut/HeroHaut_3.png", "images/hero_haut/HeroHaut_4.png", "images/hero_haut/HeroHaut_5.png", "images/hero_haut/HeroHaut_6.png", "images/hero_haut/HeroHaut_7.png", "images/hero_haut/HeroHaut_8.png", "images/hero_haut/HeroHaut_9.png" };
         private string[] tableauApparenceBas = { "images/hero_bas/HeroBas_1.png", "images/hero_bas/HeroBas_2.png", "images/hero_bas/HeroBas_3.png", "images/hero_bas/HeroBas_4.png", "images/hero_bas/HeroBas_5.png", "images/hero_bas/HeroBas_6.png", "images/hero_bas/HeroBas_7.png", "images/hero_bas/HeroBas_8.png", "images/hero_bas/HeroBas_9.png" };
         private string[] tableauApparenceSqueletteDroite = { "images/squelette_marche_droite/squelette_marche_Droite_1.png", "images/squelette_marche_droite/squelette_marche_Droite_2.png", "images/squelette_marche_droite/squelette_marche_Droite_3.png", "images/squelette_marche_droite/squelette_marche_Droite_4.png", "images/squelette_marche_droite/squelette_marche_Droite_5.png", "images/squelette_marche_droite/squelette_marche_Droite_6.png", "images/squelette_marche_droite/squelette_marche_Droite_7.png", "images/squelette_marche_droite/squelette_marche_Droite_8.png", "images/squelette_marche_droite/squelette_marche_Droite_9.png", "images/squelette_marche_droite/squelette_marche_Droite_10.png" };
-        private string[] tableauApparenceZombieDroite = { "image/zombiecourse/frame-1.gif", "i" +
-                "mage/zombiecourse/frame-2.gif", "image/zombiecourse/frame-3.gif", "image/zombiecourse/frame-4.gif", "image/zombiecourse/frame-5.gif", "image/zombiecourse/frame-6.gif", "image/zombiecourse/frame-7.gif", "image/zombiecourse/frame-8.gif", "image/zombiecourse/frame-9.gif", "image/zombiecourse/frame-99.gif" };
+        private string[] tableauApparenceZombieDroite = { "image/zombiecourse/frame-1.gif", "image/zombiecourse/frame-2.gif", "image/zombiecourse/frame-3.gif", "image/zombiecourse/frame-4.gif", "image/zombiecourse/frame-5.gif", "image/zombiecourse/frame-6.gif", "image/zombiecourse/frame-7.gif", "image/zombiecourse/frame-8.gif", "image/zombiecourse/frame-9.gif", "image/zombiecourse/frame-99.gif" };
         private int tempsEntreMisesAJour = 16;
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 34;
@@ -56,6 +55,7 @@ namespace SAE1._01_1._02
         private Random déplacementAléatoire = new Random();
         private int vitesseTireJoueur = 15;
         private List<Rectangle> supprimer = new List<Rectangle>();
+        //private int[,] tableauApparitionEnnemie = { { 30, 100 },{500,100} };
 
         public MainWindow()
         {
@@ -92,7 +92,7 @@ namespace SAE1._01_1._02
 
             buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
             buissonDroite.Fill = buissonDroiteSkin;
-
+            CreationEnnemie(1);
 
 
         }
@@ -176,34 +176,22 @@ namespace SAE1._01_1._02
             {
                 bas = false;
             }
-            if (e.Key == Key.Space && direction == "G" || e.Key == Key.Space && direction == "D")
+            if (e.Key == Key.Space)
             {
                 supprimer.Clear();
                 Rectangle nouveauTire = new Rectangle
                 {
                     Tag = "tireJoueur",
-                    Height = 5,
-                    Width = 20,
-                    Fill = Brushes.Black
+                    Height = 10,
+                    Width = 10,
+                    Fill = Brushes.Red,
+                    Stroke = Brushes.White,
                 };
                 Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height / 2);
                 Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
                 Canvas.Children.Add(nouveauTire);
             }
-            if (e.Key == Key.Space && direction == "H" || e.Key == Key.Space && direction == "B")
-            {
-                supprimer.Clear();
-                Rectangle nouveauTire = new Rectangle
-                {
-                    Tag = "tireJoueur",
-                    Height = 20,
-                    Width = 5,
-                    Fill = Brushes.Black
-                };
-                Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height);
-                Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
-                Canvas.Children.Add(nouveauTire);
-            }
+
 
         }
         private void TestTireJoueur(Rectangle x)
@@ -215,11 +203,6 @@ namespace SAE1._01_1._02
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireGauche = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
                 x.Tag = "TireG";
-                if (Canvas.GetLeft(x) < 80)
-                {
-                    supprimer.Add(x);
-                }
-
             }
 
             if ((string)x.Tag == "TireG")
@@ -227,6 +210,10 @@ namespace SAE1._01_1._02
                 Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseTireJoueur);
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+                if (Canvas.GetLeft(x) < 80)
+                {
+                    supprimer.Add(x);
+                }
             }
 
 
@@ -238,10 +225,7 @@ namespace SAE1._01_1._02
                 Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
                 x.Tag = "TireH";
 
-                if (Canvas.GetTop(x) < 0)
-                {
-                    supprimer.Add(x);
-                }
+
             }
 
             if ((string)x.Tag == "TireH")
@@ -249,6 +233,10 @@ namespace SAE1._01_1._02
                 Canvas.SetTop(x, Canvas.GetTop(x) - vitesseTireJoueur);
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+                if (Canvas.GetTop(x) < 0)
+                {
+                    supprimer.Add(x);
+                }
             }
 
 
@@ -259,10 +247,7 @@ namespace SAE1._01_1._02
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireBas = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
                 x.Tag = "TireB";
-                if (Canvas.GetTop(x) > 500)
-                {
-                    supprimer.Add(x);
-                }
+
 
             }
             if ((string)x.Tag == "TireB")
@@ -270,6 +255,10 @@ namespace SAE1._01_1._02
                 Canvas.SetTop(x, Canvas.GetTop(x) + vitesseTireJoueur);
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+                if (Canvas.GetTop(x) > 500)
+                {
+                    supprimer.Add(x);
+                }
             }
 
 
@@ -280,10 +269,7 @@ namespace SAE1._01_1._02
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireDroite = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
                 x.Tag = "TireD";
-                if (Canvas.GetLeft(x) > 1200)
-                {
-                    supprimer.Add(x);
-                }
+
 
             }
             if ((string)x.Tag == "TireD")
@@ -291,6 +277,10 @@ namespace SAE1._01_1._02
                 Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseTireJoueur);
                 // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
                 Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+                if (Canvas.GetLeft(x) > 1200)
+                {
+                    supprimer.Add(x);
+                }
             }
         }
 
@@ -383,9 +373,40 @@ namespace SAE1._01_1._02
 
 
         }
-    }
+        private void CreationEnnemie(int nombreennemie)
+        {
+            int gauche = 100;
+            for (int i = 0; i < nombreennemie; i++)
+            {
+                ImageBrush ennemieSkin = new ImageBrush();
+                Rectangle newEnnemie = new Rectangle
+                {
+                    Tag = "ennemie",
+                    Height = 75,
+                    Width = 75,
+                    Fill = ennemieSkin,
+                };
+                Canvas.SetTop(newEnnemie, 300);
+                Canvas.SetLeft(newEnnemie, gauche);
+                Canvas.Children.Add(newEnnemie);
+                gauche = -50;
+                ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette_marche_droite/squelette_marche_Droite_1.png"));
+                //pas mettre png ???
+                //for (int j = 0; j < tableauApparenceZombieDroite.Length; j++)
+                //{
+                //    ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[j]));
+                //    if (j <= tableauApparenceZombieDroite.Length)
+                //    {
+                //        j = 0;
+                //    }
+                //}
+            }
+        }
 
     }
+}
+
+    
 
 
     

@@ -113,12 +113,6 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle
-            Canvas.Left="90"
-            Canvas.Top="158"
-            Width="71"
-            Height="103"
-            Stroke="Black" />
 
     </Canvas>
 
