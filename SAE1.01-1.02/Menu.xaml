@@ -13,78 +13,196 @@
     mc:Ignorable="d">
 
     <Window.Resources>
-        <FontFamily x:Key="PixelTandyFont">/SAE1.01-1.02;component/Pixel Tandy.otf#Pixel Tandy</FontFamily>
+        <FontFamily x:Key="PixelTandyPolice">/SAE1.01-1.02;component/Pixel Tandy.otf#Pixel Tandy</FontFamily>
     </Window.Resources>
     <Grid>
-        <Grid.Background>
-            <ImageBrush/>
-        </Grid.Background>
-        <Label
-            x:Name="titre"
-            Margin="0,76,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Panel.ZIndex="3"
-            Background="{x:Null}"
-            Content="ZOMBIE SURVIVOR"
-            FontFamily="{StaticResource PixelTandyFont}"
-            FontSize="120"
-            FontWeight="Bold"
-            Foreground="White" />
-        <Button
-            x:Name="but_Jouer"
-            Width="250"
-            Height="100"
-            Margin="0,293,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Panel.ZIndex="2"
-            Background="#FF5CB75D"
-            Click="but_Jouer_Click"
-            Content="Jouer"
-            FontFamily="{StaticResource PixelTandyFont}"
-            FontSize="72"
-            FontWeight="Bold"
-            Foreground="White" />
-        <Button
-            x:Name="but_Mode"
-            Width="250"
-            Height="100"
-            Margin="0,408,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Panel.ZIndex="2"
-            Background="#FF5CB75D"
-            Click="but_Mode_Click"
-            Content="Mode"
-            FontFamily="{StaticResource PixelTandyFont}"
-            FontSize="72"
-            FontWeight="Bold"
-            Foreground="White" />
-        <Rectangle
-            x:Name="mode"
-            Width="656"
-            Height="364"
-            Margin="0,568,0,0"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Panel.ZIndex="4" />
-        <Rectangle
-            x:Name="fontMode"
+        <Canvas
+            x:Name="menuPrincipale"
             Width="1500"
-            Height="1000"
-            Margin="0,0,0,0"
-            Panel.ZIndex="1" />
-        <Rectangle x:Name="ombre"
-            Width="712"
-            Height="314"
-            Margin="0,641,0,0"
+            Height="984"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Fill="#FF333232" 
-            Panel.ZIndex="2"/>
-        <Button x:Name="parametre" Content="" HorizontalAlignment="Left" Margin="1380,867,0,0" VerticalAlignment="Top" Height="100" Width="100" Panel.ZIndex="4"/>
+            Panel.ZIndex="5">
+            <!--  comment centrer un canvas au milieu d'une fenetre wpf xaml  -->
+
+            <Label
+                x:Name="titre"
+                Canvas.Left="224"
+                Canvas.Top="79"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Panel.ZIndex="3"
+                Background="{x:Null}"
+                Content="ZOMBIE SURVIVOR"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="120"
+                FontWeight="Bold"
+                Foreground="White" />
+            <Button
+                x:Name="but_Jouer"
+                Canvas.Left="625"
+                Canvas.Top="246"
+                Width="250"
+                Height="100"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Panel.ZIndex="2"
+                Background="#FF5CB75D"
+                Click="but_Jouer_Click"
+                Content="Jouer"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="72"
+                FontWeight="Bold"
+                Foreground="White" />
+            <Button
+                x:Name="but_Mode"
+                Canvas.Left="625"
+                Canvas.Top="366"
+                Width="250"
+                Height="100"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Panel.ZIndex="2"
+                Background="#FF5CB75D"
+                Click="but_Mode_Click"
+                Content="Mode"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="72"
+                FontWeight="Bold"
+                Foreground="White" />
+            <Rectangle
+                x:Name="mode"
+                Canvas.Left="422"
+                Canvas.Top="500"
+                Width="656"
+                Height="364"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Panel.ZIndex="4" />
+            <Rectangle
+                x:Name="fontMode"
+                Width="1500"
+                Height="1000"
+                Margin="0,0,0,0"
+                Panel.ZIndex="1" />
+            <Rectangle
+                x:Name="ombre"
+                Canvas.Left="394"
+                Canvas.Top="595"
+                Width="712"
+                Height="314"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Panel.ZIndex="2"
+                Fill="#FF333232" />
+            <Button
+                x:Name="parametre"
+                Width="100"
+                Height="100"
+                Margin="1380,867,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Panel.ZIndex="4"
+                Click="parametre_Click"
+                Content="" />
+        </Canvas>
+        <Canvas
+            x:Name="menuParametre"
+            Width="1500"
+            Height="984"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Panel.ZIndex="5"
+            Visibility="Hidden">
+            <Label
+                Canvas.Left="632"
+                Canvas.Top="242"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Panel.ZIndex="6"
+                Content="Deplacement"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="35"
+                Foreground="White" />
+            <Label
+                Canvas.Left="555"
+                Canvas.Top="102"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Panel.ZIndex="6"
+                Content="Parametre"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="72"
+                Foreground="White" />
+            <Label
+                Canvas.Left="707"
+                Canvas.Top="566"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Panel.ZIndex="6"
+                Content="Tire"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="35"
+                Foreground="White" />
+            <Button
+                Canvas.Left="700"
+                Canvas.Top="301"
+                Width="100"
+                Height="100"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Panel.ZIndex="5"
+                Content="z"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="40" />
+            <Button
+                Canvas.Left="700"
+                Canvas.Top="401"
+                Width="100"
+                Height="100"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Panel.ZIndex="5"
+                Content="s"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="40" />
+            <Button
+                Canvas.Left="800"
+                Canvas.Top="401"
+                Width="100"
+                Height="100"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Panel.ZIndex="5"
+                Content="d"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="40" />
+            <Button
+                Canvas.Left="600"
+                Canvas.Top="401"
+                Width="100"
+                Height="100"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Panel.ZIndex="5"
+                Content="q"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="40" />
+            <Button
+                Canvas.Left="650"
+                Canvas.Top="625"
+                Width="200"
+                Height="100"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Panel.ZIndex="5"
+                Content="ESPACE"
+                FontFamily="{StaticResource PixelTandyPolice}"
+                FontSize="40" />
+
+        </Canvas>
     </Grid>
-    
+
+
 
 </Window>

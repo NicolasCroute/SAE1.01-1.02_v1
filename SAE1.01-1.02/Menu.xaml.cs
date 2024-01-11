@@ -99,5 +99,11 @@ namespace SAE1._01_1._02
         {
             this.DialogResult = true;
         }
+
+        private void parametre_Click(object sender, RoutedEventArgs e)
+        {
+            menuParametre.Visibility = Visibility.Visible;
+            menuPrincipale.Visibility = Visibility.Hidden;
+        }
     }
 }
