@@ -23,7 +23,7 @@
             Canvas.Top="-20"
             Width="1350"
             Height="800"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Center"
             VerticalAlignment="Center"
             Fill="ForestGreen"
             Grid.IsSharedSizeScope="True" />
