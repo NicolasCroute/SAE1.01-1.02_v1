@@ -43,7 +43,8 @@ namespace SAE1._01_1._02
         private string[] tableauApparenceHaut = { "images/hero_haut/HeroHaut_1.png", "images/hero_haut/HeroHaut_2.png", "images/hero_haut/HeroHaut_3.png", "images/hero_haut/HeroHaut_4.png", "images/hero_haut/HeroHaut_5.png", "images/hero_haut/HeroHaut_6.png", "images/hero_haut/HeroHaut_7.png", "images/hero_haut/HeroHaut_8.png", "images/hero_haut/HeroHaut_9.png" };
         private string[] tableauApparenceBas = { "images/hero_bas/HeroBas_1.png", "images/hero_bas/HeroBas_2.png", "images/hero_bas/HeroBas_3.png", "images/hero_bas/HeroBas_4.png", "images/hero_bas/HeroBas_5.png", "images/hero_bas/HeroBas_6.png", "images/hero_bas/HeroBas_7.png", "images/hero_bas/HeroBas_8.png", "images/hero_bas/HeroBas_9.png" };
         private string[] tableauApparenceSqueletteDroite = { "images/squelette_marche_droite/squelette_marche_Droite_1.png", "images/squelette_marche_droite/squelette_marche_Droite_2.png", "images/squelette_marche_droite/squelette_marche_Droite_3.png", "images/squelette_marche_droite/squelette_marche_Droite_4.png", "images/squelette_marche_droite/squelette_marche_Droite_5.png", "images/squelette_marche_droite/squelette_marche_Droite_6.png", "images/squelette_marche_droite/squelette_marche_Droite_7.png", "images/squelette_marche_droite/squelette_marche_Droite_8.png", "images/squelette_marche_droite/squelette_marche_Droite_9.png", "images/squelette_marche_droite/squelette_marche_Droite_10.png" };
-        private string[] tableauApparenceZombieDroite = { "image/zombiecourse/frame-1.gif", "image/zombiecourse/frame-2.gif", "image/zombiecourse/frame-3.gif", "image/zombiecourse/frame-4.gif", "image/zombiecourse/frame-5.gif", "image/zombiecourse/frame-6.gif", "image/zombiecourse/frame-7.gif", "image/zombiecourse/frame-8.gif", "image/zombiecourse/frame-9.gif", "image/zombiecourse/frame-99.gif" };
+        private string[] tableauApparenceZombieDroite = { "image/zombiecourse/frame-1.gif", "i" +
+                "mage/zombiecourse/frame-2.gif", "image/zombiecourse/frame-3.gif", "image/zombiecourse/frame-4.gif", "image/zombiecourse/frame-5.gif", "image/zombiecourse/frame-6.gif", "image/zombiecourse/frame-7.gif", "image/zombiecourse/frame-8.gif", "image/zombiecourse/frame-9.gif", "image/zombiecourse/frame-99.gif" };
         private int tempsEntreMisesAJour = 16;
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 34;
@@ -76,7 +77,6 @@ namespace SAE1._01_1._02
             {
                 Application.Current.Shutdown();
             }
-            
 
             dispatcherTimer.Tick += Jeu;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);

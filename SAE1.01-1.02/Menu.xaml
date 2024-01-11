@@ -8,29 +8,29 @@
     Title="Menu"
     Width="1500"
     Height="1000"
-    mc:Ignorable="d" ResizeMode="NoResize"
-    >
+    Background="#FF2F2F2F"
+    ResizeMode="NoResize"
+    mc:Ignorable="d">
 
     <Window.Resources>
         <FontFamily x:Key="PixelTandyFont">/SAE1.01-1.02;component/Pixel Tandy.otf#Pixel Tandy</FontFamily>
     </Window.Resources>
-
-    <Grid >
-
-
-
+    <Grid>
+        <Grid.Background>
+            <ImageBrush/>
+        </Grid.Background>
         <Label
             x:Name="titre"
             Margin="0,76,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            Panel.ZIndex="3"
             Background="{x:Null}"
             Content="ZOMBIE SURVIVOR"
             FontFamily="{StaticResource PixelTandyFont}"
             FontSize="120"
             FontWeight="Bold"
-            Foreground="White" 
-            Panel.ZIndex="3"/>
+            Foreground="White" />
         <Button
             x:Name="but_Jouer"
             Width="250"
@@ -38,13 +38,14 @@
             Margin="0,293,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            Panel.ZIndex="2"
             Background="#FF5CB75D"
+            Click="but_Jouer_Click"
             Content="Jouer"
             FontFamily="{StaticResource PixelTandyFont}"
             FontSize="72"
             FontWeight="Bold"
-            Foreground="White" Click="but_Jouer_Click" 
-            Panel.ZIndex="2"/>
+            Foreground="White" />
         <Button
             x:Name="but_Mode"
             Width="250"
@@ -52,23 +53,36 @@
             Margin="0,408,0,0"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
+            Panel.ZIndex="2"
             Background="#FF5CB75D"
             Click="but_Mode_Click"
             Content="Mode"
             FontFamily="{StaticResource PixelTandyFont}"
             FontSize="72"
             FontWeight="Bold"
-            Foreground="White" 
-            Panel.ZIndex="2"/>
+            Foreground="White" />
         <Rectangle
             x:Name="mode"
             Width="656"
             Height="364"
             Margin="0,568,0,0"
             HorizontalAlignment="Center"
-            VerticalAlignment="Top" 
+            VerticalAlignment="Top"
+            Panel.ZIndex="4" />
+        <Rectangle
+            x:Name="fontMode"
+            Width="1500"
+            Height="1000"
+            Margin="0,0,0,0"
+            Panel.ZIndex="1" />
+        <Rectangle x:Name="ombre"
+            Width="712"
+            Height="314"
+            Margin="0,641,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Fill="#FF333232" 
             Panel.ZIndex="2"/>
-        <Rectangle x:Name="fontMode" Height="1000" Margin="0,0,0,0" Width="1500" Panel.ZIndex="1"/>
-
+        <Button x:Name="parametre" Content="" HorizontalAlignment="Left" Margin="1380,867,0,0" VerticalAlignment="Top" Height="100" Width="100" Panel.ZIndex="4"/>
     </Grid>
 </Window>

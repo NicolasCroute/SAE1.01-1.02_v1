@@ -21,10 +21,12 @@ namespace SAE1._01_1._02
     public partial class Menu : Window
     {
 
+        private ImageBrush butParametreSkin = new ImageBrush();
         private ImageBrush solFacileSkin = new ImageBrush();
         private ImageBrush solDifficileSkin = new ImageBrush();
         private ImageBrush fontFacileSkin = new ImageBrush();
         private ImageBrush fontDifficileSkin = new ImageBrush();
+        
         private bool modeJeu = false;
         
 
@@ -40,8 +42,13 @@ namespace SAE1._01_1._02
 
             fontFacileSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/font/fontBleu.png"));
             fontDifficileSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/font/fontRouge.png"));
+
+            butParametreSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/but_parametre.png"));
+
+            parametre.Background = butParametreSkin;
             mode.Fill = solFacileSkin;
             fontMode.Fill = fontFacileSkin;
+            
 
 
         }
@@ -90,14 +97,8 @@ namespace SAE1._01_1._02
 
         }
         */
-
-
-
-
-
         private void but_Jouer_Click(object sender, RoutedEventArgs e)
         {
-            
             this.DialogResult = true;
         }
     }
