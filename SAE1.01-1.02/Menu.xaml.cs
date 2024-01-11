@@ -49,8 +49,6 @@ namespace SAE1._01_1._02
             mode.Fill = solFacileSkin;
             fontMode.Fill = fontFacileSkin;
             
-
-
         }
 
         private void but_Mode_Click(object sender, RoutedEventArgs e)

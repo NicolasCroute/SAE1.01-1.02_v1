@@ -85,4 +85,6 @@
             Panel.ZIndex="2"/>
         <Button x:Name="parametre" Content="" HorizontalAlignment="Left" Margin="1380,867,0,0" VerticalAlignment="Top" Height="100" Width="100" Panel.ZIndex="4"/>
     </Grid>
+    
+
 </Window>
