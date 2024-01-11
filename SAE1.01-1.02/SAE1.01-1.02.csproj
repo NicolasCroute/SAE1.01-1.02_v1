@@ -29,6 +29,9 @@
     <None Update="images\buisson\buisson_haut.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\but_parametre.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\font\fontBleu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
