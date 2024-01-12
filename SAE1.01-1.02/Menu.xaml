@@ -22,8 +22,9 @@
             Height="984"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Panel.ZIndex="5">
-            <!--  comment centrer un canvas au milieu d'une fenetre wpf xaml  -->
+            Panel.ZIndex="5"
+            >
+
 
             <Label
                 x:Name="titre"
@@ -144,7 +145,7 @@
                 FontFamily="{StaticResource PixelTandyPolice}"
                 FontSize="35"
                 Foreground="White" />
-            <Button
+            <Button x:Name="but_defAvancer"
                 Canvas.Left="700"
                 Canvas.Top="301"
                 Width="100"
@@ -154,8 +155,8 @@
                 Panel.ZIndex="5"
                 Content="z"
                 FontFamily="{StaticResource PixelTandyPolice}"
-                FontSize="40" />
-            <Button
+                FontSize="40" PreviewKeyDown="but_defAvancer_PreviewKeyDown" />
+            <Button x:Name="but_defReculer"
                 Canvas.Left="700"
                 Canvas.Top="401"
                 Width="100"
@@ -165,8 +166,8 @@
                 Panel.ZIndex="5"
                 Content="s"
                 FontFamily="{StaticResource PixelTandyPolice}"
-                FontSize="40" />
-            <Button
+                FontSize="40" PreviewKeyDown="but_defReculer_PreviewKeyDown" />
+            <Button x:Name="but_defDroite"
                 Canvas.Left="800"
                 Canvas.Top="401"
                 Width="100"
@@ -176,8 +177,8 @@
                 Panel.ZIndex="5"
                 Content="d"
                 FontFamily="{StaticResource PixelTandyPolice}"
-                FontSize="40" />
-            <Button
+                FontSize="40" PreviewKeyDown="but_defDroite_PreviewKeyDown" />
+            <Button x:Name="but_defGauche"
                 Canvas.Left="600"
                 Canvas.Top="401"
                 Width="100"
@@ -187,8 +188,8 @@
                 Panel.ZIndex="5"
                 Content="q"
                 FontFamily="{StaticResource PixelTandyPolice}"
-                FontSize="40" />
-            <Button
+                FontSize="40" PreviewKeyDown="but_defGauche_PreviewKeyDown" />
+            <Button x:Name="but_defTire"
                 Canvas.Left="650"
                 Canvas.Top="625"
                 Width="200"
@@ -196,9 +197,17 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Panel.ZIndex="5"
-                Content="ESPACE"
+                Content="Space"
                 FontFamily="{StaticResource PixelTandyPolice}"
-                FontSize="40" />
+                FontSize="40" PreviewKeyDown="but_defTire_PreviewKeyDown" />
+            <Button x:Name="but_OK"
+                Canvas.Left="655"
+                Canvas.Top="799"
+                Width="190"
+                Height="67"
+                Panel.ZIndex="5"
+                Content=""
+                HorizontalAlignment="Left" VerticalAlignment="Center" Click="but_OK_Click" BorderBrush="#FF2F2F2F" />
 
         </Canvas>
     </Grid>
