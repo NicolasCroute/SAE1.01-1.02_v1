@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Printing;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,6 +57,7 @@ namespace SAE1._01_1._02
         private int delaiapparitionennemie = 500;
         private Random déplacementAléatoire = new Random();
         private int vitesseTireJoueur = 15;
+        private bool directionennemie;
         private List<Rectangle> supprimer = new List<Rectangle>();
         private int[,] tableauApparitionEnnemie = { { 100, 300 },{500,100} };
 
@@ -112,7 +116,9 @@ namespace SAE1._01_1._02
 
             foreach (Rectangle x in Canvas.Children.OfType<Rectangle>())
             {
-                TestTireJoueur(x);
+                if (x.Tag!= null && x is Rectangle && ((string)x.Tag).Substring(0, ((string)x.Tag).Length - 1) == "tireJoueur")                
+                    TestTireJoueur(x);
+                MouvementEnnemieEtCollision(x, joueur);
 
             }
 
@@ -181,7 +187,7 @@ namespace SAE1._01_1._02
                 supprimer.Clear();
                 Rectangle nouveauTire = new Rectangle
                 {
-                    Tag = "tireJoueur",
+                    Tag = "tireJoueur" + direction,
                     Height = 10,
                     Width = 10,
                     Fill = Brushes.Red,
@@ -197,91 +203,74 @@ namespace SAE1._01_1._02
         private void TestTireJoueur(Rectangle x)
         {
 
-            if (x is Rectangle && (string)x.Tag == "tireJoueur" && direction == "G")
-            {
-                Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseTireJoueur);
-                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                Rect TireGauche = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
-                x.Tag = "TireG";
-            }
 
-            if ((string)x.Tag == "TireG")
+            if (x is Rectangle && (string)x.Tag == "tireJoueurG")
             {
+
                 Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseTireJoueur);
-                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+
+
                 if (Canvas.GetLeft(x) < 80)
                 {
                     supprimer.Add(x);
                 }
             }
-
-
-
-            if (x is Rectangle && (string)x.Tag == "tireJoueur" && direction == "H")
+            else if (x is Rectangle && (string)x.Tag == "tireJoueurD")
             {
-                Canvas.SetTop(x, Canvas.GetTop(x) - vitesseTireJoueur);
-                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
-                x.Tag = "TireH";
 
+                Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseTireJoueur);
 
+                if (Canvas.GetLeft(x) > 1200)
+                {
+                    supprimer.Add(x);
+                }
             }
-
-            if ((string)x.Tag == "TireH")
+            else if (x is Rectangle && (string)x.Tag == "tireJoueurH")
             {
+
                 Canvas.SetTop(x, Canvas.GetTop(x) - vitesseTireJoueur);
-                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+
                 if (Canvas.GetTop(x) < 0)
                 {
                     supprimer.Add(x);
                 }
             }
-
-
-
-            if (x is Rectangle && (string)x.Tag == "tireJoueur" && direction == "B")
+            else if (x is Rectangle && (string)x.Tag == "tireJoueurB")
             {
-                Canvas.SetTop(x, Canvas.GetTop(x) + vitesseTireJoueur);
-                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                Rect TireBas = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
-                x.Tag = "TireB";
 
-
-            }
-            if ((string)x.Tag == "TireB")
-            {
                 Canvas.SetTop(x, Canvas.GetTop(x) + vitesseTireJoueur);
-                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
+
                 if (Canvas.GetTop(x) > 500)
                 {
                     supprimer.Add(x);
                 }
             }
 
-
-
-            if (x is Rectangle && (string)x.Tag == "tireJoueur" && direction == "D")
+            // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
+            Rect tir = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
+            foreach (var y in Canvas.Children.OfType<Rectangle>())
             {
-                Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseTireJoueur);
-                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                Rect TireDroite = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
-                x.Tag = "TireD";
-
-
-            }
-            if ((string)x.Tag == "TireD")
-            {
-                Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseTireJoueur);
-                // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-                Rect TireHaut = new Rect(Canvas.GetTop(x), Canvas.GetLeft(x), x.Width, x.Height);
-                if (Canvas.GetLeft(x) > 1200)
+                // si le rectangle est un ennemi
+                if (y is Rectangle && (string)y.Tag == "ennemie")
                 {
-                    supprimer.Add(x);
+                    
+                    // création d’un rectangle correspondant à l’ennemi
+                    Rect ennemie = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
+                   // Console.WriteLine("test avec l'ennemi :" +ennemie);
+                   // Console.WriteLine("test avec tir :" + tir);
+                    // on vérifie la collision
+                    // appel à la méthode IntersectsWith pour détecter la collision
+                    if (tir.IntersectsWith(ennemie))
+                    {
+                        Console.WriteLine("touché");
+                        // on ajoute l’ennemi de la liste à supprimer eton décrémente le nombre d’ennemis
+                        supprimer.Add(x);
+                        supprimer.Add(y);
+                    }
                 }
             }
+            //Console.WriteLine("----------------------------");
+
         }
 
 
@@ -386,8 +375,8 @@ namespace SAE1._01_1._02
                 {
 
                     Tag = "ennemie",
-                    Height = 75,
-                    Width = 75,
+                    Height = 120,
+                    Width = 120,
                     Fill = ennemieSkin,
                 };
                 Canvas.SetTop(newEnnemie, 300);
@@ -404,7 +393,43 @@ namespace SAE1._01_1._02
                 //        j = 0;
                 //    }
                 //}
+
             }
+        }
+        private Rect MouvementEnnemieEtCollision(Rectangle x, Rect joueur)
+        {
+
+            if(x is Rectangle && (string)x.Tag == "ennemie")
+            {
+                int directionalleatoire = 1;//new Random().Next(1, 2);
+                //if (directionalleatoire == 1) 
+                //{
+                    if (Canvas.GetLeft(x) == 1100)
+                    {
+                    directionennemie = false;
+                      
+                    }
+                    if(Canvas.GetLeft(x) == 100) { directionennemie = true; }
+
+                    if(directionennemie == false)
+                    {
+                     Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseennemie);
+                    }
+                    if(directionennemie == true) 
+                    {
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseennemie);
+                    }
+                    Rect ennemie = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width-40, x.Height-40);
+                    if (joueur.IntersectsWith(ennemie))
+                    {
+                        // collision avec le joueur et fin de la partie
+                        dispatcherTimer.Stop();
+                        MessageBox.Show("Perdu", "Fin de partie", MessageBoxButton.OK, MessageBoxImage.Stop);
+                    }
+                    
+            }
+            return joueur;
+
         }
 
     }
