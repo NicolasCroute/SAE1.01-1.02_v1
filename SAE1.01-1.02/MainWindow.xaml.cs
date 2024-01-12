@@ -55,7 +55,7 @@ namespace SAE1._01_1._02
         private Random déplacementAléatoire = new Random();
         private int vitesseTireJoueur = 15;
         private List<Rectangle> supprimer = new List<Rectangle>();
-        //private int[,] tableauApparitionEnnemie = { { 30, 100 },{500,100} };
+        private int[,] tableauApparitionEnnemie = { { 100, 300 },{500,100} };
 
         public MainWindow()
         {
@@ -92,7 +92,7 @@ namespace SAE1._01_1._02
 
             buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
             buissonDroite.Fill = buissonDroiteSkin;
-            CreationEnnemie(1);
+            CreationEnnemie(2);
 
 
         }
@@ -375,21 +375,25 @@ namespace SAE1._01_1._02
         }
         private void CreationEnnemie(int nombreennemie)
         {
-            int gauche = 100;
+            int g = 100;
             for (int i = 0; i < nombreennemie; i++)
             {
+                //g++;
+                //int gauche = tableauApparitionEnnemie[0, g];
+                //int hauteur = tableauApparitionEnnemie[g, 0];
                 ImageBrush ennemieSkin = new ImageBrush();
                 Rectangle newEnnemie = new Rectangle
                 {
+
                     Tag = "ennemie",
                     Height = 75,
                     Width = 75,
                     Fill = ennemieSkin,
                 };
                 Canvas.SetTop(newEnnemie, 300);
-                Canvas.SetLeft(newEnnemie, gauche);
+                Canvas.SetLeft(newEnnemie, g);
+                g = +200;
                 Canvas.Children.Add(newEnnemie);
-                gauche = -50;
                 ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette_marche_droite/squelette_marche_Droite_1.png"));
                 //pas mettre png ???
                 //for (int j = 0; j < tableauApparenceZombieDroite.Length; j++)
