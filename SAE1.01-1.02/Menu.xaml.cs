@@ -26,8 +26,11 @@ namespace SAE1._01_1._02
         private ImageBrush solDifficileSkin = new ImageBrush();
         private ImageBrush fontFacileSkin = new ImageBrush();
         private ImageBrush fontDifficileSkin = new ImageBrush();
-        
+        private ImageBrush but_OKSkin = new ImageBrush();
+
         private bool modeJeu = false;
+
+        
         
 
         public Menu()
@@ -45,10 +48,14 @@ namespace SAE1._01_1._02
 
             butParametreSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/but_parametre.png"));
 
+            but_OKSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/Retour.png"));
+
+            
             parametre.Background = butParametreSkin;
             mode.Fill = solFacileSkin;
             fontMode.Fill = fontFacileSkin;
-            
+            but_OK.Background = but_OKSkin;
+
         }
 
         private void but_Mode_Click(object sender, RoutedEventArgs e)
@@ -98,6 +105,41 @@ namespace SAE1._01_1._02
         private void but_Jouer_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
+        }
+
+        private void parametre_Click(object sender, RoutedEventArgs e)
+        {
+            menuParametre.Visibility = Visibility.Visible;
+            menuPrincipale.Visibility = Visibility.Hidden;
+        }
+        private void but_defReculer_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            but_defReculer.Content = e.Key.ToString();
+        }
+
+        private void but_defAvancer_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            but_defAvancer.Content = e.Key.ToString();
+        }
+        private void but_defGauche_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            but_defGauche.Content = e.Key.ToString();
+        }
+
+        private void but_defDroite_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            but_defDroite.Content = e.Key.ToString();
+        }
+
+        private void but_defTire_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            but_defTire.Content = e.Key.ToString();
+        }
+
+        private void but_OK_Click(object sender, RoutedEventArgs e)
+        {
+            menuParametre.Visibility = Visibility.Hidden;
+            menuPrincipale.Visibility = Visibility.Visible;
         }
     }
 }
