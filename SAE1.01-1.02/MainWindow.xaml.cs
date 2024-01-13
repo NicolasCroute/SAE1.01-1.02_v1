@@ -67,6 +67,8 @@ namespace SAE1._01_1._02
         private string toucheReculer;
         private string toucheGauche;
         private string toucheDroite;
+        private string toucheTire;
+        private Menu accesMenu;
 
 
         public MainWindow()
@@ -75,7 +77,7 @@ namespace SAE1._01_1._02
             WindowState = WindowState.Maximized;
 
             //------------------A comprendre--------------
-            Menu accesMenu = new Menu();
+            accesMenu = new Menu();
             accesMenu.ShowDialog();
             //----------------------?????-------------------
             //accesMenu.Owner = this;
@@ -105,12 +107,14 @@ namespace SAE1._01_1._02
             buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
             buissonDroite.Fill = buissonDroiteSkin;
             CreationEnnemie(2);
+            
 
-            //------------Deplacement Touche-----------
             toucheAvancer = accesMenu.valeurAvancer;
             toucheReculer = accesMenu.valeurReculer;
             toucheGauche = accesMenu.valeurGauche;
             toucheDroite = accesMenu.valeurDroite;
+            toucheTire = accesMenu.valeurTire;
+            
 
 
         }
@@ -150,53 +154,62 @@ namespace SAE1._01_1._02
 
         }
 
+        //pour les touche faire des touche de base
+
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
 
-            if (e.Key == Key.Left)
+
+            if (e.Key.ToString() == toucheGauche)
             {
                 gauche = true;
                 direction = "G";
             }
-            if (e.Key == Key.Right)
+
+            if (e.Key.ToString() == toucheDroite)
             {
                 droite = true;
                 direction = "D";
             }
-            if (e.Key == Key.Up)
+            
+
+            if (e.Key.ToString() == toucheAvancer)
             {
                 haut = true;
                 direction = "H";
             }
-            if (e.Key == Key.Down)
+
+            if (e.Key.ToString() == toucheReculer)
             {
                 bas = true;
                 direction = "B";
             }
+
+
         }
 
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
 
-            if (e.Key == Key.Left)
+            if (e.Key.ToString() == toucheGauche)
             {
                 gauche = false;
             }
-            if (e.Key == Key.Right)
+            if (e.Key.ToString() == toucheDroite)
             {
                 droite = false;
 
             }
-            if (e.Key == Key.Up)
+            if (e.Key.ToString() == toucheAvancer)
             {
                 haut = false;
 
             }
-            if (e.Key == Key.Down)
+            if (e.Key.ToString() == toucheReculer)
             {
                 bas = false;
             }
-            if (e.Key == Key.Space)
+            if (e.Key.ToString() == toucheTire)
             {
                 supprimer.Clear();
                 Rectangle nouveauTire = new Rectangle

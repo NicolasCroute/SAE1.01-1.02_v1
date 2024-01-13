@@ -37,6 +37,7 @@ namespace SAE1._01_1._02
         public string valeurGauche;
         public string valeurDroite;
         public string valeurReculer;
+        public string valeurTire;
 
 
 
@@ -180,19 +181,25 @@ namespace SAE1._01_1._02
         private void but_defTire_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             but_defTire.Content = e.Key.ToString();
+            valeurTire = (string)but_defTire.Content;
 
         }
+
+        private string toucheTire;
+        public string ToucheTire
+        {
+            get
+            {
+                return valeurTire;
+            }
+        }
+
 
         private void but_OK_Click(object sender, RoutedEventArgs e)
         {
             menuParametre.Visibility = Visibility.Hidden;
             menuPrincipale.Visibility = Visibility.Visible;
         }
-
-
-        
-
-        
 
     }
 
