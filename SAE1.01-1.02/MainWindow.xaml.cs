@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace SAE1._01_1._02
 {
@@ -63,11 +64,15 @@ namespace SAE1._01_1._02
 
 
         //----------Deplacement Touche-------------
+        
         private string toucheAvancer;
         private string toucheReculer;
         private string toucheGauche;
         private string toucheDroite;
         private string toucheTire;
+        
+
+
         private Menu accesMenu;
 
 
@@ -160,26 +165,26 @@ namespace SAE1._01_1._02
         {
 
 
-            if (e.Key.ToString() == toucheGauche)
+            if (e.Key.ToString() == toucheGauche || e.Key == Key.Left)
             {
                 gauche = true;
                 direction = "G";
             }
 
-            if (e.Key.ToString() == toucheDroite)
+            if (e.Key.ToString() == toucheDroite || e.Key == Key.Right)
             {
                 droite = true;
                 direction = "D";
             }
             
 
-            if (e.Key.ToString() == toucheAvancer)
+            if (e.Key.ToString() == toucheAvancer || e.Key == Key.Up)
             {
                 haut = true;
                 direction = "H";
             }
 
-            if (e.Key.ToString() == toucheReculer)
+            if (e.Key.ToString() == toucheReculer || e.Key == Key.Down)
             {
                 bas = true;
                 direction = "B";
@@ -191,25 +196,25 @@ namespace SAE1._01_1._02
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
 
-            if (e.Key.ToString() == toucheGauche)
+            if (e.Key.ToString() == toucheGauche || e.Key == Key.Left)
             {
                 gauche = false;
             }
-            if (e.Key.ToString() == toucheDroite)
+            if (e.Key.ToString() == toucheDroite || e.Key == Key.Right)
             {
                 droite = false;
 
             }
-            if (e.Key.ToString() == toucheAvancer)
+            if (e.Key.ToString() == toucheAvancer || e.Key == Key.Up)
             {
                 haut = false;
 
             }
-            if (e.Key.ToString() == toucheReculer)
+            if (e.Key.ToString() == toucheReculer || e.Key == Key.Down)
             {
                 bas = false;
             }
-            if (e.Key.ToString() == toucheTire)
+            if (e.Key.ToString() == toucheTire || e.Key == Key.Space)
             {
                 supprimer.Clear();
                 Rectangle nouveauTire = new Rectangle
