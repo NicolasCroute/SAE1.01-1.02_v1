@@ -57,6 +57,14 @@ namespace SAE1._01_1._02
         private List<Rectangle> supprimer = new List<Rectangle>();
         //private int[,] tableauApparitionEnnemie = { { 30, 100 },{500,100} };
 
+
+        //----------Deplacement Touche-------------
+        private string toucheAvancer;
+        private string toucheReculer;
+        private string toucheGauche;
+        private string toucheDroite;
+
+
         public MainWindow()
         {
             InitializeComponent();
@@ -93,6 +101,12 @@ namespace SAE1._01_1._02
             buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
             buissonDroite.Fill = buissonDroiteSkin;
             CreationEnnemie(1);
+
+            //------------Deplacement Touche-----------
+            toucheAvancer = accesMenu.valeurAvancer;
+            toucheReculer = accesMenu.valeurReculer;
+            toucheGauche = accesMenu.valeurGauche;
+            toucheDroite = accesMenu.valeurDroite;
 
 
         }

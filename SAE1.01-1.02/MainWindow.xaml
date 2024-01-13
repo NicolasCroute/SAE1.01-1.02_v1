@@ -8,10 +8,11 @@
     Title="Zombie Survivor"
     Width="1500"
     Height="1000"
+    Background="#FF2F2F2F"
     KeyDown="CanvasKeyIsDown"
     KeyUp="CanvasKeyIsUp"
     ResizeMode="NoResize"
-    mc:Ignorable="d" Background="#FF2F2F2F">
+    mc:Ignorable="d">
 
     <Canvas
         x:Name="Canvas"
@@ -35,8 +36,8 @@
             Height="92"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Fill="LightBlue" 
-            Stroke="DarkBlue"/>
+            Fill="LightBlue"
+            Stroke="DarkBlue" />
         <Rectangle
             x:Name="buissonGauche"
             Canvas.Left="-73"
@@ -45,8 +46,8 @@
             Height="618"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            RenderTransformOrigin="0.5,0.5"
-            Panel.ZIndex="2">
+            Panel.ZIndex="2"
+            RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -64,8 +65,8 @@
             Height="200"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            RenderTransformOrigin="0.5,0.5"
-            Panel.ZIndex="1">
+            Panel.ZIndex="1"
+            RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />
@@ -83,8 +84,8 @@
             Height="634"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            RenderTransformOrigin="0.5,0.5"
-            Panel.ZIndex="2">
+            Panel.ZIndex="2"
+            RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleY="-1" />
@@ -102,8 +103,8 @@
             Height="193"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            RenderTransformOrigin="0.5,0.5"
-            Panel.ZIndex="3">
+            Panel.ZIndex="3"
+            RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform />

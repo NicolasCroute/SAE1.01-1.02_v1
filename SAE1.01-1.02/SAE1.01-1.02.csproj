@@ -338,7 +338,7 @@
     <None Update="little-pixel.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Pixel Tandy.otf">
+    <None Update="Pixel_Tandy.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

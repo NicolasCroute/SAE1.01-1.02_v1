@@ -22,9 +22,7 @@
             Height="984"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Panel.ZIndex="5"
-            >
-
+            Panel.ZIndex="5">
 
             <Label
                 x:Name="titre"
@@ -145,7 +143,8 @@
                 FontFamily="{StaticResource PixelTandyPolice}"
                 FontSize="35"
                 Foreground="White" />
-            <Button x:Name="but_defAvancer"
+            <Button
+                x:Name="but_defAvancer"
                 Canvas.Left="700"
                 Canvas.Top="301"
                 Width="100"
@@ -153,10 +152,12 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Panel.ZIndex="5"
-                Content="z"
+                Content=""
                 FontFamily="{StaticResource PixelTandyPolice}"
-                FontSize="40" PreviewKeyDown="but_defAvancer_PreviewKeyDown" />
-            <Button x:Name="but_defReculer"
+                FontSize="40"
+                PreviewKeyDown="but_defAvancer_PreviewKeyDown" />
+            <Button
+                x:Name="but_defReculer"
                 Canvas.Left="700"
                 Canvas.Top="401"
                 Width="100"
@@ -164,10 +165,12 @@
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Panel.ZIndex="5"
-                Content="s"
+                Content=""
                 FontFamily="{StaticResource PixelTandyPolice}"
-                FontSize="40" PreviewKeyDown="but_defReculer_PreviewKeyDown" />
-            <Button x:Name="but_defDroite"
+                FontSize="40"
+                PreviewKeyDown="but_defReculer_PreviewKeyDown" />
+            <Button
+                x:Name="but_defDroite"
                 Canvas.Left="800"
                 Canvas.Top="401"
                 Width="100"
@@ -175,10 +178,12 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Panel.ZIndex="5"
-                Content="d"
+                Content=""
                 FontFamily="{StaticResource PixelTandyPolice}"
-                FontSize="40" PreviewKeyDown="but_defDroite_PreviewKeyDown" />
-            <Button x:Name="but_defGauche"
+                FontSize="40"
+                PreviewKeyDown="but_defDroite_PreviewKeyDown" />
+            <Button
+                x:Name="but_defGauche"
                 Canvas.Left="600"
                 Canvas.Top="401"
                 Width="100"
@@ -186,10 +191,12 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Panel.ZIndex="5"
-                Content="q"
+                Content=""
                 FontFamily="{StaticResource PixelTandyPolice}"
-                FontSize="40" PreviewKeyDown="but_defGauche_PreviewKeyDown" />
-            <Button x:Name="but_defTire"
+                FontSize="40"
+                PreviewKeyDown="but_defGauche_PreviewKeyDown" />
+            <Button
+                x:Name="but_defTire"
                 Canvas.Left="650"
                 Canvas.Top="625"
                 Width="200"
@@ -199,16 +206,20 @@
                 Panel.ZIndex="5"
                 Content="Space"
                 FontFamily="{StaticResource PixelTandyPolice}"
-                FontSize="40" PreviewKeyDown="but_defTire_PreviewKeyDown" />
-            <Button x:Name="but_OK"
+                FontSize="40"
+                PreviewKeyDown="but_defTire_PreviewKeyDown" />
+            <Button
+                x:Name="but_OK"
                 Canvas.Left="655"
                 Canvas.Top="799"
                 Width="190"
                 Height="67"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
                 Panel.ZIndex="5"
-                Content=""
-                HorizontalAlignment="Left" VerticalAlignment="Center" Click="but_OK_Click" BorderBrush="#FF2F2F2F" />
-
+                BorderBrush="#FF2F2F2F"
+                Click="but_OK_Click"
+                Content="" />
         </Canvas>
     </Grid>
 
