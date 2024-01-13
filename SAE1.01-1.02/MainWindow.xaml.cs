@@ -29,6 +29,7 @@ namespace SAE1._01_1._02
 
 
         private bool haut, gauche, droite, bas = false;
+        private bool tireHaut, tireGauche, tireDroite, tireBas = false;
 
         private ImageBrush joueurSkin = new ImageBrush();
         private ImageBrush sol1Skin = new ImageBrush();
@@ -38,6 +39,7 @@ namespace SAE1._01_1._02
         private ImageBrush buissonDroiteSkin = new ImageBrush();
         private ImageBrush ennemieZombieSkin = new ImageBrush();
         private ImageBrush ennemieSquSkin = new ImageBrush();
+        
         //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int vitesseJoueur = 5;
@@ -48,7 +50,8 @@ namespace SAE1._01_1._02
         private string[] tableauApparenceHaut = { "images/hero_haut/HeroHaut_1.png", "images/hero_haut/HeroHaut_2.png", "images/hero_haut/HeroHaut_3.png", "images/hero_haut/HeroHaut_4.png", "images/hero_haut/HeroHaut_5.png", "images/hero_haut/HeroHaut_6.png", "images/hero_haut/HeroHaut_7.png", "images/hero_haut/HeroHaut_8.png", "images/hero_haut/HeroHaut_9.png" };
         private string[] tableauApparenceBas = { "images/hero_bas/HeroBas_1.png", "images/hero_bas/HeroBas_2.png", "images/hero_bas/HeroBas_3.png", "images/hero_bas/HeroBas_4.png", "images/hero_bas/HeroBas_5.png", "images/hero_bas/HeroBas_6.png", "images/hero_bas/HeroBas_7.png", "images/hero_bas/HeroBas_8.png", "images/hero_bas/HeroBas_9.png" };
         private string[] tableauApparenceSqueletteDroite = { "images/squelette_marche_droite/squelette_marche_Droite_1.png", "images/squelette_marche_droite/squelette_marche_Droite_2.png", "images/squelette_marche_droite/squelette_marche_Droite_3.png", "images/squelette_marche_droite/squelette_marche_Droite_4.png", "images/squelette_marche_droite/squelette_marche_Droite_5.png", "images/squelette_marche_droite/squelette_marche_Droite_6.png", "images/squelette_marche_droite/squelette_marche_Droite_7.png", "images/squelette_marche_droite/squelette_marche_Droite_8.png", "images/squelette_marche_droite/squelette_marche_Droite_9.png", "images/squelette_marche_droite/squelette_marche_Droite_10.png" };
-        private string[] tableauApparenceZombieDroite = { "image/zombiecourse/frame-1.gif", "image/zombiecourse/frame-2.gif", "image/zombiecourse/frame-3.gif", "image/zombiecourse/frame-4.gif", "image/zombiecourse/frame-5.gif", "image/zombiecourse/frame-6.gif", "image/zombiecourse/frame-7.gif", "image/zombiecourse/frame-8.gif", "image/zombiecourse/frame-9.gif", "image/zombiecourse/frame-99.gif" };
+        private string[] tableauApparenceZombieDroite = { "images/zombiecourse/frame-1.gif", "images/zombiecourse/frame-2.gif", "images/zombiecourse/frame-3.gif", "images/zombiecourse/frame-4.gif", "images/zombiecourse/frame-5.gif", "images/zombiecourse/frame-6.gif", "images/zombiecourse/frame-7.gif", "images/zombiecourse/frame-8.gif", "images/zombiecourse/frame-9.gif", "images/zombiecourse/frame-99.gif" };
+        private string[] tableauApparenceTireHaut = { "images/hero_tire_hauttire_haut_1.png"};
         private int tempsEntreMisesAJour = 16;
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 34;
@@ -228,6 +231,8 @@ namespace SAE1._01_1._02
                 Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height / 2);
                 Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
                 Canvas.Children.Add(nouveauTire);
+
+                
             }
 
 
@@ -240,12 +245,14 @@ namespace SAE1._01_1._02
             {
 
                 Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseTireJoueur);
+                
 
 
                 if (Canvas.GetLeft(x) < 80)
                 {
                     supprimer.Add(x);
                 }
+                tireGauche = true;
             }
             else if (x is Rectangle && (string)x.Tag == "tireJoueurD")
             {
@@ -256,6 +263,7 @@ namespace SAE1._01_1._02
                 {
                     supprimer.Add(x);
                 }
+                tireDroite = true;
             }
             else if (x is Rectangle && (string)x.Tag == "tireJoueurH")
             {
@@ -266,6 +274,11 @@ namespace SAE1._01_1._02
                 {
                     supprimer.Add(x);
                 }
+
+
+                tireHaut = true;
+
+
             }
             else if (x is Rectangle && (string)x.Tag == "tireJoueurB")
             {
@@ -276,6 +289,7 @@ namespace SAE1._01_1._02
                 {
                     supprimer.Add(x);
                 }
+                tireBas = true;
             }
 
             // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
@@ -306,9 +320,6 @@ namespace SAE1._01_1._02
         }
 
 
-
-
-
         private void DeplacementJoueur()
         {
             if (gauche && Canvas.GetLeft(joueur1) > 0)
@@ -332,6 +343,7 @@ namespace SAE1._01_1._02
 
         private void ChangementApparence()
         {
+            //------------------------------------------------A optimiser (pas crée changement a chauqe fois)----------------------------
 
 
             if (droite == true)
@@ -371,6 +383,7 @@ namespace SAE1._01_1._02
                 joueurSkin.ImageSource = new BitmapImage(new Uri(image));
                 joueur1.Fill = joueurSkin;
 
+
             }
             else if (bas == true)
             {
@@ -385,11 +398,37 @@ namespace SAE1._01_1._02
                 joueur1.Fill = joueurSkin;
 
             }
+            else if (tireHaut == true)
+            {
+                joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/hero_tire/tire_haut_1.png"));
+                joueur1.Fill = joueurSkin;
+                tireHaut = false;
+            }
+            else if (tireBas == true)
+            {
+                joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/hero_tire/tire_bas.png"));
+                joueur1.Fill = joueurSkin;
+                tireBas = false;
+            }
+            else if (tireGauche == true)
+            {
+                joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/hero_tire/tire_gauche.png"));
+                joueur1.Fill = joueurSkin;
+                tireGauche = false;
+            }
+            else if (tireDroite == true)
+            {
+                joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/hero_tire/tire_droite.png"));
+                joueur1.Fill = joueurSkin;
+                tireDroite= false;
+            }
+            /*
             else
             {
                 joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
                 joueur1.Fill = joueurSkin;
             }
+            */
 
 
 
