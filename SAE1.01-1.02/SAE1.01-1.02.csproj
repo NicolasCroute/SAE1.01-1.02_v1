@@ -284,6 +284,12 @@
     <None Update="images\squelette_marche_droite\squelette_marche_Droite_9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\text\easy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\text\hard.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\text\titre.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

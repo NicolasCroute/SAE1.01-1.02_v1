@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Printing;
+using System.Runtime.Intrinsics.X86;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,7 +28,10 @@ namespace SAE1._01_1._02
         private ImageBrush fontFacileSkin = new ImageBrush();
         private ImageBrush fontDifficileSkin = new ImageBrush();
         private ImageBrush but_OKSkin = new ImageBrush();
-        
+        private ImageBrush easySkin = new ImageBrush();
+        private ImageBrush hardSkin = new ImageBrush();
+
+
 
         private bool modeJeu = false;
 
@@ -55,17 +59,25 @@ namespace SAE1._01_1._02
             fontFacileSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/font/fontBleu.png"));
             fontDifficileSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/font/fontRouge.png"));
 
+            easySkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/text/easy.png"));
+            hardSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/text/hard.png"));
+
+
             butParametreSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/but_parametre.png"));
 
             but_OKSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/Retour.png"));
 
             //titre.FontFamily = new FontFamily(new Uri("little-pixel.tff"), "./#Pixel_Tandy");
-            titre.FontFamily = new FontFamily("Pixel_Tandy.otf");
+            //titre.FontFamily = new FontFamily("Pixel_Tandy.otf");
+
+            FontFamily font = new FontFamily("Pixel_Tandy.otf");
+            titre.FontFamily = font;
 
             parametre.Background = butParametreSkin;
             mode.Fill = solFacileSkin;
             fontMode.Fill = fontFacileSkin;
             but_OK.Background = but_OKSkin;
+            hardEasy.Fill = easySkin;
 
             
     }
@@ -86,12 +98,14 @@ namespace SAE1._01_1._02
                 
                 mode.Fill = solFacileSkin;
                 fontMode.Fill = fontFacileSkin;
+                hardEasy.Fill = easySkin;
             }
             else if (modeJeu == true) 
             {
                 
                 mode.Fill = solDifficileSkin;
                 fontMode.Fill = fontDifficileSkin;
+                hardEasy.Fill = hardSkin;
             }
 
             //inverse l'état initiale des touche
