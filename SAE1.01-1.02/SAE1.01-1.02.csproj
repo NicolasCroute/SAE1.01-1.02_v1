@@ -242,6 +242,9 @@
     <None Update="images\hero_tire\tire_haut_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\rejouer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\Retour.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -315,6 +318,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="images\text\easy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\text\gameOver.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="images\text\hard.png">

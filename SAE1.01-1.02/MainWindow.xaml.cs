@@ -40,7 +40,9 @@ namespace SAE1._01_1._02
         private ImageBrush buissonDroiteSkin = new ImageBrush();
         private ImageBrush ennemieZombieSkin = new ImageBrush();
         private ImageBrush ennemiSkin = new ImageBrush();
-        
+        private ImageBrush perduSkin = new ImageBrush();
+        private ImageBrush rejouerSkin = new ImageBrush();
+
         //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int vitesseJoueur = 5;
@@ -116,6 +118,13 @@ namespace SAE1._01_1._02
 
             buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
             buissonDroite.Fill = buissonDroiteSkin;
+
+            perduSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/text/gameOver.png"));
+            gameOver.Fill = perduSkin;
+
+            rejouerSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/rejouer.png"));
+            rejouer.Background = rejouerSkin;
+
             CreationEnnemie(3);
             
 
