@@ -156,7 +156,9 @@ namespace SAE1._01_1._02
             {
                 if (x.Tag!= null && x is Rectangle && ((string)x.Tag).Substring(0, ((string)x.Tag).Length - 1) == "tireJoueur")                
                     TestTireJoueur(x);
-                
+                MouvementEnnemieEtCollision(x, joueur, 3);
+
+
 
             }
 
