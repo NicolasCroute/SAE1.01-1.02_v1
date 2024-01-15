@@ -59,12 +59,12 @@ namespace SAE1._01_1._02
         private int vitesseennemie = 3;
         private int maxEnnemiemillisecond;
         private int delaiapparitionennemie = 500;
-        private Random déplacementAléatoire = new Random();
+        private Random nombrealeatoire = new Random();
         private int vitesseTireJoueur = 15;
         private bool directionennemie = true;
         private List<Rectangle> supprimer = new List<Rectangle>();
         private int[,] tableauApparitionEnnemie = { { 100, 300 },{500,100} };
-        private int directionaleatoireennemie = new Random().Next(1, 2);
+        private int directionaléatoire = 1;
 
         //----------Deplacement Touche-------------
 
@@ -477,16 +477,30 @@ namespace SAE1._01_1._02
             {
                 if (compteur % 100 == 0)
                 {
-                    int randomNumber = déplacementAléatoire.Next(1, 5);
-                    Console.WriteLine(randomNumber);
+                    directionaléatoire = nombrealeatoire.Next(1, 5);
+                    Console.WriteLine(directionaléatoire);
                 }
-                if (Canvas.GetLeft(x) > 1100) { directionennemie = true; }
-                if (Canvas.GetLeft(x) < 50) { directionennemie = false; }
+                if (directionaléatoire == 1)
+                { 
+                    if (Canvas.GetLeft(x) > 1100)
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) - 2 + Math.Sin((double)compteur / 50));
+
+                    else 
+                    Canvas.SetLeft(x, Canvas.GetLeft(x) + 2 + Math.Sin((double)compteur / 50));
+                }
+
+                
+                if (Canvas.GetLeft(x) < 50) 
+                {
+                    if(directionaléatoire == 2)
+                    { Canvas.SetLeft(x, Canvas.GetLeft(x) + 2 + Math.Sin((double)compteur / 50)); }
+                    else Canvas.SetLeft(x, Canvas.GetLeft(x) - 2 + Math.Sin((double)compteur / 50));
+
+                }
 
 
-                if (directionennemie == true)
-                { Canvas.SetLeft(x, Canvas.GetLeft(x) - 2 + Math.Sin((double)compteur / 50)); }
-                else if (directionennemie == false){ Canvas.SetLeft(x, Canvas.GetLeft(x) + 2 + Math.Sin((double)compteur / 50)); }
+                
+             
 
 
                 /*if (directionennemie == "G" )
