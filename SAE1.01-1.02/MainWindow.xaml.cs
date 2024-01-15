@@ -482,7 +482,7 @@ namespace SAE1._01_1._02
                 Canvas.SetLeft(newEnnemie, g);
                
                 Canvas.Children.Add(newEnnemie);
-                //ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette_marche_droite/squelette_marche_Droite_1.png"));
+                ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette/squelette_marche_droite/squelette_marche_Droite_1.png"));
                 //pas mettre png ???
                 //for (int j = 0; j < tableauApparenceZombieDroite.Length; j++)
                 //{

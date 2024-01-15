@@ -254,6 +254,36 @@
     <None Update="images\sol\sol_facile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\squelette_marche_droite\squelette_marche_Droite_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
