@@ -287,6 +287,36 @@
     <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_9.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\squelette_marche_droite\squelette_marche_Droite_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

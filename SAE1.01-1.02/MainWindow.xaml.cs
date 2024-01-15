@@ -30,7 +30,7 @@ namespace SAE1._01_1._02
 
         private bool haut, gauche, droite, bas = false;
         private bool tireHaut, tireGauche, tireDroite, tireBas = false;
-        private bool ennemieSqueletteHaut, ennemieSqueletteGauche, ennemieSqueletteDroite, ennemieSqueletteBas = false;
+        
 
         private ImageBrush joueurSkin = new ImageBrush();
         private ImageBrush sol1Skin = new ImageBrush();
@@ -52,7 +52,8 @@ namespace SAE1._01_1._02
         private string[] tableauApparenceGauche = { "images/hero_gauche/HeroGauche_1.png", "images/hero_gauche/HeroGauche_2.png", "images/hero_gauche/HeroGauche_3.png", "images/hero_gauche/HeroGauche_4.png", "images/hero_gauche/HeroGauche_5.png", "images/hero_gauche/HeroGauche_6.png", "images/hero_gauche/HeroGauche_7.png", "images/hero_gauche/HeroGauche_8.png", "images/hero_gauche/HeroGauche_9.png" };
         private string[] tableauApparenceHaut = { "images/hero_haut/HeroHaut_1.png", "images/hero_haut/HeroHaut_2.png", "images/hero_haut/HeroHaut_3.png", "images/hero_haut/HeroHaut_4.png", "images/hero_haut/HeroHaut_5.png", "images/hero_haut/HeroHaut_6.png", "images/hero_haut/HeroHaut_7.png", "images/hero_haut/HeroHaut_8.png", "images/hero_haut/HeroHaut_9.png" };
         private string[] tableauApparenceBas = { "images/hero_bas/HeroBas_1.png", "images/hero_bas/HeroBas_2.png", "images/hero_bas/HeroBas_3.png", "images/hero_bas/HeroBas_4.png", "images/hero_bas/HeroBas_5.png", "images/hero_bas/HeroBas_6.png", "images/hero_bas/HeroBas_7.png", "images/hero_bas/HeroBas_8.png", "images/hero_bas/HeroBas_9.png" };
-        private string[] tableauApparenceSqueletteDroite = { "images/squelette/squelette_marche_droite/squelette/squelette_marche_Droite_1.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_2.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_3.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_4.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_5.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_6.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_7.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_8.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_9.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_10.png" };
+        private string[] tableauApparenceSqueletteDroite = { "images/squelette/squelette_marche_droite/squelette_marche_Droite_1.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_2.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_3.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_4.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_5.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_6.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_7.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_8.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_9.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_10.png" };
+        private string[] tableauApparenceSqueletteGauche = { "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_1.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_2.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_3.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_4.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_5.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_6.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_7.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_8.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_9.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_10.png" };
         private string[] tableauApparenceZombieDroite = { "images/zombiecourse/frame-1.gif", "images/zombiecourse/frame-2.gif", "images/zombiecourse/frame-3.gif", "images/zombiecourse/frame-4.gif", "images/zombiecourse/frame-5.gif", "images/zombiecourse/frame-6.gif", "images/zombiecourse/frame-7.gif", "images/zombiecourse/frame-8.gif", "images/zombiecourse/frame-9.gif", "images/zombiecourse/frame-99.gif" };
         
         private int tempsEntreMisesAJour = 16;
@@ -70,6 +71,9 @@ namespace SAE1._01_1._02
         private int[,] tableauApparitionEnnemie = { { 100, 300 },{500,100} };
         private int directionaléatoire = 1;
         private int pvennemie = 3;
+        private string deplacementSquelette = "D";          // a voir si c'est D
+        private Rectangle newEnnemie;
+        private ImageBrush ennemieSkin;
 
         //----------Deplacement Touche-------------
 
@@ -78,8 +82,6 @@ namespace SAE1._01_1._02
         private string toucheGauche;
         private string toucheDroite;
         private string toucheTire;
-        
-
 
         private Menu accesMenu;
 
@@ -137,13 +139,15 @@ namespace SAE1._01_1._02
             
 
 
+
         }
         private void Jeu(object sender, EventArgs e)
         {
             Rect joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1),
             joueur1.Width, joueur1.Height);
+            
             DeplacementJoueur();
-            ChangementApparence();
+            ChangementApparence(newEnnemie);
 
             foreach (Rectangle y in supprimer)
             {
@@ -359,7 +363,7 @@ namespace SAE1._01_1._02
 
         }
 
-        private void ChangementApparence()
+        private void ChangementApparence(Rectangle newEnnemie)
         {
             //------------------------------------------------A optimiser (pas crée changement a chauqe fois)----------------------------
 
@@ -440,16 +444,20 @@ namespace SAE1._01_1._02
                 joueur1.Fill = joueurSkin;
                 tireDroite= false;
             }
-            else if (ennemieSqueletteHaut == true)
+            else if (deplacementSquelette == "H")
             {
-                
+                //-------------------------A voir-------------------------------
+                //-------------------------A voir-------------------------------
+                //-------------------------A voir-------------------------------
 
             }
-            else if (ennemieSqueletteGauche == true)
+            else if (deplacementSquelette == "B")
             {
-                
+                //-------------------------A voir-------------------------------
+                //-------------------------A voir-------------------------------
+                //-------------------------A voir-------------------------------
             }
-            else if (ennemieSqueletteDroite == true)
+            else if (deplacementSquelette == "D")
             {
                 changementEnnemi++;
 
@@ -459,10 +467,18 @@ namespace SAE1._01_1._02
                 }
                 string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changement];
                 ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
+                newEnnemie.Fill = ennemiSkin;
             }
-            else if (ennemieSqueletteBas == true)
+            else if (deplacementSquelette == "G")
             {
+                changementEnnemi++;
 
+                if (changementEnnemi >= tableauApparenceSqueletteDroite.Length)
+                {
+                    changementEnnemi = 0;
+                }
+                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteGauche[changement];
+                ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
             }
             /*
             else
@@ -486,7 +502,7 @@ namespace SAE1._01_1._02
                 //int gauche = tableauApparitionEnnemie[0, g];
                 //int hauteur = tableauApparitionEnnemie[g, 0];
                 ImageBrush ennemieSkin = new ImageBrush();
-                Rectangle newEnnemie = new Rectangle
+                newEnnemie = new Rectangle
                 {
 
                     Tag = "ennemie",
@@ -499,7 +515,11 @@ namespace SAE1._01_1._02
                 Canvas.SetLeft(newEnnemie, g);
                
                 Canvas.Children.Add(newEnnemie);
-                ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette/squelette_marche_droite/squelette_marche_Droite_1.png"));
+
+                ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[0]));
+                newEnnemie.Fill = ennemieSkin;
+                ChangementApparence(newEnnemie);
+                //ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette/squelette_marche_droite/squelette_marche_Droite_1.png"));
                 //pas mettre png ???
                 //for (int j = 0; j < tableauApparenceZombieDroite.Length; j++)
                 //{
@@ -528,7 +548,8 @@ namespace SAE1._01_1._02
                     Console.WriteLine(directionaléatoire);
                 }
                 if (directionaléatoire == 1)
-                { 
+                {
+                    deplacementSquelette = "D";
                     if (Canvas.GetLeft(x) > 1100)
                         Canvas.SetLeft(x, Canvas.GetLeft(x) - 3 + Math.Sin((double)compteur / 50));
                     else Canvas.SetLeft(x, Canvas.GetLeft(x) + 3 + Math.Sin((double)compteur / 50));
@@ -537,24 +558,29 @@ namespace SAE1._01_1._02
                 
                 if (directionaléatoire == 2 ) 
                 {
-                    if(Canvas.GetLeft(x) < 50)
+                    deplacementSquelette = "G";
+                    if (Canvas.GetLeft(x) < 50)
                     { Canvas.SetLeft(x, Canvas.GetLeft(x) + 2 + Math.Sin((double)compteur / 50)); }
                     else Canvas.SetLeft(x, Canvas.GetLeft(x) - 2 + Math.Sin((double)compteur / 50));
 
                 }
                 if ( directionaléatoire == 3)
-                    if(Canvas.GetTop(x)>0)
+                {
+                    deplacementSquelette = "H";
+                    if (Canvas.GetTop(x) > 0)
                     { Canvas.SetTop(x, Canvas.GetTop(x) - 2 + Math.Sin((double)compteur / 50)); }
                     else Canvas.SetTop(x, Canvas.GetTop(x) + 2 + Math.Sin((double)compteur / 50));
+                }
+                    
 
                 if (directionaléatoire == 4)
+                {
+                    deplacementSquelette = "B";
                     if (Canvas.GetTop(x) < 400)
                     { Canvas.SetTop(x, Canvas.GetTop(x) + 2 + Math.Sin((double)compteur / 50)); }
                     else Canvas.SetTop(x, Canvas.GetTop(x) - 2 + Math.Sin((double)compteur / 50));
-
-
-
-
+                }
+                 
 
 
                 /*if (directionennemie == "G" )
