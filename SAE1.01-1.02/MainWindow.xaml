@@ -20,7 +20,7 @@
         x:Name="Canvas"
         Width="1280"
         Height="610"
-        Visibility="Hidden">
+        >
             <Rectangle
             Name="sol1"
             Canvas.Left="-30"
@@ -124,10 +124,11 @@
         <Canvas
             x:Name="Canvas_gameOver"
             Width="1280"
-            Height="610">
+            Height="610"
+            Visibility="Hidden">
 
             <Button x:Name="rejouer" Content="" Canvas.Left="580" Canvas.Top="421" Height="120" Width="120"/>
-            <Rectangle x:Name="gameOver" Height="386" Canvas.Left="296" Stroke="Black" Canvas.Top="10" Width="688"/>
+            <Rectangle x:Name="gameOver" Height="386" Canvas.Left="296" Canvas.Top="10" Width="688"/>
 
         </Canvas>
 
