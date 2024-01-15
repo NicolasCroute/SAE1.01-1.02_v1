@@ -63,14 +63,13 @@ namespace SAE1._01_1._02
         private int delaiapparitionennemie = 500;
         private Random déplacementAléatoire = new Random();
         private int vitesseTireJoueur = 15;
-        private bool directionennemie;
-        
+        private bool directionennemie = true;
         private List<Rectangle> supprimer = new List<Rectangle>();
         private int[,] tableauApparitionEnnemie = { { 100, 300 },{500,100} };
-
+        private int directionaleatoireennemie = new Random().Next(1, 2);
 
         //----------Deplacement Touche-------------
-        
+
         private string toucheAvancer;
         private string toucheReculer;
         private string toucheGauche;
@@ -117,7 +116,7 @@ namespace SAE1._01_1._02
 
             buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
             buissonDroite.Fill = buissonDroiteSkin;
-            CreationEnnemie(2);
+            CreationEnnemie(3);
             
 
             toucheAvancer = accesMenu.valeurAvancer;
@@ -163,8 +162,7 @@ namespace SAE1._01_1._02
             //    gg 
             //} 
 
-        }
-
+        }     
         //pour les touche faire des touche de base
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
@@ -325,11 +323,11 @@ namespace SAE1._01_1._02
 
         private void DeplacementJoueur()
         {
-            if (gauche && Canvas.GetLeft(joueur1) > 0)
+            if (gauche && Canvas.GetLeft(joueur1) > 50)
             {
                 Canvas.SetLeft(joueur1, Canvas.GetLeft(joueur1) - vitesseJoueur);
             }
-            if (droite && Canvas.GetLeft(joueur1) > 0)
+            if (droite && Canvas.GetLeft(joueur1) < 1200)
             {
                 Canvas.SetLeft(joueur1, Canvas.GetLeft(joueur1) + vitesseJoueur);
             }
@@ -337,7 +335,7 @@ namespace SAE1._01_1._02
             {
                 Canvas.SetTop(joueur1, Canvas.GetTop(joueur1) - vitesseJoueur);
             }
-            if (bas && Canvas.GetTop(joueur1) > 0)
+            if (bas && Canvas.GetTop(joueur1) <500)
             {
                 Canvas.SetTop(joueur1, Canvas.GetTop(joueur1) + vitesseJoueur);
             }
@@ -463,8 +461,10 @@ namespace SAE1._01_1._02
         private void CreationEnnemie(int nombreennemie)
         {
             int g = 100;
+
             for (int i = 0; i < nombreennemie; i++)
             {
+                
                 //g++;
                 //int gauche = tableauApparitionEnnemie[0, g];
                 //int hauteur = tableauApparitionEnnemie[g, 0];
@@ -477,9 +477,10 @@ namespace SAE1._01_1._02
                     Width = 120,
                     Fill = ennemieSkin,
                 };
+                g += 200;
                 Canvas.SetTop(newEnnemie, 300);
                 Canvas.SetLeft(newEnnemie, g);
-                g = +200;
+               
                 Canvas.Children.Add(newEnnemie);
                 //ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette_marche_droite/squelette_marche_Droite_1.png"));
                 //pas mettre png ???
@@ -496,31 +497,43 @@ namespace SAE1._01_1._02
         }
         private Rect MouvementEnnemieEtCollision(Rectangle x, Rect joueur)
         {
+            
 
-            if(x is Rectangle && (string)x.Tag == "ennemie")
+            if (x is Rectangle && (string)x.Tag == "ennemie")
             {
-                int directionalleatoire = 1;//new Random().Next(1, 2);
-                //if (directionalleatoire == 1) 
-                //{
-                
-                    if (Canvas.GetLeft(x) == 1100)
-                    {
-                    directionennemie = false;
-                    
+                if (compteur % 100 == 0)
+                {
+                    int randomNumber = déplacementAléatoire.Next(1, 5);
+                    Console.WriteLine(randomNumber);
+                }
+                if (Canvas.GetLeft(x) > 1100) { directionennemie = true; }
+                if (Canvas.GetLeft(x) < 50) { directionennemie = false; }
 
 
-                    }
-                    if(Canvas.GetLeft(x) == 100) { directionennemie = true; }
+                if (directionennemie == true)
+                { Canvas.SetLeft(x, Canvas.GetLeft(x) - 2 + Math.Sin((double)compteur / 50)); }
+                else if (directionennemie == false){ Canvas.SetLeft(x, Canvas.GetLeft(x) + 2 + Math.Sin((double)compteur / 50)); }
 
-                    if(directionennemie == false)
-                    {
+
+                /*if (directionennemie == "G" )
+                {
                      Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseennemie);
-                    }
-                    if(directionennemie == true) 
-                    {
-                        Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseennemie);
-                    }
-                    Rect ennemie = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width-40, x.Height-40);
+                }
+
+                else if(directionennemie == "D" ) 
+                {
+                     Canvas.SetLeft(x, Canvas.GetLeft(x) + vitesseennemie);
+                }
+                if (directionennemie == "H" )
+                {
+                    Canvas.SetTop(x, Canvas.GetTop(x) + vitesseennemie);
+                }
+                if (directionennemie == "B" )
+                {
+                    Canvas.SetTop(x, Canvas.GetTop(x) - vitesseennemie);
+                }*/
+               
+                Rect ennemie = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width-40, x.Height-40);
                     if (joueur.IntersectsWith(ennemie))
                     {
                         // collision avec le joueur et fin de la partie

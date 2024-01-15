@@ -31,8 +31,8 @@
         <Rectangle
             Name="joueur1"
             Canvas.Left="608"
-            Canvas.Top="262"
-            Width="65"
+            Canvas.Top="164"
+            Width="64"
             Height="90"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
