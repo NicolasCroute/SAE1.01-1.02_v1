@@ -65,6 +65,7 @@ namespace SAE1._01_1._02
         private List<Rectangle> supprimer = new List<Rectangle>();
         private int[,] tableauApparitionEnnemie = { { 100, 300 },{500,100} };
         private int directionaléatoire = 1;
+        private int pvennemie = 3;
 
         //----------Deplacement Touche-------------
 
@@ -144,7 +145,7 @@ namespace SAE1._01_1._02
             {
                 if (x.Tag!= null && x is Rectangle && ((string)x.Tag).Substring(0, ((string)x.Tag).Length - 1) == "tireJoueur")                
                     TestTireJoueur(x);
-                MouvementEnnemieEtCollision(x, joueur);
+                MouvementEnnemieEtCollision(x, joueur, 3);
 
             }
 
@@ -310,7 +311,12 @@ namespace SAE1._01_1._02
                         Console.WriteLine("touché");
                         // on ajoute l’ennemi de la liste à supprimer eton décrémente le nombre d’ennemis
                         supprimer.Add(x);
-                        supprimer.Add(y);
+                        pvennemie--;
+                        if (pvennemie == 0)
+                        {
+                            supprimer.Add(y);
+                            pvennemie = 3;
+                        }
                     }
                 }
             }
@@ -469,38 +475,49 @@ namespace SAE1._01_1._02
 
             }
         }
-        private Rect MouvementEnnemieEtCollision(Rectangle x, Rect joueur)
+        private Rect MouvementEnnemieEtCollision(Rectangle x, Rect joueur, int nombreennemie)
         {
-            
 
+            /*for (int i = 0; i < nombreennemie; i++)
+            {
+               
+            }*/
             if (x is Rectangle && (string)x.Tag == "ennemie")
             {
                 if (compteur % 100 == 0)
                 {
                     directionaléatoire = nombrealeatoire.Next(1, 5);
+                    
                     Console.WriteLine(directionaléatoire);
                 }
                 if (directionaléatoire == 1)
                 { 
                     if (Canvas.GetLeft(x) > 1100)
-                        Canvas.SetLeft(x, Canvas.GetLeft(x) - 2 + Math.Sin((double)compteur / 50));
-
-                    else 
-                    Canvas.SetLeft(x, Canvas.GetLeft(x) + 2 + Math.Sin((double)compteur / 50));
+                        Canvas.SetLeft(x, Canvas.GetLeft(x) - 3 + Math.Sin((double)compteur / 50));
+                    else Canvas.SetLeft(x, Canvas.GetLeft(x) + 3 + Math.Sin((double)compteur / 50));
                 }
 
                 
-                if (Canvas.GetLeft(x) < 50) 
+                if (directionaléatoire == 2 ) 
                 {
-                    if(directionaléatoire == 2)
+                    if(Canvas.GetLeft(x) < 50)
                     { Canvas.SetLeft(x, Canvas.GetLeft(x) + 2 + Math.Sin((double)compteur / 50)); }
                     else Canvas.SetLeft(x, Canvas.GetLeft(x) - 2 + Math.Sin((double)compteur / 50));
 
                 }
+                if ( directionaléatoire == 3)
+                    if(Canvas.GetTop(x)>0)
+                    { Canvas.SetTop(x, Canvas.GetTop(x) - 2 + Math.Sin((double)compteur / 50)); }
+                    else Canvas.SetTop(x, Canvas.GetTop(x) + 2 + Math.Sin((double)compteur / 50));
+
+                if (directionaléatoire == 4)
+                    if (Canvas.GetTop(x) < 400)
+                    { Canvas.SetTop(x, Canvas.GetTop(x) + 2 + Math.Sin((double)compteur / 50)); }
+                    else Canvas.SetTop(x, Canvas.GetTop(x) - 2 + Math.Sin((double)compteur / 50));
 
 
-                
-             
+
+
 
 
                 /*if (directionennemie == "G" )
@@ -520,7 +537,7 @@ namespace SAE1._01_1._02
                 {
                     Canvas.SetTop(x, Canvas.GetTop(x) - vitesseennemie);
                 }*/
-               
+
                 Rect ennemie = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width-40, x.Height-40);
                     if (joueur.IntersectsWith(ennemie))
                     {
