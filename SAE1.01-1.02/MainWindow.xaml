@@ -117,17 +117,18 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
+            <MediaElement x:Name="son" Source="sonArrierePlan.mp3" />
 
         </Canvas>
 
 
         <Canvas
-            x:Name="Canvas_gameOver"
+            x:Name="canvas_gameOver"
             Width="1280"
             Height="610"
             Visibility="Hidden">
 
-            <Button x:Name="rejouer" Content="" Canvas.Left="580" Canvas.Top="421" Height="120" Width="120"/>
+            <Button x:Name="rejouer" Content="" Canvas.Left="580" Canvas.Top="421" Height="120" Width="120" Click="rejouer_Click"/>
             <Rectangle x:Name="gameOver" Height="386" Canvas.Left="296" Canvas.Top="10" Width="688"/>
 
         </Canvas>

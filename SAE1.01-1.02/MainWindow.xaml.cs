@@ -90,6 +90,7 @@ namespace SAE1._01_1._02
         {
             InitializeComponent();
             WindowState = WindowState.Maximized;
+            
 
             //------------------A comprendre--------------
             accesMenu = new Menu();
@@ -136,11 +137,16 @@ namespace SAE1._01_1._02
             toucheGauche = accesMenu.valeurGauche;
             toucheDroite = accesMenu.valeurDroite;
             toucheTire = accesMenu.valeurTire;
-            
-
-
 
         }
+        
+        private void JouerSon()
+        {
+            son.Play();
+        }
+        
+        
+
         private void Jeu(object sender, EventArgs e)
         {
             Rect joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1),
@@ -178,7 +184,10 @@ namespace SAE1._01_1._02
             //    gg 
             //} 
 
-        }     
+        }
+
+        
+
         //pour les touche faire des touche de base
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
@@ -606,13 +615,32 @@ namespace SAE1._01_1._02
                     {
                         // collision avec le joueur et fin de la partie
                         dispatcherTimer.Stop();
-                        MessageBox.Show("Perdu", "Fin de partie", MessageBoxButton.OK, MessageBoxImage.Stop);
+                        
+                        Canvas.Visibility = Visibility.Hidden;
+                        canvas_gameOver.Visibility = Visibility.Visible;
                     }
                     
             }
             return joueur;
 
         }
+        //---------------------------------------------------Si on a le temps ----------------------------------------------------------------
+        //---------------------------------------------------il faut tout redefinir les emplacement initiale----------------------------------
+        //------------------------------------------------------------------------------------------------------------------------------------
+        /*
+        private void rejouer_Click(object sender, RoutedEventArgs e)
+        {
+            
+            this.Close();
+            
+            // Ouvrir la fenêtre du menu principal (remplacez MainWindow avec le nom approprié de votre fenêtre du menu principal)
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.ShowDialog();
+        }
+        */
+        ///-----------------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------------------
 
     }
 }
