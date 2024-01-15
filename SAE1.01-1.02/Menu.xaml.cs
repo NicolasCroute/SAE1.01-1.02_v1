@@ -80,38 +80,30 @@ namespace SAE1._01_1._02
             hardEasy.Fill = easySkin;
 
             
-    }
+        }
 
         private void but_Mode_Click(object sender, RoutedEventArgs e)
         {
-
-            ChangeImage();
-            //ChangeFond();
-        }
-
-        //--------------Simplifier en compilant les 2 codes---------------
-
-        private void ChangeImage()
-        {
+            
             if (modeJeu == false)
             {
-                
+
                 mode.Fill = solFacileSkin;
                 fontMode.Fill = fontFacileSkin;
                 hardEasy.Fill = easySkin;
             }
-            else if (modeJeu == true) 
+            else if (modeJeu == true)
             {
-                
+
                 mode.Fill = solDifficileSkin;
                 fontMode.Fill = fontDifficileSkin;
                 hardEasy.Fill = hardSkin;
             }
 
-            //inverse l'état initiale des touche
             modeJeu = !modeJeu;
-            
         }
+
+        
         
         private void but_Jouer_Click(object sender, RoutedEventArgs e)
         {
@@ -122,6 +114,11 @@ namespace SAE1._01_1._02
         {
             menuParametre.Visibility = Visibility.Visible;
             menuPrincipale.Visibility = Visibility.Hidden;
+        }
+        private void but_OK_Click(object sender, RoutedEventArgs e)
+        {
+            menuParametre.Visibility = Visibility.Hidden;
+            menuPrincipale.Visibility = Visibility.Visible;
         }
         private void but_defReculer_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -207,14 +204,6 @@ namespace SAE1._01_1._02
                 return valeurTire;
             }
         }
-
-
-        private void but_OK_Click(object sender, RoutedEventArgs e)
-        {
-            menuParametre.Visibility = Visibility.Hidden;
-            menuPrincipale.Visibility = Visibility.Visible;
-        }
-
     }
 
 }
