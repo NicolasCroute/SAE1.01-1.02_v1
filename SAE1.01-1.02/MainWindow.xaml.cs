@@ -30,6 +30,7 @@ namespace SAE1._01_1._02
 
         private bool haut, gauche, droite, bas = false;
         private bool tireHaut, tireGauche, tireDroite, tireBas = false;
+        private bool ennemieSqueletteHaut, ennemieSqueletteGauche, ennemieSqueletteDroite, ennemieSqueletteBas = false;
 
         private ImageBrush joueurSkin = new ImageBrush();
         private ImageBrush sol1Skin = new ImageBrush();
@@ -38,7 +39,7 @@ namespace SAE1._01_1._02
         private ImageBrush buissonGaucheSkin = new ImageBrush();
         private ImageBrush buissonDroiteSkin = new ImageBrush();
         private ImageBrush ennemieZombieSkin = new ImageBrush();
-        private ImageBrush ennemieSquSkin = new ImageBrush();
+        private ImageBrush ennemiSkin = new ImageBrush();
         
         //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
@@ -49,19 +50,21 @@ namespace SAE1._01_1._02
         private string[] tableauApparenceGauche = { "images/hero_gauche/HeroGauche_1.png", "images/hero_gauche/HeroGauche_2.png", "images/hero_gauche/HeroGauche_3.png", "images/hero_gauche/HeroGauche_4.png", "images/hero_gauche/HeroGauche_5.png", "images/hero_gauche/HeroGauche_6.png", "images/hero_gauche/HeroGauche_7.png", "images/hero_gauche/HeroGauche_8.png", "images/hero_gauche/HeroGauche_9.png" };
         private string[] tableauApparenceHaut = { "images/hero_haut/HeroHaut_1.png", "images/hero_haut/HeroHaut_2.png", "images/hero_haut/HeroHaut_3.png", "images/hero_haut/HeroHaut_4.png", "images/hero_haut/HeroHaut_5.png", "images/hero_haut/HeroHaut_6.png", "images/hero_haut/HeroHaut_7.png", "images/hero_haut/HeroHaut_8.png", "images/hero_haut/HeroHaut_9.png" };
         private string[] tableauApparenceBas = { "images/hero_bas/HeroBas_1.png", "images/hero_bas/HeroBas_2.png", "images/hero_bas/HeroBas_3.png", "images/hero_bas/HeroBas_4.png", "images/hero_bas/HeroBas_5.png", "images/hero_bas/HeroBas_6.png", "images/hero_bas/HeroBas_7.png", "images/hero_bas/HeroBas_8.png", "images/hero_bas/HeroBas_9.png" };
-        private string[] tableauApparenceSqueletteDroite = { "images/squelette_marche_droite/squelette_marche_Droite_1.png", "images/squelette_marche_droite/squelette_marche_Droite_2.png", "images/squelette_marche_droite/squelette_marche_Droite_3.png", "images/squelette_marche_droite/squelette_marche_Droite_4.png", "images/squelette_marche_droite/squelette_marche_Droite_5.png", "images/squelette_marche_droite/squelette_marche_Droite_6.png", "images/squelette_marche_droite/squelette_marche_Droite_7.png", "images/squelette_marche_droite/squelette_marche_Droite_8.png", "images/squelette_marche_droite/squelette_marche_Droite_9.png", "images/squelette_marche_droite/squelette_marche_Droite_10.png" };
+        private string[] tableauApparenceSqueletteDroite = { "images/squelette/squelette_marche_droite/squelette/squelette_marche_Droite_1.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_2.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_3.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_4.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_5.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_6.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_7.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_8.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_9.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_10.png" };
         private string[] tableauApparenceZombieDroite = { "images/zombiecourse/frame-1.gif", "images/zombiecourse/frame-2.gif", "images/zombiecourse/frame-3.gif", "images/zombiecourse/frame-4.gif", "images/zombiecourse/frame-5.gif", "images/zombiecourse/frame-6.gif", "images/zombiecourse/frame-7.gif", "images/zombiecourse/frame-8.gif", "images/zombiecourse/frame-9.gif", "images/zombiecourse/frame-99.gif" };
-        private string[] tableauApparenceTireHaut = { "images/hero_tire_hauttire_haut_1.png"};
+        
         private int tempsEntreMisesAJour = 16;
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 34;
         private int changement = 0;
+        private int changementEnnemi = 0;
         private int vitesseennemie = 3;
         private int maxEnnemiemillisecond;
         private int delaiapparitionennemie = 500;
         private Random déplacementAléatoire = new Random();
         private int vitesseTireJoueur = 15;
         private bool directionennemie;
+        
         private List<Rectangle> supprimer = new List<Rectangle>();
         private int[,] tableauApparitionEnnemie = { { 100, 300 },{500,100} };
 
@@ -144,7 +147,7 @@ namespace SAE1._01_1._02
             {
                 if (x.Tag!= null && x is Rectangle && ((string)x.Tag).Substring(0, ((string)x.Tag).Length - 1) == "tireJoueur")                
                     TestTireJoueur(x);
-                MouvementEnnemieEtCollision(x, joueur);
+                
 
             }
 
@@ -422,6 +425,30 @@ namespace SAE1._01_1._02
                 joueur1.Fill = joueurSkin;
                 tireDroite= false;
             }
+            else if (ennemieSqueletteHaut == true)
+            {
+                
+
+            }
+            else if (ennemieSqueletteGauche == true)
+            {
+                
+            }
+            else if (ennemieSqueletteDroite == true)
+            {
+                changementEnnemi++;
+
+                if (changementEnnemi >= tableauApparenceSqueletteDroite.Length)
+                {
+                    changementEnnemi = 0;
+                }
+                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changement];
+                ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
+            }
+            else if (ennemieSqueletteBas == true)
+            {
+
+            }
             /*
             else
             {
@@ -454,7 +481,7 @@ namespace SAE1._01_1._02
                 Canvas.SetLeft(newEnnemie, g);
                 g = +200;
                 Canvas.Children.Add(newEnnemie);
-                ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette_marche_droite/squelette_marche_Droite_1.png"));
+                //ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette_marche_droite/squelette_marche_Droite_1.png"));
                 //pas mettre png ???
                 //for (int j = 0; j < tableauApparenceZombieDroite.Length; j++)
                 //{
@@ -475,10 +502,13 @@ namespace SAE1._01_1._02
                 int directionalleatoire = 1;//new Random().Next(1, 2);
                 //if (directionalleatoire == 1) 
                 //{
+                
                     if (Canvas.GetLeft(x) == 1100)
                     {
                     directionennemie = false;
-                      
+                    
+
+
                     }
                     if(Canvas.GetLeft(x) == 100) { directionennemie = true; }
 
