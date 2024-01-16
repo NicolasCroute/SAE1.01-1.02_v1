@@ -14,6 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="images\bouton_quitter.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="images\buisson.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

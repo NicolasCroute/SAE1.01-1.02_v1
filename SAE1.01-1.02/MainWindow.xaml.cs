@@ -32,7 +32,7 @@ namespace SAE1._01_1._02
 
         private bool haut, gauche, droite, bas = false;
         private bool tireHaut, tireGauche, tireDroite, tireBas = false;
-        private bool deplacementSqueletteHaut, deplacementSqueletteGauche, deplacementSqueletteDroite, deplacementSqueletteBas = false;
+        
 
 
 
@@ -46,6 +46,7 @@ namespace SAE1._01_1._02
         private ImageBrush ennemiSkin = new ImageBrush();
         private ImageBrush perduSkin = new ImageBrush();
         private ImageBrush rejouerSkin = new ImageBrush();
+        private ImageBrush quitterSkin = new ImageBrush();
 
         //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
@@ -70,16 +71,12 @@ namespace SAE1._01_1._02
         private int delaiapparitionennemie = 500;
         private Random nombrealeatoire = new Random();
         private int vitesseTireJoueur = 15;
-        private bool directionennemie = true;
         private List<Rectangle> supprimer = new List<Rectangle>();
         private List<Rectangle> ennemieListe = new List<Rectangle>();
         private List<int> directionsennemieListe = new List<int>();
-        private int directionaléatoire = 1;
         private int pvennemie = 3;
-        private string deplacementSquelette = "D";          // a voir si c'est D
         private Rectangle newEnnemie;
         private int nombreEnnemie = 7;
-        private ImageBrush ennemieSkin;
 
         //----------Deplacement Touche-------------
 
@@ -94,7 +91,7 @@ namespace SAE1._01_1._02
 
         private Menu accesMenu;
 
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -117,22 +114,11 @@ namespace SAE1._01_1._02
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
             dispatcherTimer.Start();
 
-            sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.png"));
-            sol1.Fill = sol1Skin;
+            
 
             joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
             joueur1.Fill = joueurSkin;
-            buissonBasSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_bas.png"));
-            buissonBas.Fill = buissonBasSkin;
-
-            buissonHautSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_haut.png"));
-            buissonHaut.Fill = buissonHautSkin;
-
-            buissonGaucheSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_gauche.png"));
-            buissonGauche.Fill = buissonGaucheSkin;
-
-            buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
-            buissonDroite.Fill = buissonDroiteSkin;
+            
 
             perduSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/text/gameOver.png"));
             gameOver.Fill = perduSkin;
@@ -140,8 +126,9 @@ namespace SAE1._01_1._02
             rejouerSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/rejouer.png"));
             rejouer.Background = rejouerSkin;
 
+            quitterSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/bouton_quitter.png"));
+            but_quitter.Background = quitterSkin;
 
-            CreationEnnemie();
 
             toucheAvancer = accesMenu.valeurAvancer;
             toucheReculer = accesMenu.valeurReculer;
@@ -150,25 +137,57 @@ namespace SAE1._01_1._02
             toucheTire = accesMenu.valeurTire;
 
             //--------------Mode Jeu (recupérer depuis menu)------------------
+
             modeJeuRecup = accesMenu.modeJeu;
-            
+            Console.WriteLine("Mode de jeu actuel : " + modeJeuRecup);
+
+            ModeDeJeu(modeJeuRecup);
+            CreationEnnemie();
         }
 
         private void JouerSon()
         {
             son.Play();
         }
-        
-        
+
+        private void ModeDeJeu(bool modeJeuRecup)
+        {
+            Console.WriteLine("Mode de jeu actuel dans modeJeu : " + modeJeuRecup);
+            if (modeJeuRecup == false)
+            {
+                sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.png"));
+                sol1.Fill = sol1Skin;
+
+                buissonBasSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_bas.png"));
+                buissonBas.Fill = buissonBasSkin;
+
+                buissonHautSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_haut.png"));
+                buissonHaut.Fill = buissonHautSkin;
+
+                buissonGaucheSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_gauche.png"));
+                buissonGauche.Fill = buissonGaucheSkin;
+
+                buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
+                buissonDroite.Fill = buissonDroiteSkin;
+            }
+            else if (modeJeuRecup == true)
+            {
+                sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_difficile.png"));
+                sol1.Fill = sol1Skin;
+            }
+        }
+
+
+
 
         private void Jeu(object sender, EventArgs e)
         {
-            Rect joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1),
-            joueur1.Width, joueur1.Height);
+            Rect joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1), joueur1.Width, joueur1.Height);
             //Console.WriteLine(joueur + "joueur");
 
             DeplacementJoueur();
-            ChangementApparence(newEnnemie);
+            ChangementApparence();
+            ChangementApparenceEnnemis(newEnnemie);
 
             foreach (Rectangle y in supprimer)
             {
@@ -205,10 +224,6 @@ namespace SAE1._01_1._02
 
         }
 
-
-
-        //pour les touche faire des touche de base
-
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
 
@@ -237,10 +252,7 @@ namespace SAE1._01_1._02
                 bas = true;
                 direction = "B";
             }
-
-
         }
-
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
 
@@ -277,11 +289,7 @@ namespace SAE1._01_1._02
                 Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height / 2);
                 Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
                 Canvas.Children.Add(nouveauTire);
-
-
             }
-
-
         }
         private void TestTireJoueur(Rectangle x)
         {
@@ -402,7 +410,7 @@ namespace SAE1._01_1._02
 
         }
 
-        private void ChangementApparence(Rectangle newEnnemie)
+        private void ChangementApparence()
         {
             //------------------------------------------------A optimiser (pas crée changement a chauqe fois)----------------------------
 
@@ -483,67 +491,26 @@ namespace SAE1._01_1._02
                 joueur1.Fill = joueurSkin;
                 tireDroite = false;
             }
-            else if (deplacementSquelette == "H")
-            {
-                //-------------------------A voir-------------------------------
-                //-------------------------A voir-------------------------------
-                //-------------------------A voir-------------------------------
-
-            }
-            else if (deplacementSquelette == "B")
-            {
-                //-------------------------A voir-------------------------------
-                //-------------------------A voir-------------------------------
-                //-------------------------A voir-------------------------------
-            }
-            else if (deplacementSquelette == "D")
-            {
-                changementEnnemi++;
-
-                if (changementEnnemi >= tableauApparenceSqueletteDroite.Length)
-                {
-                    changementEnnemi = 0;
-                }
-                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changementEnnemi];
-                ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
-                newEnnemie.Fill = ennemiSkin;
-            }
-            else if (deplacementSquelette == "G")
-            {
-
-                changementEnnemi++;
-
-                if (changementEnnemi >= tableauApparenceSqueletteDroite.Length)
-                {
-                    changementEnnemi = 0;
-                }
-                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteGauche[changementEnnemi];
-                ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
-                newEnnemie.Fill = ennemiSkin;
-                /*
-                changementEnnemi++;
-
-                if (changementEnnemi >= tableauApparenceSqueletteGauche.Length)
-                {
-                    changementEnnemi = 0;
-                }
-
-                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteGauche[changementEnnemi];
-                ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
-                newEnnemie.Fill = ennemiSkin;
-                */
-            }
-            else
-            {
-                // Si aucune touche de déplacement n'est enfoncée, réinitialisez le compteur pour l'animation.
-                changement = 0;
-                changementEnnemi = 0;
-            }
-
-
 
 
         }
+        private void ChangementApparenceEnnemis(Rectangle newEnnemie)
+        {
+            ImageBrush ennemiSkin = new ImageBrush();
+
+            changementEnnemi++;
+
+            if (changementEnnemi >= tableauApparenceSqueletteDroite.Length)
+            {
+                changementEnnemi = 0;
+            }
+            string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changementEnnemi];
+            ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
+            
+
+        }
+
+
         private void CreationEnnemie()
         {
 
@@ -572,7 +539,7 @@ namespace SAE1._01_1._02
 
                 ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[0]));
                 newEnnemie.Fill = ennemieSkin;
-                ChangementApparence(newEnnemie);
+                ChangementApparenceEnnemis(newEnnemie);
                 //ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette/squelette_marche_droite/squelette_marche_Droite_1.png"));
                 //pas mettre png ???
                 //for (int j = 0; j < tableauApparenceZombieDroite.Length; j++)
@@ -606,7 +573,6 @@ namespace SAE1._01_1._02
                 {
                     case 1:
                         {
-                            deplacementSquelette = "D";
                             Console.WriteLine("D");
                             if (Canvas.GetLeft(ennemieListe[i]) > 1100)
                             { Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50)); }
@@ -615,7 +581,6 @@ namespace SAE1._01_1._02
                         }
                     case 2:
                         {
-                            deplacementSquelette = "G";
                             Console.WriteLine("G");
                             if (Canvas.GetLeft(ennemieListe[i]) < 50)
                             { Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50)); }
@@ -625,7 +590,6 @@ namespace SAE1._01_1._02
                     case 3:
                         {
                             Console.WriteLine("H");
-                            deplacementSquelette = "H";
                             if (Canvas.GetTop(ennemieListe[i]) > 0)
                             { Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50)); }
                             else Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50));
@@ -634,7 +598,6 @@ namespace SAE1._01_1._02
                     case 4:
                         {
                             Console.WriteLine("b");
-                            deplacementSquelette = "B";
                             if (Canvas.GetTop(ennemieListe[i]) < 400)
                             { Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50)); }
                             else Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50));
@@ -642,11 +605,7 @@ namespace SAE1._01_1._02
                         }
                 }
 
-
-
-
                 //Console.WriteLine(ennemie);
-
                 // tester si l'ennemi est touché par un tir
 
                 foreach (var x in Canvas.Children.OfType<Rectangle>())
@@ -670,7 +629,6 @@ namespace SAE1._01_1._02
 
                     }
 
-
                     if (joueur.IntersectsWith(ennemie))
                     {
                         // collision avec le joueur et fin de la partie
@@ -680,42 +638,33 @@ namespace SAE1._01_1._02
                     }
                 }
 
-
-
-                //  return joueur;
-
             }
-
-            //---------------------------------------------------Si on a le temps ----------------------------------------------------------------
-            //---------------------------------------------------il faut tout redefinir les emplacement initiale----------------------------------
-            //------------------------------------------------------------------------------------------------------------------------------------
-            /*
-            private void rejouer_Click(object sender, RoutedEventArgs e)
-            {
-
-                this.Close();
-
-                // Ouvrir la fenêtre du menu principal (remplacez MainWindow avec le nom approprié de votre fenêtre du menu principal)
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.ShowDialog();
-            }
-            */
-            ///-----------------------------------------------------------------------------------------------------------------
-            //-------------------------------------------------------------------------------------------------------------------
-            //-------------------------------------------------------------------------------------------------------------------
-
-
-
         }
-      
+
+        //---------------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------réinitialiser tout les composant---------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------
+        
+        private void rejouer_Click(object sender, RoutedEventArgs e)
+        {
+            
+            accesMenu = new Menu();
+            accesMenu.ShowDialog();
+            if (accesMenu.DialogResult == false)
+            {
+                Application.Current.Shutdown();
+            }
+            // réinitialiser le jeu
+        }
+        //---------------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------réinitialiser tout les composant---------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------------------------------
+
+        private void but_quitter_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
 
-    
-
-
-    
-
-
-
- 
+// -----------------------------------------------Bouton pause---------------------------------------------------

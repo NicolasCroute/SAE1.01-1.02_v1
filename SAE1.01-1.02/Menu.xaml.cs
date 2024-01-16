@@ -30,6 +30,11 @@ namespace SAE1._01_1._02
         private ImageBrush but_OKSkin = new ImageBrush();
         private ImageBrush easySkin = new ImageBrush();
         private ImageBrush hardSkin = new ImageBrush();
+       
+
+
+        private string modeFacileText = "EASY";
+        private string modeDifficileText = "HARD";
 
 
 
@@ -66,11 +71,8 @@ namespace SAE1._01_1._02
 
             but_OKSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/Retour.png"));
 
-            //titre.FontFamily = new FontFamily(new Uri("little-pixel.tff"), "./#Pixel_Tandy");
-            //titre.FontFamily = new FontFamily("Pixel_Tandy.otf");
-
-            FontFamily font = new FontFamily("Pixel_Tandy.otf");
-            titre.FontFamily = font;
+            //titre.FontFamily = new FontFamily("P:\\1er année IUT\\SAE 1.01-1.02\\SAE1.01-1.02\\SAE1.01-1.02\\Pixel_Tandy.otf");
+            
 
             parametre.Background = butParametreSkin;
             mode.Fill = solFacileSkin;
@@ -91,7 +93,9 @@ namespace SAE1._01_1._02
                 mode.Fill = solFacileSkin;
                 fontMode.Fill = fontFacileSkin;
                 hardEasy.Fill = easySkin;
-                
+                but_Mode.Content = modeFacileText;
+
+
             }
             else if (modeJeu == true)
             {
@@ -99,6 +103,7 @@ namespace SAE1._01_1._02
                 mode.Fill = solDifficileSkin;
                 fontMode.Fill = fontDifficileSkin;
                 hardEasy.Fill = hardSkin;
+                but_Mode.Content = modeDifficileText;
             }
 
         }
@@ -112,6 +117,7 @@ namespace SAE1._01_1._02
             {
                 return modeJeu;
             }
+            
         }
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------

@@ -65,7 +65,7 @@
                 Panel.ZIndex="2"
                 Background="#FF5CB75D"
                 Click="but_Mode_Click"
-                Content="Mode"
+                Content="EASY"
                 FontFamily="{StaticResource PixelTandyPolice}"
                 FontSize="72"
                 FontWeight="Bold"
