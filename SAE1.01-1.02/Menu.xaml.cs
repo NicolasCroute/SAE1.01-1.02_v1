@@ -33,7 +33,7 @@ namespace SAE1._01_1._02
 
 
 
-        private bool modeJeu = false;
+        public bool modeJeu = false;
 
         //---------------Déplacement touche----------------
         
@@ -42,7 +42,6 @@ namespace SAE1._01_1._02
         public string valeurDroite;
         public string valeurReculer;
         public string valeurTire;
-
 
 
         public Menu()
@@ -84,13 +83,15 @@ namespace SAE1._01_1._02
 
         private void but_Mode_Click(object sender, RoutedEventArgs e)
         {
-            
+            modeJeu = !modeJeu;
+
             if (modeJeu == false)
             {
 
                 mode.Fill = solFacileSkin;
                 fontMode.Fill = fontFacileSkin;
                 hardEasy.Fill = easySkin;
+                
             }
             else if (modeJeu == true)
             {
@@ -100,11 +101,22 @@ namespace SAE1._01_1._02
                 hardEasy.Fill = hardSkin;
             }
 
-            modeJeu = !modeJeu;
         }
 
-        
-        
+        //----------------------------------------------------------------------
+        //----------------------------------------------------------------------
+        private bool difficulter;
+        public bool Difficulter
+        {
+            get
+            {
+                return modeJeu;
+            }
+        }
+        //----------------------------------------------------------------------
+        //----------------------------------------------------------------------
+
+
         private void but_Jouer_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;

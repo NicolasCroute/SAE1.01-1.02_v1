@@ -30,7 +30,9 @@ namespace SAE1._01_1._02
 
         private bool haut, gauche, droite, bas = false;
         private bool tireHaut, tireGauche, tireDroite, tireBas = false;
-        
+        private bool deplacementSqueletteHaut, deplacementSqueletteGauche, deplacementSqueletteDroite, deplacementSqueletteBas = false;
+
+
 
         private ImageBrush joueurSkin = new ImageBrush();
         private ImageBrush sol1Skin = new ImageBrush();
@@ -73,7 +75,7 @@ namespace SAE1._01_1._02
         private int pvennemie = 3;
         private string deplacementSquelette = "D";          // a voir si c'est D
         private Rectangle newEnnemie;
-        private ImageBrush ennemieSkin;
+       
 
         //----------Deplacement Touche-------------
 
@@ -83,12 +85,16 @@ namespace SAE1._01_1._02
         private string toucheDroite;
         private string toucheTire;
 
+        //--------------Mode Jeu------------------
+        private bool modeJeuRecup;
+
         private Menu accesMenu;
 
 
         public MainWindow()
         {
             InitializeComponent();
+            
             WindowState = WindowState.Maximized;
             
 
@@ -109,6 +115,7 @@ namespace SAE1._01_1._02
 
             sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.png"));
             sol1.Fill = sol1Skin;
+
             joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
             joueur1.Fill = joueurSkin;
             buissonBasSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_bas.png"));
@@ -130,20 +137,24 @@ namespace SAE1._01_1._02
             rejouer.Background = rejouerSkin;
 
             CreationEnnemie(3);
-            
 
+            //----------Deplacement Touche (recupérer depuis menu)-------------
             toucheAvancer = accesMenu.valeurAvancer;
             toucheReculer = accesMenu.valeurReculer;
             toucheGauche = accesMenu.valeurGauche;
             toucheDroite = accesMenu.valeurDroite;
             toucheTire = accesMenu.valeurTire;
 
+            //--------------Mode Jeu (recupérer depuis menu)------------------
+            modeJeuRecup = accesMenu.modeJeu;
+            
         }
-        
+
         private void JouerSon()
         {
             son.Play();
         }
+        
         
         
 
@@ -474,28 +485,42 @@ namespace SAE1._01_1._02
                 {
                     changementEnnemi = 0;
                 }
-                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changement];
+                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changementEnnemi];
                 ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
                 newEnnemie.Fill = ennemiSkin;
             }
             else if (deplacementSquelette == "G")
             {
+
                 changementEnnemi++;
 
                 if (changementEnnemi >= tableauApparenceSqueletteDroite.Length)
                 {
                     changementEnnemi = 0;
                 }
-                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteGauche[changement];
+                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteGauche[changementEnnemi];
                 ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
+                newEnnemie.Fill = ennemiSkin;
+                /*
+                changementEnnemi++;
+
+                if (changementEnnemi >= tableauApparenceSqueletteGauche.Length)
+                {
+                    changementEnnemi = 0;
+                }
+
+                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteGauche[changementEnnemi];
+                ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
+                newEnnemie.Fill = ennemiSkin;
+                */
             }
-            /*
             else
             {
-                joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
-                joueur1.Fill = joueurSkin;
+                // Si aucune touche de déplacement n'est enfoncée, réinitialisez le compteur pour l'animation.
+                changement = 0;
+                changementEnnemi = 0;
             }
-            */
+
 
 
 
@@ -563,8 +588,9 @@ namespace SAE1._01_1._02
                         Canvas.SetLeft(x, Canvas.GetLeft(x) - 3 + Math.Sin((double)compteur / 50));
                     else Canvas.SetLeft(x, Canvas.GetLeft(x) + 3 + Math.Sin((double)compteur / 50));
                 }
-
                 
+
+
                 if (directionaléatoire == 2 ) 
                 {
                     deplacementSquelette = "G";
@@ -636,6 +662,8 @@ namespace SAE1._01_1._02
             // Ouvrir la fenêtre du menu principal (remplacez MainWindow avec le nom approprié de votre fenêtre du menu principal)
             MainWindow mainWindow = new MainWindow();
             mainWindow.ShowDialog();
+
+        //Utiliser une autre fenetre 
         }
         */
         ///-----------------------------------------------------------------------------------------------------------------
