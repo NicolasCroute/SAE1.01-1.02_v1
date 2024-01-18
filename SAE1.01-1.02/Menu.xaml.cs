@@ -31,17 +31,12 @@ namespace SAE1._01_1._02
         private ImageBrush easySkin = new ImageBrush();
         private ImageBrush hardSkin = new ImageBrush();
        
-
-
         private string modeFacileText = "EASY";
         private string modeDifficileText = "HARD";
 
-
-
         public bool modeJeu = false;
 
-        //---------------Déplacement touche----------------
-        
+        //---------------touches de deplacement----------------
         public string valeurAvancer;
         public string valeurGauche;
         public string valeurDroite;
@@ -51,11 +46,8 @@ namespace SAE1._01_1._02
 
         public Menu()
         {
-
             InitializeComponent();
-
             WindowState = WindowState.Maximized;
-
             
             solFacileSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.png"));
             solDifficileSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_Difficile.png"));
@@ -66,21 +58,14 @@ namespace SAE1._01_1._02
             easySkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/text/easy.png"));
             hardSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/text/hard.png"));
 
-
             butParametreSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/but_parametre.png"));
-
-            but_OKSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/Retour.png"));
-
-            //titre.FontFamily = new FontFamily("P:\\1er année IUT\\SAE 1.01-1.02\\SAE1.01-1.02\\SAE1.01-1.02\\Pixel_Tandy.otf");
-            
+            but_OKSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/Retour.png")); 
 
             parametre.Background = butParametreSkin;
             mode.Fill = solFacileSkin;
             fontMode.Fill = fontFacileSkin;
             but_OK.Background = but_OKSkin;
             hardEasy.Fill = easySkin;
-
-            
         }
 
         private void but_Mode_Click(object sender, RoutedEventArgs e)
@@ -89,17 +74,13 @@ namespace SAE1._01_1._02
 
             if (modeJeu == false)
             {
-
                 mode.Fill = solFacileSkin;
                 fontMode.Fill = fontFacileSkin;
                 hardEasy.Fill = easySkin;
                 but_Mode.Content = modeFacileText;
-
-
             }
-            else if (modeJeu == true)
+            else
             {
-
                 mode.Fill = solDifficileSkin;
                 fontMode.Fill = fontDifficileSkin;
                 hardEasy.Fill = hardSkin;
