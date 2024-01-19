@@ -555,9 +555,9 @@ namespace SAE1._01_1._02
         }
         private void MouvementEnnemiesEtCollision(Rect joueur)
         {
-            Console.WriteLine("MouvementEnnemiesEtCollision");
+            //Console.WriteLine("MouvementEnnemiesEtCollision");
             int directionaléatoire = 1;
-            for (int i = 0; i < ennemieListe.Count; i++)
+            for (int i = ennemieListe.Count-1;i>=0; i--)
             {
                 if (compteur % 50 == 0)
                 {
@@ -624,6 +624,7 @@ namespace SAE1._01_1._02
                                 supprimer.Add(ennemieListe[i]);
                                 ennemieListe.RemoveAt(i);
                                 pvennemie = 3;
+                                break;
                             }
                         }
 
