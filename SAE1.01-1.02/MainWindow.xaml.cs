@@ -29,7 +29,6 @@ namespace SAE1._01_1._02
     public partial class MainWindow : Window
     {
 
-
         private bool haut, gauche, droite, bas = false;
         private bool tireHaut, tireGauche, tireDroite, tireBas = false;
         
