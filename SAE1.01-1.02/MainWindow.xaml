@@ -40,7 +40,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Fill="LightBlue"
-            Stroke="DarkBlue" />
+            />
             <Rectangle
             x:Name="buissonGauche"
             Canvas.Left="-73"
@@ -132,11 +132,16 @@
             <Rectangle x:Name="gameOver" Height="386" Canvas.Left="296" Canvas.Top="10" Width="688"/>
             <Button x:Name="rejouer" Content="" Canvas.Left="594" Canvas.Top="444" Height="93" Width="92" Click="rejouer_Click" />
             <Button x:Name="but_quitter" Content="" Canvas.Left="487" Canvas.Top="585" Height="76" Width="306" HorizontalAlignment="Left" VerticalAlignment="Center" Click="but_quitter_Click"/>
-
-
-
-
         </Canvas>
+
+        <Canvas
+            x:Name="canvasPause"
+            Width="1280" 
+            Margin="110,187,110,51"
+            Visibility="Hidden">
+            <Label Content="PAUSE" Canvas.Left="406" Canvas.Top="164" FontSize="150" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        </Canvas>
+
 
     </Grid>
 

@@ -33,9 +33,6 @@ namespace SAE1._01_1._02
         private bool haut, gauche, droite, bas = false;
         private bool tireHaut, tireGauche, tireDroite, tireBas = false;
         
-
-
-
         private ImageBrush joueurSkin = new ImageBrush();
         private ImageBrush sol1Skin = new ImageBrush();
         private ImageBrush buissonHautSkin = new ImageBrush();
@@ -64,7 +61,7 @@ namespace SAE1._01_1._02
         private int[] tableauspawnennemieHorizontale = { 0, 0, 0, 0, 1200, 1200, 1200, 1200 };
         private int tempsEntreMisesAJour = 16;
         private int tempsEcouleDepuisChangement = 0;
-        private int intervalleChangementApparence = 34;
+        private int intervalleChangementApparence = 40;
         private int changement = 0;
         private int changementEnnemi = 0;
         private int maxEnnemiemillisecond;
@@ -77,6 +74,7 @@ namespace SAE1._01_1._02
         private int pvennemie = 3;
         private Rectangle newEnnemie;
         private int nombreEnnemie = 7;
+        private bool jeuEnPause = false;
 
         //----------Deplacement Touche-------------
 
@@ -111,7 +109,7 @@ namespace SAE1._01_1._02
 
 
             dispatcherTimer.Tick += Jeu;
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(16);
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(tempsEntreMisesAJour);
             dispatcherTimer.Start();
 
             
@@ -188,6 +186,7 @@ namespace SAE1._01_1._02
             DeplacementJoueur();
             ChangementApparence();
             ChangementApparenceEnnemis(newEnnemie);
+            MouvementEnnemiesEtCollision(joueur);
 
             foreach (Rectangle y in supprimer)
             {
@@ -195,17 +194,26 @@ namespace SAE1._01_1._02
                 Canvas.Children.Remove(y);
             }
 
-
             foreach (Rectangle x in Canvas.Children.OfType<Rectangle>())
             {
                 if (x.Tag != null && x is Rectangle && ((string)x.Tag).Substring(0, ((string)x.Tag).Length - 1) == "tireJoueur")
                     TestTireJoueur(x);
             }
-            MouvementEnnemiesEtCollision(joueur);
 
+            foreach (Rectangle ennemie in ennemieListe)
+            {
+                if (tempsEcouleDepuisChangement >= intervalleChangementApparence)
+                {
+                    ChangementApparenceEnnemis(ennemie);
+                    tempsEcouleDepuisChangement = 0;
+                }
+                else
+                {
+                    tempsEcouleDepuisChangement = tempsEcouleDepuisChangement + tempsEntreMisesAJour;
+                }
 
-
-
+            }
+            
             compteur++;
             /* if (compteur % 100 == 0)
              {
@@ -252,6 +260,22 @@ namespace SAE1._01_1._02
                 bas = true;
                 direction = "B";
             }
+
+            if (e.Key == Key.Escape)
+            {
+                jeuEnPause = !jeuEnPause;
+                if (jeuEnPause == true)
+                {
+                    dispatcherTimer.Stop();
+                    canvasPause.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    dispatcherTimer.Start();
+                    canvasPause.Visibility = Visibility.Hidden;
+                }
+            }
+
         }
         private void CanvasKeyIsUp(object sender, KeyEventArgs e)
         {
@@ -506,7 +530,7 @@ namespace SAE1._01_1._02
             }
             string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changementEnnemi];
             ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
-            
+            newEnnemie.Fill = ennemiSkin;
 
         }
 
@@ -520,14 +544,13 @@ namespace SAE1._01_1._02
                 //g++;
                 //int gauche = tableauApparitionEnnemie[0, g];
                 //int hauteur = tableauApparitionEnnemie[g, 0];
-                ImageBrush ennemieSkin = new ImageBrush();
                 newEnnemie = new Rectangle
                 {
 
                     Tag = "ennemie",
                     Height = 120,
                     Width = 120,
-                    Fill = ennemieSkin,
+                    Fill = ennemiSkin,
                 };
                 ennemieListe.Add(newEnnemie);
                 directionsennemieListe.Add(0);
@@ -536,21 +559,8 @@ namespace SAE1._01_1._02
                 Canvas.SetLeft(newEnnemie, tableauspawnennemieHorizontale[i]);
 
                 Canvas.Children.Add(newEnnemie);
-
-                ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[0]));
-                newEnnemie.Fill = ennemieSkin;
                 ChangementApparenceEnnemis(newEnnemie);
-                //ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/squelette/squelette_marche_droite/squelette_marche_Droite_1.png"));
-                //pas mettre png ???
-                //for (int j = 0; j < tableauApparenceZombieDroite.Length; j++)
-                //{
-                //    ennemieSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[j]));
-                //    if (j <= tableauApparenceZombieDroite.Length)
-                //    {
-                //        j = 0;
-                //    }
-                //}
-
+                
             }
         }
         private void MouvementEnnemiesEtCollision(Rect joueur)
@@ -667,5 +677,3 @@ namespace SAE1._01_1._02
         }
     }
 }
-
-// -----------------------------------------------Bouton pause---------------------------------------------------
