@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Markup.Localizer;
 using System.Windows.Media;
@@ -51,7 +52,7 @@ namespace SAE1._01_1._02
         //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int vitesseJoueur = 5;
-        int compteur = 0, sprite = 1;
+        int compteur = 0, sprite = 1, compteurennemie =0, indicedirectionaléatoire;
         private string direction = "A";
         private string[] tableauApparenceDroite = { "images/hero_droites/HeroDroite_1.png", "images/hero_droites/HeroDroite_2.png", "images/hero_droites/HeroDroite_3.png", "images/hero_droites/HeroDroite_4.png", "images/hero_droites/HeroDroite_5.png", "images/hero_droites/HeroDroite_6.png", "images/hero_droites/HeroDroite_7.png", "images/hero_droites/HeroDroite_8.png", "images/hero_droites/HeroDroite_9.png" };
         private string[] tableauApparenceGauche = { "images/hero_gauche/HeroGauche_1.png", "images/hero_gauche/HeroGauche_2.png", "images/hero_gauche/HeroGauche_3.png", "images/hero_gauche/HeroGauche_4.png", "images/hero_gauche/HeroGauche_5.png", "images/hero_gauche/HeroGauche_6.png", "images/hero_gauche/HeroGauche_7.png", "images/hero_gauche/HeroGauche_8.png", "images/hero_gauche/HeroGauche_9.png" };
@@ -62,6 +63,8 @@ namespace SAE1._01_1._02
         private string[] tableauApparenceZombieDroite = { "images/zombiecourse/frame-1.gif", "images/zombiecourse/frame-2.gif", "images/zombiecourse/frame-3.gif", "images/zombiecourse/frame-4.gif", "images/zombiecourse/frame-5.gif", "images/zombiecourse/frame-6.gif", "images/zombiecourse/frame-7.gif", "images/zombiecourse/frame-8.gif", "images/zombiecourse/frame-9.gif", "images/zombiecourse/frame-99.gif" };
         private int[] tableauspawnennemieVerticale = { 300, 100, 200, 400, 300, 200, 100, 400 };
         private int[] tableauspawnennemieHorizontale = { 0, 0, 0, 0, 1200, 1200, 1200, 1200 };
+        int[] listeEnnemiGauche = { 1, 3, 4 };
+        int[] listeEnnemiHaut = { 1, 2, 4 };
         private int tempsEntreMisesAJour = 16;
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 34;
@@ -202,10 +205,13 @@ namespace SAE1._01_1._02
                     TestTireJoueur(x);
             }
             MouvementEnnemiesEtCollision(joueur);
+            /* foreach (Rectangle ennemie in ennemieListe)
+             {
+                 TirEnnemi(ennemie, joueur);
+             }*/
 
 
-
-
+            compteurennemie++;
             compteur++;
             /* if (compteur % 100 == 0)
              {
@@ -354,37 +360,6 @@ namespace SAE1._01_1._02
                 }
                 tireBas = true;
             }
-
-
-            // création d’un tir joueur à base d’un rectangle Rect (nécessaire pour la collision) 
-            /* Rect tir = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
-              foreach (var y in Canvas.Children.OfType<Rectangle>())
-              {
-                  for (int i = 0; i < nombreEnnemie; i++) {
-                      // si le rectangle est un ennemi
-                      if (y is Rectangle && (string)y.Tag == "ennemie")
-                      {
-
-                          Rect ennemie = new Rect(Canvas.GetLeft(y), Canvas.GetTop(y), y.Width, y.Height);
-                          // Console.WriteLine("test avec l'ennemi :" +ennemie);
-                          // Console.WriteLine("test avec tir :" + tir);
-                          if (tir.IntersectsWith(ennemie))
-                          {
-                              Console.WriteLine("touché");
-                              // on ajoute l’ennemi de la liste à supprimer eton décrémente le nombre d’ennemis
-                              supprimer.Add(x);
-                              pvennemie--;
-                              if (pvennemie == 0)
-                              {
-                                  supprimer.Add(y);
-                                  pvennemie = 3;
-                              }
-                          }
-                      }
-                  }
-              }
-            */
-            //Console.WriteLine("----------------------------");
 
         }
 
@@ -559,7 +534,7 @@ namespace SAE1._01_1._02
             int directionaléatoire = 1;
             for (int i = ennemieListe.Count-1;i>=0; i--)
             {
-                if (compteur % 50 == 0)
+                if (compteurennemie % 50 == 0)
                 {
                     Console.WriteLine("Nouveau tirage");
                     directionaléatoire = nombrealeatoire.Next(1, 5);
@@ -575,7 +550,9 @@ namespace SAE1._01_1._02
                         {
                             Console.WriteLine("D");
                             if (Canvas.GetLeft(ennemieListe[i]) > 1100)
-                            { Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50)); }
+                            {
+                                break;
+                            }
                             else Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50));
                             break;
                         }
@@ -583,7 +560,9 @@ namespace SAE1._01_1._02
                         {
                             Console.WriteLine("G");
                             if (Canvas.GetLeft(ennemieListe[i]) < 50)
-                            { Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50)); }
+                            {
+                               break;
+                               }
                             else Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50));
                             break;
                         }
@@ -591,15 +570,19 @@ namespace SAE1._01_1._02
                         {
                             Console.WriteLine("H");
                             if (Canvas.GetTop(ennemieListe[i]) > 0)
-                            { Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50)); }
+                            {
+                                break;
+                            }
                             else Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50));
                             break;
                         }
                     case 4:
                         {
-                            Console.WriteLine("b");
+                            Console.WriteLine("B");
                             if (Canvas.GetTop(ennemieListe[i]) < 400)
-                            { Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50)); }
+                            {
+                                break;
+                            }
                             else Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50));
                             break;
                         }
@@ -613,7 +596,7 @@ namespace SAE1._01_1._02
                     Rect ennemie = new Rect(Canvas.GetLeft(ennemieListe[i]), Canvas.GetTop(ennemieListe[i]), ennemieListe[i].Width, ennemieListe[i].Height);
                     if (x.Tag != null && ((string)x.Tag).Substring(0, ((string)x.Tag).Length - 1) == "tireJoueur")
                     {
-
+                        
                         Rect tir = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                         if (tir.IntersectsWith(ennemie))
                         {
@@ -638,7 +621,6 @@ namespace SAE1._01_1._02
                         canvas_gameOver.Visibility = Visibility.Visible;
                     }
                 }
-
             }
         }
 
@@ -665,6 +647,41 @@ namespace SAE1._01_1._02
         {
             this.Close();
         }
+       /* private void TirEnnemi(Rectangle ennemie, Rect joueur)
+        {
+            if (compteur % 100 == 0)
+            {
+                double angle = Math.Atan2(Canvas.GetTop(joueur1) - Canvas.GetTop(ennemie), Canvas.GetLeft(joueur1) - Canvas.GetLeft(ennemie));
+                double bulletSpeed = 5; // You can adjust the bullet speed
+                double deltaX = bulletSpeed * Math.Cos(angle);
+                double deltaY = bulletSpeed * Math.Sin(angle);
+                Rectangle nouveauTire = new Rectangle
+                {
+                    Tag = "tireEnnemi",
+                    Height = 10,
+                    Width = 10,
+                    Fill = Brushes.Blue,
+                    Stroke = Brushes.White,
+                };
+                Canvas.SetTop(nouveauTire, Canvas.GetTop(ennemie) + ennemie.Height / 2);
+                Canvas.SetLeft(nouveauTire, Canvas.GetLeft(ennemie) + ennemie.Width / 2);
+                Canvas.Children.Add(nouveauTire);
+ 
+                {
+                    Canvas.SetTop(nouveauTire, Canvas.GetTop(nouveauTire) + deltaY);
+                    Canvas.SetLeft(nouveauTire, Canvas.GetLeft(nouveauTire) + deltaX);
+                    Rect tire = new Rect(Canvas.GetTop(nouveauTire), Canvas.GetLeft(nouveauTire), nouveauTire.Width, nouveauTire.Height);
+
+                    // Check for collisions with the player or out of bounds
+                    if (tire.IntersectsWith(joueur) || Canvas.GetLeft(nouveauTire) < 0 || Canvas.GetTop(nouveauTire) < 0 || Canvas.GetTop(nouveauTire) > 500)
+                    {
+                        supprimer.Add(nouveauTire);
+                      
+                    }
+                };
+            }
+        }*/
+
     }
 }
 
