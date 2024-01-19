@@ -31,7 +31,9 @@ namespace SAE1._01_1._02
 
         private bool haut, gauche, droite, bas = false;
         private bool tireHaut, tireGauche, tireDroite, tireBas = false;
-        
+        private bool jeuEnPause = false;
+        private bool modeJeuRecup;
+
         private ImageBrush joueurSkin = new ImageBrush();
         private ImageBrush sol1Skin = new ImageBrush();
         private ImageBrush buissonHautSkin = new ImageBrush();
@@ -44,10 +46,8 @@ namespace SAE1._01_1._02
         private ImageBrush rejouerSkin = new ImageBrush();
         private ImageBrush quitterSkin = new ImageBrush();
 
-        //private ImageBrush ennemi1 = new ImageBrush();
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private int vitesseJoueur = 5;
-        int compteur = 0, sprite = 1;
+
         private string direction = "A";
         private string[] tableauApparenceDroite = { "images/hero_droites/HeroDroite_1.png", "images/hero_droites/HeroDroite_2.png", "images/hero_droites/HeroDroite_3.png", "images/hero_droites/HeroDroite_4.png", "images/hero_droites/HeroDroite_5.png", "images/hero_droites/HeroDroite_6.png", "images/hero_droites/HeroDroite_7.png", "images/hero_droites/HeroDroite_8.png", "images/hero_droites/HeroDroite_9.png" };
         private string[] tableauApparenceGauche = { "images/hero_gauche/HeroGauche_1.png", "images/hero_gauche/HeroGauche_2.png", "images/hero_gauche/HeroGauche_3.png", "images/hero_gauche/HeroGauche_4.png", "images/hero_gauche/HeroGauche_5.png", "images/hero_gauche/HeroGauche_6.png", "images/hero_gauche/HeroGauche_7.png", "images/hero_gauche/HeroGauche_8.png", "images/hero_gauche/HeroGauche_9.png" };
@@ -58,33 +58,29 @@ namespace SAE1._01_1._02
         private string[] tableauApparenceZombieDroite = { "images/zombiecourse/frame-1.gif", "images/zombiecourse/frame-2.gif", "images/zombiecourse/frame-3.gif", "images/zombiecourse/frame-4.gif", "images/zombiecourse/frame-5.gif", "images/zombiecourse/frame-6.gif", "images/zombiecourse/frame-7.gif", "images/zombiecourse/frame-8.gif", "images/zombiecourse/frame-9.gif", "images/zombiecourse/frame-99.gif" };
         private int[] tableauspawnennemieVerticale = { 300, 100, 200, 400, 300, 200, 100, 400 };
         private int[] tableauspawnennemieHorizontale = { 0, 0, 0, 0, 1200, 1200, 1200, 1200 };
+
+        private int vitesseJoueur = 5;
+        private int compteur = 0;
         private int tempsEntreMisesAJour = 16;
         private int tempsEcouleDepuisChangement = 0;
         private int intervalleChangementApparence = 40;
         private int changement = 0;
         private int changementEnnemi = 0;
-        private int maxEnnemiemillisecond;
-        private int delaiapparitionennemie = 500;
-        private Random nombrealeatoire = new Random();
         private int vitesseTireJoueur = 15;
+        private int nombreEnnemie = 7;
+        private int pvennemie = 3;
+
+        private Random nombrealeatoire = new Random();
+        private Rectangle newEnnemie;
         private List<Rectangle> supprimer = new List<Rectangle>();
         private List<Rectangle> ennemieListe = new List<Rectangle>();
         private List<int> directionsennemieListe = new List<int>();
-        private int pvennemie = 3;
-        private Rectangle newEnnemie;
-        private int nombreEnnemie = 7;
-        private bool jeuEnPause = false;
-
-        //----------Deplacement Touche-------------
-
+        
         private string toucheAvancer;
         private string toucheReculer;
         private string toucheGauche;
         private string toucheDroite;
         private string toucheTire;
-
-        //--------------Mode Jeu------------------
-        private bool modeJeuRecup;
 
         private Menu accesMenu;
 

@@ -1,4 +1,4 @@
-﻿<Window x:Name="canvas"
+﻿<Window x:Name="fenetreJeu"
     x:Class="SAE1._01_1._02.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
