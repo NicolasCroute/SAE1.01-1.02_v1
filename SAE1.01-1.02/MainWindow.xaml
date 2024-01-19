@@ -1,4 +1,4 @@
-﻿<Window x:Name="canvas"
+﻿<Window x:Name="fenetreJeu"
     x:Class="SAE1._01_1._02.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -40,7 +40,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
             Fill="LightBlue"
-            Stroke="DarkBlue" />
+            />
             <Rectangle
             x:Name="buissonGauche"
             Canvas.Left="-73"
@@ -49,16 +49,7 @@
             Height="618"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Panel.ZIndex="2"
-            RenderTransformOrigin="0.5,0.5">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform Angle="0.354" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
+            Panel.ZIndex="2">
             </Rectangle>
             <Rectangle
             x:Name="buissonHaut"
@@ -68,17 +59,9 @@
             Height="200"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Panel.ZIndex="1"
-            RenderTransformOrigin="0.5,0.5">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform Angle="-359.832" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
+            Panel.ZIndex="1">
             </Rectangle>
+            
             <Rectangle
             x:Name="buissonDroite"
             Canvas.Left="1175"
@@ -87,17 +70,9 @@
             Height="634"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Panel.ZIndex="2"
-            RenderTransformOrigin="0.5,0.5">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1" />
-                        <SkewTransform />
-                        <RotateTransform Angle="179.456" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
+            Panel.ZIndex="2">
             </Rectangle>
+
             <Rectangle
             x:Name="buissonBas"
             Canvas.Left="-1"
@@ -106,21 +81,9 @@
             Height="193"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Panel.ZIndex="3"
-            RenderTransformOrigin="0.5,0.5">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform Angle="-0.123" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
+            Panel.ZIndex="3">
             </Rectangle>
             <MediaElement x:Name="son" Source="sonArrierePlan.mp3" />
-
-
-
         </Canvas>
 
 
@@ -132,11 +95,16 @@
             <Rectangle x:Name="gameOver" Height="386" Canvas.Left="296" Canvas.Top="10" Width="688"/>
             <Button x:Name="rejouer" Content="" Canvas.Left="594" Canvas.Top="444" Height="93" Width="92" Click="rejouer_Click" />
             <Button x:Name="but_quitter" Content="" Canvas.Left="487" Canvas.Top="585" Height="76" Width="306" HorizontalAlignment="Left" VerticalAlignment="Center" Click="but_quitter_Click"/>
-
-
-
-
         </Canvas>
+
+        <Canvas
+            x:Name="canvasPause"
+            Width="1280" 
+            Margin="110,187,110,51"
+            Visibility="Hidden">
+            <Label Content="PAUSE" Canvas.Left="406" Canvas.Top="164" FontSize="150" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        </Canvas>
+
 
     </Grid>
 
