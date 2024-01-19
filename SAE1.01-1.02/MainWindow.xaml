@@ -49,16 +49,7 @@
             Height="618"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Panel.ZIndex="2"
-            RenderTransformOrigin="0.5,0.5">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform Angle="0.354" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
+            Panel.ZIndex="2">
             </Rectangle>
             <Rectangle
             x:Name="buissonHaut"
@@ -68,17 +59,9 @@
             Height="200"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Panel.ZIndex="1"
-            RenderTransformOrigin="0.5,0.5">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform Angle="-359.832" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
+            Panel.ZIndex="1">
             </Rectangle>
+            
             <Rectangle
             x:Name="buissonDroite"
             Canvas.Left="1175"
@@ -87,17 +70,9 @@
             Height="634"
             HorizontalAlignment="Left"
             VerticalAlignment="Center"
-            Panel.ZIndex="2"
-            RenderTransformOrigin="0.5,0.5">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleY="-1" />
-                        <SkewTransform />
-                        <RotateTransform Angle="179.456" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
+            Panel.ZIndex="2">
             </Rectangle>
+
             <Rectangle
             x:Name="buissonBas"
             Canvas.Left="-1"
@@ -106,21 +81,9 @@
             Height="193"
             HorizontalAlignment="Center"
             VerticalAlignment="Top"
-            Panel.ZIndex="3"
-            RenderTransformOrigin="0.5,0.5">
-                <Rectangle.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform />
-                        <SkewTransform />
-                        <RotateTransform Angle="-0.123" />
-                        <TranslateTransform />
-                    </TransformGroup>
-                </Rectangle.RenderTransform>
+            Panel.ZIndex="3">
             </Rectangle>
             <MediaElement x:Name="son" Source="sonArrierePlan.mp3" />
-
-
-
         </Canvas>
 
 
