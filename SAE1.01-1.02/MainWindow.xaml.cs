@@ -199,7 +199,7 @@ namespace SAE1._01_1._02
              {
                  TirEnnemi(ennemie, joueur);
              }*/
-
+            
             foreach (Rectangle ennemie in ennemieListe)
             {
                 if (tempsEcouleDepuisChangement >= intervalleChangementApparence)
