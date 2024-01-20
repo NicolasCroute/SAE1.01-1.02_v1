@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Printing;
 using System.Reflection;
+using System.Runtime.Intrinsics.Arm;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
@@ -66,8 +67,8 @@ namespace SAE1._01_1._02
         private int changement = 0;
         private int changementEnnemi = 0;
         private int vitesseTireJoueur = 15;
-        private int nombreEnnemie = 7;
-        private int pvennemie = 2;
+        //private int pvennemie = 3;
+        private int nbennemi = 3;
 
         private Random nombrealeatoire = new Random();
         private Rectangle newEnnemie;
@@ -134,8 +135,7 @@ namespace SAE1._01_1._02
             Console.WriteLine("Mode de jeu actuel : " + modeJeuRecup);
 
             ModeDeJeu(modeJeuRecup);
-          
-            CreationEnnemie();
+            
         }
 
         private void JouerSon()
@@ -180,7 +180,7 @@ namespace SAE1._01_1._02
 
             DeplacementJoueur();
             ChangementApparence();
-            ChangementApparenceEnnemis(newEnnemie);
+            //ChangementApparenceEnnemis(newEnnemie);
             MouvementEnnemiesEtCollision(joueur);
 
             foreach (Rectangle y in supprimer)
@@ -204,7 +204,7 @@ namespace SAE1._01_1._02
             {
                 if (tempsEcouleDepuisChangement >= intervalleChangementApparence)
                 {
-                    ChangementApparenceEnnemis(ennemie);
+                    //ChangementApparenceEnnemis(ennemie);
                     tempsEcouleDepuisChangement = 0;
                 }
                 else
@@ -213,7 +213,16 @@ namespace SAE1._01_1._02
                 }
 
             }
+           
             
+            if (!PasDennemiEnVie())
+            {
+                CreationEnnemie(nbennemi);
+                nbennemi++;
+                Console.WriteLine(nbennemi);
+            }
+
+
             compteur++;
             /* if (compteur % 100 == 0)
              {
@@ -231,6 +240,18 @@ namespace SAE1._01_1._02
             //} 
 
         }
+        private bool PasDennemiEnVie()
+        {
+            foreach (var child in Canvas.Children)
+            {
+                if (child is Rectangle && ((Rectangle)child).Tag != null && ((string)((Rectangle)child).Tag).StartsWith("ennemie"))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         private void CanvasKeyIsDown(object sender, KeyEventArgs e)
         {
@@ -274,6 +295,10 @@ namespace SAE1._01_1._02
                     dispatcherTimer.Start();
                     canvasPause.Visibility = Visibility.Hidden;
                 }
+            }
+            if (e.Key == Key.X) 
+            {
+                nbennemi += 15;
             }
 
         }
@@ -487,7 +512,7 @@ namespace SAE1._01_1._02
 
 
         }
-        private void ChangementApparenceEnnemis(Rectangle newEnnemie)
+       /* private void ChangementApparenceEnnemis(Rectangle newEnnemie)
         {
             ImageBrush ennemiSkin = new ImageBrush();
 
@@ -501,11 +526,13 @@ namespace SAE1._01_1._02
             ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
             newEnnemie.Fill = ennemiSkin;
 
-        }
+        }*/
 
 
-        private void CreationEnnemie()
+        private void CreationEnnemie(int nombreEnnemie)
         {
+            Random rdm1 = new Random();
+            Random rdm2 = new Random();
 
             for (int i = 0; i < nombreEnnemie; i++)
             {
@@ -513,6 +540,10 @@ namespace SAE1._01_1._02
                 //g++;
                 //int gauche = tableauApparitionEnnemie[0, g];
                 //int hauteur = tableauApparitionEnnemie[g, 0];
+                double yspawnEnnemi = rdm1.Next(0, 500);
+                double droiteouGauche = rdm2.Next(0,2);
+                Console.WriteLine(droiteouGauche);
+                ennemiSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/zombiecourse/frame-1.gif"));
                 newEnnemie = new Rectangle
                 {
 
@@ -521,15 +552,23 @@ namespace SAE1._01_1._02
                     Width = 120,
                     Fill = ennemiSkin,
                 };
-                ennemieListe.Add(newEnnemie);
+                
                 directionsennemieListe.Add(0);
                 // Console.WriteLine(ennemieListe[i].Tag);    
-                Canvas.SetTop(newEnnemie, tableauspawnennemieVerticale[i]);
-                Canvas.SetLeft(newEnnemie, tableauspawnennemieHorizontale[i]);
+                Canvas.SetTop(newEnnemie, yspawnEnnemi);//tableauspawnennemieVerticale[i]);
+                if (droiteouGauche == 0)
+                {
+                    Canvas.SetLeft(newEnnemie, 0);// tableauspawnennemieHorizontale[i]);
+                }
+                else
+                {
+                    Canvas.SetLeft(newEnnemie, 1200);
+                }
 
-                Canvas.Children.Add(newEnnemie);
-                ChangementApparenceEnnemis(newEnnemie);
-                
+                    Canvas.Children.Add(newEnnemie);
+                //ChangementApparenceEnnemis(newEnnemie);
+                ennemieListe.Add(newEnnemie);
+
             }
         }
         private void MouvementEnnemiesEtCollision(Rect joueur)
@@ -538,7 +577,7 @@ namespace SAE1._01_1._02
 
             for (int i = ennemieListe.Count - 1; i >= 0; i--)
             {
-                if (compteur % 100 == 0)
+                if (compteur % 50 == 0)
                 {
                     directionaléatoire = nombrealeatoire.Next(1, 5);
                     directionsennemieListe[i] = directionaléatoire;
@@ -584,16 +623,17 @@ namespace SAE1._01_1._02
                         Rect tir = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                         if (tir.IntersectsWith(ennemie))
                         {
+                            //pvennemie--;
                             supprimer.Add(x);
-                            pvennemie--;
+                            ennemieListe.RemoveAt(i);
+                            supprimer.Add(ennemieListe[i]);
+                            
+                            // if (pvennemie == 0)
+                            //{
+                            //  pvennemie = 3;
 
-                            if (pvennemie == 0)
-                            {
-                                supprimer.Add(ennemieListe[i]);
-                                ennemieListe.RemoveAt(i);
-                                pvennemie = 3;
-                                break;
-                            }
+                            break;
+                            //}
                         }
                     }
 
