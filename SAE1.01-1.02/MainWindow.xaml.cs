@@ -67,7 +67,7 @@ namespace SAE1._01_1._02
         private int changementEnnemi = 0;
         private int vitesseTireJoueur = 15;
         private int nombreEnnemie = 7;
-        private int pvennemie = 3;
+        private int pvennemie = 2;
 
         private Random nombrealeatoire = new Random();
         private Rectangle newEnnemie;
@@ -134,6 +134,7 @@ namespace SAE1._01_1._02
             Console.WriteLine("Mode de jeu actuel : " + modeJeuRecup);
 
             ModeDeJeu(modeJeuRecup);
+          
             CreationEnnemie();
         }
 
@@ -533,78 +534,59 @@ namespace SAE1._01_1._02
         }
         private void MouvementEnnemiesEtCollision(Rect joueur)
         {
-            //Console.WriteLine("MouvementEnnemiesEtCollision");
             int directionaléatoire = 1;
-            for (int i = ennemieListe.Count-1;i>=0; i--)
-            {
-                if (compteurennemie % 50 == 0)
-                {
-                    Console.WriteLine("Nouveau tirage");
-                    directionaléatoire = nombrealeatoire.Next(1, 5);
-                    Console.WriteLine(directionaléatoire);
-                    directionsennemieListe[i] = (directionaléatoire);
 
+            for (int i = ennemieListe.Count - 1; i >= 0; i--)
+            {
+                if (compteur % 100 == 0)
+                {
+                    directionaléatoire = nombrealeatoire.Next(1, 5);
+                    directionsennemieListe[i] = directionaléatoire;
                 }
-                //Console.WriteLine(ennemieListe.Count + "nombre ennemie");
 
                 switch (directionsennemieListe[i])
                 {
                     case 1:
+                        if (Canvas.GetLeft(ennemieListe[i]) < 1100)
                         {
-                            Console.WriteLine("D");
-                            if (Canvas.GetLeft(ennemieListe[i]) > 1100)
-                            {
-                                break;
-                            }
-                            else Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50));
-                            break;
+                            Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50));
                         }
-                    case 2:
-                        {
-                            Console.WriteLine("G");
-                            if (Canvas.GetLeft(ennemieListe[i]) < 50)
-                            {
-                               break;
-                               }
-                            else Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50));
-                            break;
-                        }
-                    case 3:
-                        {
-                            Console.WriteLine("H");
-                            if (Canvas.GetTop(ennemieListe[i]) > 0)
-                            {
-                                break;
-                            }
-                            else Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50));
-                            break;
-                        }
-                    case 4:
-                        {
-                            Console.WriteLine("B");
-                            if (Canvas.GetTop(ennemieListe[i]) < 400)
-                            {
-                                break;
-                            }
-                            else Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50));
-                            break;
-                        }
-                }
+                        break;
 
-                //Console.WriteLine(ennemie);
-                // tester si l'ennemi est touché par un tir
+                    case 2:
+                        if (Canvas.GetLeft(ennemieListe[i]) > 50)
+                        {
+                            Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50));
+                        }
+                        break;
+
+                    case 3:
+                        if (Canvas.GetTop(ennemieListe[i]) > 0)
+                        {
+                            Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50));
+                        }
+                        break;
+
+                    case 4:
+                        if (Canvas.GetTop(ennemieListe[i]) < 400)
+                        {
+                            Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50));
+                        }
+                        break;
+                }
 
                 foreach (var x in Canvas.Children.OfType<Rectangle>())
                 {
                     Rect ennemie = new Rect(Canvas.GetLeft(ennemieListe[i]), Canvas.GetTop(ennemieListe[i]), ennemieListe[i].Width, ennemieListe[i].Height);
+
                     if (x.Tag != null && ((string)x.Tag).Substring(0, ((string)x.Tag).Length - 1) == "tireJoueur")
                     {
-                        
                         Rect tir = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                         if (tir.IntersectsWith(ennemie))
                         {
                             supprimer.Add(x);
                             pvennemie--;
+
                             if (pvennemie == 0)
                             {
                                 supprimer.Add(ennemieListe[i]);
@@ -613,7 +595,6 @@ namespace SAE1._01_1._02
                                 break;
                             }
                         }
-
                     }
 
                     if (joueur.IntersectsWith(ennemie))
@@ -627,10 +608,11 @@ namespace SAE1._01_1._02
             }
         }
 
+
         //---------------------------------------------------------------------------------------------------------------------------------------
         //----------------------------------------------réinitialiser tout les composant---------------------------------------------------------
         //---------------------------------------------------------------------------------------------------------------------------------------
-        
+
         private void rejouer_Click(object sender, RoutedEventArgs e)
         {
             
