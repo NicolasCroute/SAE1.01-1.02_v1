@@ -30,13 +30,12 @@ namespace SAE1._01_1._02
         private ImageBrush but_OKSkin = new ImageBrush();
         private ImageBrush easySkin = new ImageBrush();
         private ImageBrush hardSkin = new ImageBrush();
-       
-        private string modeFacileText = "EASY";
-        private string modeDifficileText = "HARD";
 
         public bool modeJeu = false;
 
-        //---------------touches de deplacement----------------
+        private string modeFacileText = "EASY";
+        private string modeDifficileText = "HARD";
+
         public string valeurAvancer;
         public string valeurGauche;
         public string valeurDroite;
@@ -65,7 +64,6 @@ namespace SAE1._01_1._02
             mode.Fill = solFacileSkin;
             fontMode.Fill = fontFacileSkin;
             but_OK.Background = but_OKSkin;
-            hardEasy.Fill = easySkin;
         }
 
         private void but_Mode_Click(object sender, RoutedEventArgs e)
@@ -76,21 +74,17 @@ namespace SAE1._01_1._02
             {
                 mode.Fill = solFacileSkin;
                 fontMode.Fill = fontFacileSkin;
-                hardEasy.Fill = easySkin;
                 but_Mode.Content = modeFacileText;
             }
             else
             {
                 mode.Fill = solDifficileSkin;
                 fontMode.Fill = fontDifficileSkin;
-                hardEasy.Fill = hardSkin;
                 but_Mode.Content = modeDifficileText;
             }
 
         }
 
-        //----------------------------------------------------------------------
-        //----------------------------------------------------------------------
         private bool difficulter;
         public bool Difficulter
         {
@@ -100,9 +94,6 @@ namespace SAE1._01_1._02
             }
             
         }
-        //----------------------------------------------------------------------
-        //----------------------------------------------------------------------
-
 
         private void but_Jouer_Click(object sender, RoutedEventArgs e)
         {
@@ -126,8 +117,6 @@ namespace SAE1._01_1._02
 
         }
 
-        //----------------------------Voir si on peut pas simplifier--------------------
-
         private string toucheReculer;
         public string ToucheReculer
         {
@@ -136,7 +125,6 @@ namespace SAE1._01_1._02
                 return valeurReculer;
             }
         }
-        //-------------------------------------------------------------------------
 
         private void but_defAvancer_PreviewKeyDown(object sender, KeyEventArgs e)
         {

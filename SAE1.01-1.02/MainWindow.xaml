@@ -19,8 +19,7 @@
         <Canvas
         x:Name="Canvas"
         Width="1280"
-        Height="610"
-        >
+        Height="610">
             <Rectangle
             Name="sol1"
             Canvas.Left="-30"
@@ -41,49 +40,9 @@
             VerticalAlignment="Top"
             Fill="LightBlue"
             />
-            <Rectangle
-            x:Name="buissonGauche"
-            Canvas.Left="-73"
-            Canvas.Top="-40"
-            Width="177"
-            Height="618"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Panel.ZIndex="2">
-            </Rectangle>
-            <Rectangle
-            x:Name="buissonHaut"
-            Canvas.Left="18"
-            Canvas.Top="-175"
-            Width="1260"
-            Height="200"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Panel.ZIndex="1">
-            </Rectangle>
-            
-            <Rectangle
-            x:Name="buissonDroite"
-            Canvas.Left="1175"
-            Canvas.Top="-60"
-            Width="200"
-            Height="634"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Center"
-            Panel.ZIndex="2">
-            </Rectangle>
-
-            <Rectangle
-            x:Name="buissonBas"
-            Canvas.Left="-1"
-            Canvas.Top="447"
-            Width="1323"
-            Height="193"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top"
-            Panel.ZIndex="3">
-            </Rectangle>
             <MediaElement x:Name="son" Source="sonArrierePlan.mp3" />
+            <Label x:Name="labelScore" Content="Score : " HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="-71" FontSize="24" FontWeight="Bold" Foreground="White"/>
+            <TextBlock x:Name="textScore" HorizontalAlignment="Left" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Canvas.Left="89" Canvas.Top="-65" Width="137" Height="35" FontSize="24" Foreground="White" FontWeight="Bold"/>
         </Canvas>
 
 
@@ -92,9 +51,10 @@
             Width="1280" Margin="110,187,110,51"
             Visibility="Hidden">
 
-            <Rectangle x:Name="gameOver" Height="386" Canvas.Left="296" Canvas.Top="10" Width="688"/>
-            <Button x:Name="rejouer" Content="" Canvas.Left="594" Canvas.Top="444" Height="93" Width="92" Click="rejouer_Click" />
+            <Rectangle x:Name="gameOver" Height="386" Canvas.Left="296" Canvas.Top="-62" Width="688" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Button x:Name="but_quitter" Content="" Canvas.Left="487" Canvas.Top="585" Height="76" Width="306" HorizontalAlignment="Left" VerticalAlignment="Center" Click="but_quitter_Click"/>
+            <Label x:Name="labelScoreFinal" Content="Score :" Canvas.Left="478" Canvas.Top="373" Foreground="White" FontSize="60" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="Bold"/>
+            <TextBlock x:Name="testScoreFinal" Canvas.Left="690" TextWrapping="Wrap" Text="0" Canvas.Top="383" Foreground="White" FontSize="60" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Width="267"/>
         </Canvas>
 
         <Canvas
@@ -103,7 +63,10 @@
             Margin="110,187,110,51"
             Visibility="Hidden">
             <Label Content="PAUSE" Canvas.Left="406" Canvas.Top="164" FontSize="150" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
         </Canvas>
+
+
 
 
     </Grid>

@@ -105,7 +105,6 @@
                 Panel.ZIndex="4"
                 Click="parametre_Click"
                 Content="" />
-            <Rectangle x:Name="hardEasy" Height="328" Canvas.Left="-30" Canvas.Top="518" Width="1560" HorizontalAlignment="Left" VerticalAlignment="Center" Panel.ZIndex="1"/>
         </Canvas>
         <Canvas
             x:Name="menuParametre"

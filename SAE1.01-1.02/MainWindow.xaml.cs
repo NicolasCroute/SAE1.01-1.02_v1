@@ -21,6 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 namespace SAE1._01_1._02
@@ -35,47 +36,40 @@ namespace SAE1._01_1._02
         private bool tireHaut, tireGauche, tireDroite, tireBas = false;
         private bool jeuEnPause = false;
         private bool modeJeuRecup;
+        private bool delaiTire = true;
 
         private ImageBrush joueurSkin = new ImageBrush();
         private ImageBrush sol1Skin = new ImageBrush();
-        private ImageBrush buissonHautSkin = new ImageBrush();
-        private ImageBrush buissonBasSkin = new ImageBrush();
-        private ImageBrush buissonGaucheSkin = new ImageBrush();
-        private ImageBrush buissonDroiteSkin = new ImageBrush();
-        private ImageBrush ennemieZombieSkin = new ImageBrush();
         private ImageBrush ennemiSkin = new ImageBrush();
         private ImageBrush perduSkin = new ImageBrush();
-        private ImageBrush rejouerSkin = new ImageBrush();
         private ImageBrush quitterSkin = new ImageBrush();
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
-        private int vitesseJoueur = 5;
-        int compteur = 0, sprite = 1, compteurennemie = 0;
+        
         private string direction = "A";
+        private string imageDuJoueur = AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png";
+        private string imageDuJoueurDebut = AppDomain.CurrentDomain.BaseDirectory;
         private string[] tableauApparenceDroite = { "images/hero_droites/HeroDroite_1.png", "images/hero_droites/HeroDroite_2.png", "images/hero_droites/HeroDroite_3.png", "images/hero_droites/HeroDroite_4.png", "images/hero_droites/HeroDroite_5.png", "images/hero_droites/HeroDroite_6.png", "images/hero_droites/HeroDroite_7.png", "images/hero_droites/HeroDroite_8.png", "images/hero_droites/HeroDroite_9.png" };
         private string[] tableauApparenceGauche = { "images/hero_gauche/HeroGauche_1.png", "images/hero_gauche/HeroGauche_2.png", "images/hero_gauche/HeroGauche_3.png", "images/hero_gauche/HeroGauche_4.png", "images/hero_gauche/HeroGauche_5.png", "images/hero_gauche/HeroGauche_6.png", "images/hero_gauche/HeroGauche_7.png", "images/hero_gauche/HeroGauche_8.png", "images/hero_gauche/HeroGauche_9.png" };
         private string[] tableauApparenceHaut = { "images/hero_haut/HeroHaut_1.png", "images/hero_haut/HeroHaut_2.png", "images/hero_haut/HeroHaut_3.png", "images/hero_haut/HeroHaut_4.png", "images/hero_haut/HeroHaut_5.png", "images/hero_haut/HeroHaut_6.png", "images/hero_haut/HeroHaut_7.png", "images/hero_haut/HeroHaut_8.png", "images/hero_haut/HeroHaut_9.png" };
         private string[] tableauApparenceBas = { "images/hero_bas/HeroBas_1.png", "images/hero_bas/HeroBas_2.png", "images/hero_bas/HeroBas_3.png", "images/hero_bas/HeroBas_4.png", "images/hero_bas/HeroBas_5.png", "images/hero_bas/HeroBas_6.png", "images/hero_bas/HeroBas_7.png", "images/hero_bas/HeroBas_8.png", "images/hero_bas/HeroBas_9.png" };
-        private string[] tableauApparenceSqueletteDroite = { "images/squelette/squelette_marche_droite/squelette_marche_Droite_1.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_2.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_3.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_4.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_5.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_6.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_7.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_8.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_9.png", "images/squelette/squelette_marche_droite/squelette_marche_Droite_10.png" };
-        private string[] tableauApparenceSqueletteGauche = { "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_1.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_2.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_3.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_4.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_5.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_6.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_7.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_8.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_9.png", "images/squelette/squelette_marche_gauche/squelette_marche_Gauche_10.png" };
-        private string[] tableauApparenceZombieDroite = { "images/zombiecourse/frame-1.gif", "images/zombiecourse/frame-2.gif", "images/zombiecourse/frame-3.gif", "images/zombiecourse/frame-4.gif", "images/zombiecourse/frame-5.gif", "images/zombiecourse/frame-6.gif", "images/zombiecourse/frame-7.gif", "images/zombiecourse/frame-8.gif", "images/zombiecourse/frame-9.gif", "images/zombiecourse/frame-99.gif" };
-        private int[] tableauspawnennemieVerticale = { 300, 100, 200, 400, 300, 200, 100, 400 };
-        private int[] tableauspawnennemieHorizontale = { 0, 0, 0, 0, 1200, 1200, 1200, 1200 };
+        
         private int tempsEntreMisesAJour = 16;
-        private int tempsEcouleDepuisChangement = 0;
-        private int intervalleChangementApparence = 40;
-        private int changement = 0;
-        private int changementEnnemi = 0;
+        private int changementApparence = 0;
         private int vitesseTireJoueur = 15;
-        //private int pvennemie = 3;
         private int vitesseEnnemi = 0;
-        private int nbennemi = 3;
-        private bool delaiTire = true;
-        private Random nombrealeatoire = new Random();
-        private Rectangle newEnnemie;
+        private int nbEnnemis = 3;
+        private int vitesseJoueur = 5;
+        private int compteur = 0;
+        private int scorePartie = 0;
+        private int delaiTireDuree = 10;
+
+
+        private Random nombreAleatoire = new Random();
+        private Rectangle nouvelEnnemi;
         private List<Rectangle> supprimer = new List<Rectangle>();
-        private List<Rectangle> ennemieListe = new List<Rectangle>();
-        private List<int> directionsennemieListe = new List<int>();
+        private List<Rectangle> ennemiListe = new List<Rectangle>();
+        private List<int> directionsEnnemiListe = new List<int>();
 
         private string toucheAvancer;
         private string toucheReculer;
@@ -83,6 +77,7 @@ namespace SAE1._01_1._02
         private string toucheDroite;
         private string toucheTire;
 
+        private Rect joueur;
         private Menu accesMenu;
 
 
@@ -92,23 +87,16 @@ namespace SAE1._01_1._02
 
             WindowState = WindowState.Maximized;
 
-
-            //------------------A comprendre--------------
             accesMenu = new Menu();
             accesMenu.ShowDialog();
-            //----------------------?????-------------------
-            //accesMenu.Owner = this;
             if (accesMenu.DialogResult == false)
             {
-                Application.Current.Shutdown();
+                System.Windows.Application.Current.Shutdown();
             }
-
 
             dispatcherTimer.Tick += Jeu;
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(tempsEntreMisesAJour);
             dispatcherTimer.Start();
-
-
 
             joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
             joueur1.Fill = joueurSkin;
@@ -117,12 +105,9 @@ namespace SAE1._01_1._02
             perduSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/text/gameOver.png"));
             gameOver.Fill = perduSkin;
 
-            rejouerSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/rejouer.png"));
-            rejouer.Background = rejouerSkin;
 
             quitterSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/bouton_quitter.png"));
             but_quitter.Background = quitterSkin;
-
 
             toucheAvancer = accesMenu.valeurAvancer;
             toucheReculer = accesMenu.valeurReculer;
@@ -130,12 +115,50 @@ namespace SAE1._01_1._02
             toucheDroite = accesMenu.valeurDroite;
             toucheTire = accesMenu.valeurTire;
 
-            //--------------Mode Jeu (recupérer depuis menu)------------------
-
             modeJeuRecup = accesMenu.modeJeu;
+
+#if DEBUG
             Console.WriteLine("Mode de jeu actuel : " + modeJeuRecup);
+#endif
 
             ModeDeJeu(modeJeuRecup);
+
+        }
+        private void Jeu(object sender, EventArgs e)
+        {
+            joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1), joueur1.Width, joueur1.Height);
+#if DEBUG
+            Console.WriteLine(joueur + "joueur");
+#endif
+
+            DeplacementJoueur();
+            ChangementApparence();
+            MouvementEnnemiesEtCollision(joueur);
+
+            foreach (Rectangle y in supprimer)
+            {
+                Canvas.Children.Remove(y);
+            }
+
+            foreach (Rectangle x in Canvas.Children.OfType<Rectangle>())
+            {
+                if (x.Tag != null && x is Rectangle && ((string)x.Tag).Substring(0, ((string)x.Tag).Length - 1) == "tireJoueur")
+                    TestTireJoueur(x);
+            }
+
+            if (!PasDennemiEnVie())
+            {
+                CreationEnnemie(nbEnnemis);
+                nbEnnemis++;
+                Console.WriteLine(nbEnnemis);
+            }
+
+            if (compteur % delaiTireDuree == 0)
+            {
+                delaiTire = true;
+            }
+
+            compteur++;
 
         }
 
@@ -146,23 +169,13 @@ namespace SAE1._01_1._02
 
         private void ModeDeJeu(bool modeJeuRecup)
         {
+#if DEBUG
             Console.WriteLine("Mode de jeu actuel dans modeJeu : " + modeJeuRecup);
+#endif
             if (modeJeuRecup == false)
             {
                 sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_facile.png"));
                 sol1.Fill = sol1Skin;
-
-                buissonBasSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_bas.png"));
-                buissonBas.Fill = buissonBasSkin;
-
-                buissonHautSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_haut.png"));
-                buissonHaut.Fill = buissonHautSkin;
-
-                buissonGaucheSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_gauche.png"));
-                buissonGauche.Fill = buissonGaucheSkin;
-
-                buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
-                buissonDroite.Fill = buissonDroiteSkin;
                 vitesseEnnemi = 2;
             }
             else if (modeJeuRecup == true)
@@ -173,79 +186,7 @@ namespace SAE1._01_1._02
             }
         }
 
-
-
-
-        private void Jeu(object sender, EventArgs e)
-        {
-            Rect joueur = new Rect(Canvas.GetLeft(joueur1), Canvas.GetTop(joueur1), joueur1.Width, joueur1.Height);
-            //Console.WriteLine(joueur + "joueur");
-
-            DeplacementJoueur();
-            ChangementApparence();
-            //ChangementApparenceEnnemis(newEnnemie);
-            MouvementEnnemiesEtCollision(joueur);
-
-            foreach (Rectangle y in supprimer)
-            {
-                // on les enlève du canvas
-                Canvas.Children.Remove(y);
-            }
-
-            foreach (Rectangle x in Canvas.Children.OfType<Rectangle>())
-            {
-                if (x.Tag != null && x is Rectangle && ((string)x.Tag).Substring(0, ((string)x.Tag).Length - 1) == "tireJoueur")
-                    TestTireJoueur(x);
-            }
-            MouvementEnnemiesEtCollision(joueur);
-            /* foreach (Rectangle ennemie in ennemieListe)
-             {
-                 TirEnnemi(ennemie, joueur);
-             }*/
-
-            foreach (Rectangle ennemie in ennemieListe)
-            {
-                if (tempsEcouleDepuisChangement >= intervalleChangementApparence)
-                {
-                    //ChangementApparenceEnnemis(ennemie);
-                    tempsEcouleDepuisChangement = 0;
-                }
-                else
-                {
-                    tempsEcouleDepuisChangement = tempsEcouleDepuisChangement + tempsEntreMisesAJour;
-                }
-
-            }
-
-
-            if (!PasDennemiEnVie())
-            {
-                CreationEnnemie(nbennemi);
-                nbennemi++;
-                Console.WriteLine(nbennemi);
-            }
-
-            if (compteur % 10 == 0) 
-            {
-                delaiTire = true;
-            }
-            compteur++;
-            /* if (compteur % 100 == 0)
-             {
-
-             }
-             if (compteur % delaiapparitionennemie == 0 && delaiapparitionennemie > 100)
-             {
-
-                 delaiapparitionennemie -= 25;
-                 compteur = 0;
-             }*/
-            //else 
-            //{ 
-            //    gg 
-            //} 
-
-        }
+        
         private bool PasDennemiEnVie()
         {
             foreach (var child in Canvas.Children)
@@ -304,7 +245,7 @@ namespace SAE1._01_1._02
             }
             if (e.Key == Key.X)
             {
-                nbennemi += 15;
+                nbEnnemis += 15;
             }
 
         }
@@ -331,21 +272,26 @@ namespace SAE1._01_1._02
             }
             if ((e.Key.ToString() == toucheTire || e.Key == Key.Space) && delaiTire == true )
             {
-                supprimer.Clear();
-                Rectangle nouveauTire = new Rectangle
-                {
-                    Tag = "tireJoueur" + direction,
-                    Height = 10,
-                    Width = 10,
-                    Fill = Brushes.Red,
-                    Stroke = Brushes.White,
-                };
-                delaiTire = false;
-                Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height / 2);
-                Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
-                Canvas.Children.Add(nouveauTire);
+                CreerNouveauTire();
             }
         }
+        private void CreerNouveauTire()
+        {
+            supprimer.Clear();
+            Rectangle nouveauTire = new Rectangle
+            {
+                Tag = "tireJoueur" + direction,
+                Height = 10,
+                Width = 10,
+                Fill = Brushes.Red,
+                Stroke = Brushes.White,
+            };
+            delaiTire = false;
+            Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height / 2);
+            Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
+            Canvas.Children.Add(nouveauTire);
+        }
+
         private void TestTireJoueur(Rectangle x)
         {
             if ((string)x.Tag == "tireJoueurA")
@@ -363,8 +309,6 @@ namespace SAE1._01_1._02
             {
 
                 Canvas.SetLeft(x, Canvas.GetLeft(x) - vitesseTireJoueur);
-
-
 
                 if (Canvas.GetLeft(x) < 80)
                 {
@@ -393,9 +337,7 @@ namespace SAE1._01_1._02
                     supprimer.Add(x);
                 }
 
-
                 tireHaut = true;
-
 
             }
             else if (x is Rectangle && (string)x.Tag == "tireJoueurB")
@@ -411,7 +353,6 @@ namespace SAE1._01_1._02
             }
 
         }
-
 
         private void DeplacementJoueur()
         {
@@ -436,103 +377,53 @@ namespace SAE1._01_1._02
 
         private void ChangementApparence()
         {
-            //------------------------------------------------A optimiser (pas crée changement a chauqe fois)----------------------------
+            changementApparence++;
 
-
+            if (changementApparence >= tableauApparenceDroite.Length)
+            {
+                changementApparence = 0;
+            }
             if (droite == true)
             {
-                changement++;
-
-                if (changement >= tableauApparenceDroite.Length)
-                {
-                    changement = 0;
-                }
-                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceDroite[changement];
-                joueurSkin.ImageSource = new BitmapImage(new Uri(image));
-                joueur1.Fill = joueurSkin;
+                imageDuJoueur = imageDuJoueurDebut + tableauApparenceDroite[changementApparence];
             }
             else if (gauche == true)
             {
-                changement++;
-
-                if (changement >= tableauApparenceDroite.Length)
-                {
-                    changement = 0;
-                }
-                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceGauche[changement];
-                joueurSkin.ImageSource = new BitmapImage(new Uri(image));
-                joueur1.Fill = joueurSkin;
-
+                imageDuJoueur = imageDuJoueurDebut + tableauApparenceGauche[changementApparence];
             }
             else if (haut == true)
             {
-                changement++;
 
-                if (changement >= tableauApparenceDroite.Length)
-                {
-                    changement = 0;
-                }
-                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceHaut[changement];
-                joueurSkin.ImageSource = new BitmapImage(new Uri(image));
-                joueur1.Fill = joueurSkin;
-
-
+                imageDuJoueur = imageDuJoueurDebut + tableauApparenceHaut[changementApparence];
             }
             else if (bas == true)
             {
-                changement++;
-
-                if (changement >= tableauApparenceDroite.Length)
-                {
-                    changement = 0;
-                }
-                string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceBas[changement];
-                joueurSkin.ImageSource = new BitmapImage(new Uri(image));
-                joueur1.Fill = joueurSkin;
-
+                imageDuJoueur = imageDuJoueurDebut + tableauApparenceBas[changementApparence];
             }
             else if (tireHaut == true)
             {
-                joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/hero_tire/tire_haut_1.png"));
-                joueur1.Fill = joueurSkin;
+                imageDuJoueur = imageDuJoueurDebut + "images/hero_tire/tire_haut_1.png";
                 tireHaut = false;
             }
             else if (tireBas == true)
             {
-                joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/hero_tire/tire_bas.png"));
-                joueur1.Fill = joueurSkin;
+                imageDuJoueur = imageDuJoueurDebut + "images/hero_tire/tire_bas.png";
                 tireBas = false;
             }
             else if (tireGauche == true)
             {
-                joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/hero_tire/tire_gauche.png"));
-                joueur1.Fill = joueurSkin;
+                imageDuJoueur = imageDuJoueurDebut + "images/hero_tire/tire_gauche.png";
                 tireGauche = false;
             }
             else if (tireDroite == true)
             {
-                joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/hero_tire/tire_droite.png"));
-                joueur1.Fill = joueurSkin;
+                imageDuJoueur = imageDuJoueurDebut + "images/hero_tire/tire_droite.png";
                 tireDroite = false;
             }
 
-
+            joueurSkin.ImageSource = new BitmapImage(new Uri(imageDuJoueur));
+            joueur1.Fill = joueurSkin;
         }
-        /* private void ChangementApparenceEnnemis(Rectangle newEnnemie)
-         {
-             ImageBrush ennemiSkin = new ImageBrush();
-
-             changementEnnemi++;
-
-             if (changementEnnemi >= tableauApparenceSqueletteDroite.Length)
-             {
-                 changementEnnemi = 0;
-             }
-             string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changementEnnemi];
-             ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
-             newEnnemie.Fill = ennemiSkin;
-
-         }*/
 
 
         private void CreationEnnemie(int nombreEnnemie)
@@ -550,7 +441,7 @@ namespace SAE1._01_1._02
                 double droiteouGauche = rdm2.Next(0, 2);
                 Console.WriteLine(droiteouGauche);
                 ennemiSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/zombiecourse/frame-1.gif"));
-                newEnnemie = new Rectangle
+                nouvelEnnemi = new Rectangle
                 {
 
                     Tag = "ennemie",
@@ -559,21 +450,19 @@ namespace SAE1._01_1._02
                     Fill = ennemiSkin,
                 };
 
-                directionsennemieListe.Add(0);
-                // Console.WriteLine(ennemieListe[i].Tag);    
-                Canvas.SetTop(newEnnemie, yspawnEnnemi);//tableauspawnennemieVerticale[i]);
+                directionsEnnemiListe.Add(0);  
+                Canvas.SetTop(nouvelEnnemi, yspawnEnnemi);
                 if (droiteouGauche == 0)
                 {
-                    Canvas.SetLeft(newEnnemie, 0);// tableauspawnennemieHorizontale[i]);
+                    Canvas.SetLeft(nouvelEnnemi, 0);
                 }
                 else
                 {
-                    Canvas.SetLeft(newEnnemie, 1200);
+                    Canvas.SetLeft(nouvelEnnemi, 1200);
                 }
 
-                Canvas.Children.Add(newEnnemie);
-                //ChangementApparenceEnnemis(newEnnemie);
-                ennemieListe.Add(newEnnemie);
+                Canvas.Children.Add(nouvelEnnemi);
+                ennemiListe.Add(nouvelEnnemi);
 
             }
         }
@@ -581,71 +470,67 @@ namespace SAE1._01_1._02
         {
             int directionaléatoire = 1;
 
-            for (int i = ennemieListe.Count - 1; i >= 0; i--)
+            for (int i = ennemiListe.Count - 1; i >= 0; i--)
             {
                 if (compteur % 50 == 0)
                 {
-                    directionaléatoire = nombrealeatoire.Next(1, 5);
-                    directionsennemieListe[i] = directionaléatoire;
+                    directionaléatoire = nombreAleatoire.Next(1, 5);
+                    directionsEnnemiListe[i] = directionaléatoire;
                 }
 
-                switch (directionsennemieListe[i])
+                switch (directionsEnnemiListe[i])
                 {
                     case 1:
-                        if (Canvas.GetLeft(ennemieListe[i]) < 1100)
+                        if (Canvas.GetLeft(ennemiListe[i]) < 1100)
                         {
-                            Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) + vitesseEnnemi + Math.Sin((double)compteur / 50));
+                            Canvas.SetLeft(ennemiListe[i], Canvas.GetLeft(ennemiListe[i]) + vitesseEnnemi + Math.Sin((double)compteur / 50));
                         }
                         break;
 
                     case 2:
-                        if (Canvas.GetLeft(ennemieListe[i]) > 50)
+                        if (Canvas.GetLeft(ennemiListe[i]) > 50)
                         {
-                            Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) - vitesseEnnemi + Math.Sin((double)compteur / 50));
+                            Canvas.SetLeft(ennemiListe[i], Canvas.GetLeft(ennemiListe[i]) - vitesseEnnemi + Math.Sin((double)compteur / 50));
                         }
                         break;
 
                     case 3:
-                        if (Canvas.GetTop(ennemieListe[i]) > 0)
+                        if (Canvas.GetTop(ennemiListe[i]) > 0)
                         {
-                            Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) - vitesseEnnemi + Math.Sin((double)compteur / 50));
+                            Canvas.SetTop(ennemiListe[i], Canvas.GetTop(ennemiListe[i]) - vitesseEnnemi + Math.Sin((double)compteur / 50));
                         }
                         break;
 
                     case 4:
-                        if (Canvas.GetTop(ennemieListe[i]) < 400)
+                        if (Canvas.GetTop(ennemiListe[i]) < 400)
                         {
-                            Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) + vitesseEnnemi + Math.Sin((double)compteur / 50));
+                            Canvas.SetTop(ennemiListe[i], Canvas.GetTop(ennemiListe[i]) + vitesseEnnemi + Math.Sin((double)compteur / 50));
                         }
                         break;
                 }
 
                 foreach (var x in Canvas.Children.OfType<Rectangle>())
                 {
-                    Rect ennemie = new Rect(Canvas.GetLeft(ennemieListe[i]), Canvas.GetTop(ennemieListe[i]), ennemieListe[i].Width, ennemieListe[i].Height);
+                    Rect ennemie = new Rect(Canvas.GetLeft(ennemiListe[i]), Canvas.GetTop(ennemiListe[i]), ennemiListe[i].Width, ennemiListe[i].Height);
 
                     if (x.Tag != null && ((string)x.Tag).Substring(0, ((string)x.Tag).Length - 1) == "tireJoueur")
                     {
                         Rect tir = new Rect(Canvas.GetLeft(x), Canvas.GetTop(x), x.Width, x.Height);
                         if (tir.IntersectsWith(ennemie))
                         {
-                            //pvennemie--;
                             supprimer.Add(x);
 
-                            supprimer.Add(ennemieListe[i]);
-                            // if (pvennemie == 0)
-                            //{
-                            //  pvennemie = 3;
-                            ennemieListe.RemoveAt(i);
-
+                            supprimer.Add(ennemiListe[i]);
+                            ennemiListe.RemoveAt(i);
+                            scorePartie = scorePartie + 10;
+                            textScore.Text = scorePartie.ToString();
+                            testScoreFinal.Text = scorePartie.ToString();
                             break;
-                            //}
                         }
                     }
 
                     if (joueur.IntersectsWith(ennemie))
                     {
-                        // collision avec le joueur et fin de la partie
                         dispatcherTimer.Stop();
                         Canvas.Visibility = Visibility.Hidden;
                         canvas_gameOver.Visibility = Visibility.Visible;
@@ -653,26 +538,6 @@ namespace SAE1._01_1._02
                 }
             }
         }
-
-
-        //---------------------------------------------------------------------------------------------------------------------------------------
-        //----------------------------------------------réinitialiser tout les composant---------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------------------------------------------
-
-        private void rejouer_Click(object sender, RoutedEventArgs e)
-        {
-
-            accesMenu = new Menu();
-            accesMenu.ShowDialog();
-            if (accesMenu.DialogResult == false)
-            {
-                Application.Current.Shutdown();
-            }
-            // réinitialiser le jeu
-        }
-        //---------------------------------------------------------------------------------------------------------------------------------------
-        //----------------------------------------------réinitialiser tout les composant---------------------------------------------------------
-        //---------------------------------------------------------------------------------------------------------------------------------------
 
         private void but_quitter_Click(object sender, RoutedEventArgs e)
         {
