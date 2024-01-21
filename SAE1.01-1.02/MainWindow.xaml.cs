@@ -150,7 +150,9 @@ namespace SAE1._01_1._02
             {
                 CreationEnnemie(nbEnnemis);
                 nbEnnemis++;
+#if DEBUG
                 Console.WriteLine(nbEnnemis);
+#endif
             }
 
             if (compteur % delaiTireDuree == 0)
@@ -437,7 +439,9 @@ namespace SAE1._01_1._02
 
                 double yspawnEnnemi = rdm1.Next(0, 500);
                 double droiteouGauche = rdm2.Next(0, 2);
+#if DEBUG
                 Console.WriteLine(droiteouGauche);
+#endif
                 ennemiSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/zombiecourse/frame-1.gif"));
                 nouvelEnnemi = new Rectangle
                 {
