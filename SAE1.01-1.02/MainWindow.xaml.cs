@@ -246,6 +246,7 @@ namespace SAE1._01_1._02
             if (e.Key == Key.X)
             {
                 nbEnnemis += 15;
+                scorePartie = 1170;
             }
 
         }
