@@ -50,7 +50,7 @@ namespace SAE1._01_1._02
 
         private DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private int vitesseJoueur = 5;
-        int compteur = 0, sprite = 1, compteurennemie =0;
+        int compteur = 0, sprite = 1, compteurennemie = 0;
         private string direction = "A";
         private string[] tableauApparenceDroite = { "images/hero_droites/HeroDroite_1.png", "images/hero_droites/HeroDroite_2.png", "images/hero_droites/HeroDroite_3.png", "images/hero_droites/HeroDroite_4.png", "images/hero_droites/HeroDroite_5.png", "images/hero_droites/HeroDroite_6.png", "images/hero_droites/HeroDroite_7.png", "images/hero_droites/HeroDroite_8.png", "images/hero_droites/HeroDroite_9.png" };
         private string[] tableauApparenceGauche = { "images/hero_gauche/HeroGauche_1.png", "images/hero_gauche/HeroGauche_2.png", "images/hero_gauche/HeroGauche_3.png", "images/hero_gauche/HeroGauche_4.png", "images/hero_gauche/HeroGauche_5.png", "images/hero_gauche/HeroGauche_6.png", "images/hero_gauche/HeroGauche_7.png", "images/hero_gauche/HeroGauche_8.png", "images/hero_gauche/HeroGauche_9.png" };
@@ -68,14 +68,15 @@ namespace SAE1._01_1._02
         private int changementEnnemi = 0;
         private int vitesseTireJoueur = 15;
         //private int pvennemie = 3;
+        private int vitesseEnnemi = 0;
         private int nbennemi = 3;
-
+        private bool delaiTire = true;
         private Random nombrealeatoire = new Random();
         private Rectangle newEnnemie;
         private List<Rectangle> supprimer = new List<Rectangle>();
         private List<Rectangle> ennemieListe = new List<Rectangle>();
         private List<int> directionsennemieListe = new List<int>();
-        
+
         private string toucheAvancer;
         private string toucheReculer;
         private string toucheGauche;
@@ -84,11 +85,11 @@ namespace SAE1._01_1._02
 
         private Menu accesMenu;
 
-        
+
         public MainWindow()
         {
             InitializeComponent();
-            
+
             WindowState = WindowState.Maximized;
 
 
@@ -107,11 +108,11 @@ namespace SAE1._01_1._02
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(tempsEntreMisesAJour);
             dispatcherTimer.Start();
 
-            
+
 
             joueurSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/HeroFace.png"));
             joueur1.Fill = joueurSkin;
-            
+
 
             perduSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/text/gameOver.png"));
             gameOver.Fill = perduSkin;
@@ -135,7 +136,7 @@ namespace SAE1._01_1._02
             Console.WriteLine("Mode de jeu actuel : " + modeJeuRecup);
 
             ModeDeJeu(modeJeuRecup);
-            
+
         }
 
         private void JouerSon()
@@ -162,11 +163,13 @@ namespace SAE1._01_1._02
 
                 buissonDroiteSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/buisson/buisson_droite.png"));
                 buissonDroite.Fill = buissonDroiteSkin;
+                vitesseEnnemi = 2;
             }
             else if (modeJeuRecup == true)
             {
                 sol1Skin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/sol/sol_difficile.png"));
                 sol1.Fill = sol1Skin;
+                vitesseEnnemi = 4;
             }
         }
 
@@ -199,7 +202,7 @@ namespace SAE1._01_1._02
              {
                  TirEnnemi(ennemie, joueur);
              }*/
-            
+
             foreach (Rectangle ennemie in ennemieListe)
             {
                 if (tempsEcouleDepuisChangement >= intervalleChangementApparence)
@@ -213,8 +216,8 @@ namespace SAE1._01_1._02
                 }
 
             }
-           
-            
+
+
             if (!PasDennemiEnVie())
             {
                 CreationEnnemie(nbennemi);
@@ -222,7 +225,10 @@ namespace SAE1._01_1._02
                 Console.WriteLine(nbennemi);
             }
 
-
+            if (compteur % 10 == 0) 
+            {
+                delaiTire = true;
+            }
             compteur++;
             /* if (compteur % 100 == 0)
              {
@@ -296,7 +302,7 @@ namespace SAE1._01_1._02
                     canvasPause.Visibility = Visibility.Hidden;
                 }
             }
-            if (e.Key == Key.X) 
+            if (e.Key == Key.X)
             {
                 nbennemi += 15;
             }
@@ -323,7 +329,7 @@ namespace SAE1._01_1._02
             {
                 bas = false;
             }
-            if (e.Key.ToString() == toucheTire || e.Key == Key.Space)
+            if ((e.Key.ToString() == toucheTire || e.Key == Key.Space) && delaiTire == true )
             {
                 supprimer.Clear();
                 Rectangle nouveauTire = new Rectangle
@@ -334,7 +340,7 @@ namespace SAE1._01_1._02
                     Fill = Brushes.Red,
                     Stroke = Brushes.White,
                 };
-
+                delaiTire = false;
                 Canvas.SetTop(nouveauTire, Canvas.GetTop(joueur1) - nouveauTire.Height + joueur1.Height / 2);
                 Canvas.SetLeft(nouveauTire, Canvas.GetLeft(joueur1) + joueur1.Width / 2);
                 Canvas.Children.Add(nouveauTire);
@@ -512,21 +518,21 @@ namespace SAE1._01_1._02
 
 
         }
-       /* private void ChangementApparenceEnnemis(Rectangle newEnnemie)
-        {
-            ImageBrush ennemiSkin = new ImageBrush();
+        /* private void ChangementApparenceEnnemis(Rectangle newEnnemie)
+         {
+             ImageBrush ennemiSkin = new ImageBrush();
 
-            changementEnnemi++;
+             changementEnnemi++;
 
-            if (changementEnnemi >= tableauApparenceSqueletteDroite.Length)
-            {
-                changementEnnemi = 0;
-            }
-            string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changementEnnemi];
-            ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
-            newEnnemie.Fill = ennemiSkin;
+             if (changementEnnemi >= tableauApparenceSqueletteDroite.Length)
+             {
+                 changementEnnemi = 0;
+             }
+             string image = AppDomain.CurrentDomain.BaseDirectory + tableauApparenceSqueletteDroite[changementEnnemi];
+             ennemiSkin.ImageSource = new BitmapImage(new Uri(image));
+             newEnnemie.Fill = ennemiSkin;
 
-        }*/
+         }*/
 
 
         private void CreationEnnemie(int nombreEnnemie)
@@ -541,7 +547,7 @@ namespace SAE1._01_1._02
                 //int gauche = tableauApparitionEnnemie[0, g];
                 //int hauteur = tableauApparitionEnnemie[g, 0];
                 double yspawnEnnemi = rdm1.Next(0, 500);
-                double droiteouGauche = rdm2.Next(0,2);
+                double droiteouGauche = rdm2.Next(0, 2);
                 Console.WriteLine(droiteouGauche);
                 ennemiSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/zombiecourse/frame-1.gif"));
                 newEnnemie = new Rectangle
@@ -552,7 +558,7 @@ namespace SAE1._01_1._02
                     Width = 120,
                     Fill = ennemiSkin,
                 };
-                
+
                 directionsennemieListe.Add(0);
                 // Console.WriteLine(ennemieListe[i].Tag);    
                 Canvas.SetTop(newEnnemie, yspawnEnnemi);//tableauspawnennemieVerticale[i]);
@@ -565,7 +571,7 @@ namespace SAE1._01_1._02
                     Canvas.SetLeft(newEnnemie, 1200);
                 }
 
-                    Canvas.Children.Add(newEnnemie);
+                Canvas.Children.Add(newEnnemie);
                 //ChangementApparenceEnnemis(newEnnemie);
                 ennemieListe.Add(newEnnemie);
 
@@ -588,28 +594,28 @@ namespace SAE1._01_1._02
                     case 1:
                         if (Canvas.GetLeft(ennemieListe[i]) < 1100)
                         {
-                            Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50));
+                            Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) + vitesseEnnemi + Math.Sin((double)compteur / 50));
                         }
                         break;
 
                     case 2:
                         if (Canvas.GetLeft(ennemieListe[i]) > 50)
                         {
-                            Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50));
+                            Canvas.SetLeft(ennemieListe[i], Canvas.GetLeft(ennemieListe[i]) - vitesseEnnemi + Math.Sin((double)compteur / 50));
                         }
                         break;
 
                     case 3:
                         if (Canvas.GetTop(ennemieListe[i]) > 0)
                         {
-                            Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) - 2 + Math.Sin((double)compteur / 50));
+                            Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) - vitesseEnnemi + Math.Sin((double)compteur / 50));
                         }
                         break;
 
                     case 4:
                         if (Canvas.GetTop(ennemieListe[i]) < 400)
                         {
-                            Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) + 2 + Math.Sin((double)compteur / 50));
+                            Canvas.SetTop(ennemieListe[i], Canvas.GetTop(ennemieListe[i]) + vitesseEnnemi + Math.Sin((double)compteur / 50));
                         }
                         break;
                 }
@@ -625,12 +631,12 @@ namespace SAE1._01_1._02
                         {
                             //pvennemie--;
                             supprimer.Add(x);
-                            ennemieListe.RemoveAt(i);
+
                             supprimer.Add(ennemieListe[i]);
-                            
                             // if (pvennemie == 0)
                             //{
                             //  pvennemie = 3;
+                            ennemieListe.RemoveAt(i);
 
                             break;
                             //}
@@ -655,7 +661,7 @@ namespace SAE1._01_1._02
 
         private void rejouer_Click(object sender, RoutedEventArgs e)
         {
-            
+
             accesMenu = new Menu();
             accesMenu.ShowDialog();
             if (accesMenu.DialogResult == false)
