@@ -260,66 +260,6 @@
     <None Update="images\sol\sol_facile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_10.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_droite\squelette_marche_Droite_9.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_1.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_10.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_2.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_3.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_4.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_5.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_6.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_7.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_8.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="images\squelette\squelette_marche_gauche\squelette_marche_Gauche_9.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="images\squelette_marche_droite\squelette_marche_Droite_1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -444,12 +384,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="images\zombiedegat\frame-44.gif">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="little-pixel.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Pixel_Tandy.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="sonArrierePlan.mp3">

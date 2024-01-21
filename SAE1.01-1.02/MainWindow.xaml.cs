@@ -435,9 +435,6 @@ namespace SAE1._01_1._02
             for (int i = 0; i < nombreEnnemie; i++)
             {
 
-                //g++;
-                //int gauche = tableauApparitionEnnemie[0, g];
-                //int hauteur = tableauApparitionEnnemie[g, 0];
                 double yspawnEnnemi = rdm1.Next(0, 500);
                 double droiteouGauche = rdm2.Next(0, 2);
                 Console.WriteLine(droiteouGauche);
