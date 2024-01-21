@@ -28,8 +28,6 @@ namespace SAE1._01_1._02
         private ImageBrush fontFacileSkin = new ImageBrush();
         private ImageBrush fontDifficileSkin = new ImageBrush();
         private ImageBrush but_OKSkin = new ImageBrush();
-        private ImageBrush easySkin = new ImageBrush();
-        private ImageBrush hardSkin = new ImageBrush();
 
         public bool modeJeu = false;
 
@@ -53,9 +51,6 @@ namespace SAE1._01_1._02
 
             fontFacileSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/font/fontBleu.png"));
             fontDifficileSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/font/fontRouge.png"));
-
-            easySkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/text/easy.png"));
-            hardSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/text/hard.png"));
 
             butParametreSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/but_parametre.png"));
             but_OKSkin.ImageSource = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory + "images/Retour.png")); 
