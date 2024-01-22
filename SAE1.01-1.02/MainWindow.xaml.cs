@@ -295,6 +295,8 @@ namespace SAE1._01_1._02
             Canvas.Children.Add(nouveauTire);
         }
 
+        
+
         private void TestTireJoueur(Rectangle x)
         {
             if ((string)x.Tag == "tireJoueurA")
@@ -541,8 +543,31 @@ namespace SAE1._01_1._02
             }
         }
 
+        private void bouttonRejouer_Click(object sender, RoutedEventArgs e)
+        {
+            scorePartie = 0;
+            nbEnnemis = 3;
+            Canvas.SetLeft(joueur1, 650);
+            Canvas.SetTop(joueur1, 200);
+
+            foreach (Rectangle ennemi in ennemiListe)
+            {
+                Canvas.Children.Remove(ennemi);
+            }
+            ennemiListe.Clear();
+            directionsEnnemiListe.Clear();
+
+            Canvas.Visibility = Visibility.Visible;
+            canvas_gameOver.Visibility = Visibility.Hidden;
+            textScore.Text = "0";
+            testScoreFinal.Text = "0";
+
+            dispatcherTimer.Start();
+        }
+
         private void but_quitter_Click(object sender, RoutedEventArgs e)
         {
+            
             this.Close();
         }
     }
